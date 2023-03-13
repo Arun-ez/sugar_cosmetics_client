@@ -1,1 +1,1 @@
-# SUGAR_COSMETICS-clone
+#use this snippet
