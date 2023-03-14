@@ -6,7 +6,7 @@ import Home from '../components/Home/Home';
 
 const RouteProvider = () => {
     return (
-        <Box mt={["40px", "40px", "80px", "135px"]} minH="80vh">
+        <Box mt={["55px", "55px", "80px", "135px"]} minH="80vh">
             <Routes>
                 <Route path='/' element={<Home />} />
             </Routes>
