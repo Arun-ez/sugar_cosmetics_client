@@ -2,7 +2,23 @@ import React from 'react'
 import { Logo } from './Logo'
 import { RxCross2 } from "react-icons/rx"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
-import { Image, Drawer, DrawerBody, DrawerContent, DrawerHeader, Accordion, AccordionItem, AccordionButton, AccordionIcon, Box, AccordionPanel, DrawerFooter, Flex, Heading, Button } from "@chakra-ui/react"
+import {
+    Image,
+    Drawer,
+    DrawerBody,
+    DrawerContent,
+    DrawerHeader,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionIcon,
+    Box,
+    AccordionPanel,
+    DrawerFooter,
+    Flex,
+    Heading,
+    Button
+} from "@chakra-ui/react"
 
 const Sidebar = ({ onClose, isOpen, }) => {
     return (
