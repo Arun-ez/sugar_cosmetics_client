@@ -1,22 +1,26 @@
 
-import React from 'react'
+import { useContext } from 'react'
 import { Flex, Input, Button, Heading, Box, Image, SimpleGrid } from "@chakra-ui/react"
 import footer_bg from "./footer_top_bg.svg";
 import footer_icon from "./footer_sugar_icon.png"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
 import { AiFillMail } from "react-icons/ai"
 import { FaFacebookF, FaTumblr, FaYoutube, FaTwitter, FaInstagram, FaPinterestP } from "react-icons/fa"
+import { GlobalContext } from '../../contexts/GlobalContextProvider';
 
 const Footer = () => {
+
+    let { isLoginPage } = useContext(GlobalContext);
+
     return (
 
         <>
-            <Flex h="70px" w="98%" justifyContent="left" gap="15px" alignItems="center" fontWeight="medium" borderTop="2px solid #f2f2f2" m="auto">
+            <Flex display={isLoginPage ? "none" : "flex"} h="70px" w="98%" justifyContent="left" gap="15px" alignItems="center" fontWeight="medium" borderTop="2px solid #f2f2f2" m="auto">
                 <p> READ MORE ABOUT SUGAR COSMETICS </p>
                 <MdOutlineArrowForwardIos color='#fc2779' fontSize="18px" />
             </Flex>
 
-            <Flex className='footer' direction="column" alignItems="center" position="relative">
+            <Flex display={isLoginPage ? "none" : "flex"} className='footer' direction="column" alignItems="center" position="relative">
 
                 <Flex bg={`url(${footer_bg})`} h="300px" w="100%" direction="column" alignItems="center" bgRepeat="no-repeat" backgroundSize="cover" position="absolute">
 

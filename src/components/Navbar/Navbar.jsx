@@ -1,5 +1,5 @@
 import "./Navbar.css"
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
@@ -12,12 +12,14 @@ import { RiShoppingBagLine } from "react-icons/ri"
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Sidebar } from "./Sidebar";
 import { Logo } from "./Logo";
+import { GlobalContext } from "../../contexts/GlobalContextProvider";
 
 const Navbar = () => {
 
     let { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate();
     let search_ref = useRef();
+    let { isLoginPage, set_isLoginPage, current_user } = useContext(GlobalContext);
 
     const handle_drawer = () => {
         onOpen();
@@ -53,7 +55,7 @@ const Navbar = () => {
     ]
 
     return (
-        <Flex className='navbar' w="100vw" direction="column">
+        <Flex className='navbar' w="100vw" direction="column" display={isLoginPage ? "none" : "flex"}>
             <Flex
                 bg="#000000"
                 w="100%"
@@ -87,9 +89,22 @@ const Navbar = () => {
                     <Button borderRadius="0px" w="150px" gap="5px" onClick={handle_search}> <FiSearch fontSize="20px" /> Search </Button>
                 </Flex>
 
-                <Heading as="p" color="white" fontSize="15px" display={["none", "none", "flex", "flex"]} gap="4px" alignItems="center">
+                <Heading
+                    as="p"
+                    color="white"
+                    fontSize="15px"
+                    display={["none", "none", "flex", "flex"]}
+                    gap="4px"
+                    alignItems="center"
+                    cursor="pointer"
+                    onClick={() => {
+                        set_isLoginPage(true);
+                        navigate("/account")
+                    }}
+
+                >
                     <HiUserCircle fontSize="25px" />
-                    Login/Register
+                    {current_user}
                 </Heading>
 
                 <Flex color="white" fontSize="20px" gap="20px">
