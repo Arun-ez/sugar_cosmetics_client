@@ -47,7 +47,7 @@ const Footer = () => {
                 </Flex>
 
                 <Flex direction="column" bg="#000000" w="100%" alignItems="center">
-                    <Flex h="100px" w="100%" justifyContent="center" zIndex="9" mt="230px">
+                    <Flex h="100px" w="100%" justifyContent="center" zIndex="1" mt="230px">
                         <Box w="130px" h="130px" p="20px" bg="#000000" borderRadius="50%">
                             <Image src={footer_icon} w="100%" />
                         </Box>

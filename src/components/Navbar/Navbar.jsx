@@ -1,5 +1,5 @@
 import "./Navbar.css"
-import React from 'react'
+import React, { useRef } from 'react'
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
@@ -17,9 +17,25 @@ const Navbar = () => {
 
     let { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate();
+    let search_ref = useRef();
 
     const handle_drawer = () => {
         onOpen();
+    }
+
+    const handle_search = () => {
+        let query = search_ref.current.value;
+
+        if (!query) { return }
+        navigate(`/search?q=${query}`);
+        search_ref.current.value = "";
+    }
+
+    const handle_key = ({ key }) => {
+        if (key == 'Enter') {
+            handle_search();
+        }
+
     }
 
     const nav_routes = [
@@ -64,9 +80,11 @@ const Navbar = () => {
                         borderRadius="none"
                         bg="#212121"
                         color="white"
+                        ref={search_ref}
+                        onKeyPress={handle_key}
                         style={{ caretColor: "#fc2779" }} />
 
-                    <Button borderRadius="0px" w="150px" gap="5px"> <FiSearch fontSize="20px" /> Search </Button>
+                    <Button borderRadius="0px" w="150px" gap="5px" onClick={handle_search}> <FiSearch fontSize="20px" /> Search </Button>
                 </Flex>
 
                 <Heading as="p" color="white" fontSize="15px" display={["none", "none", "flex", "flex"]} gap="4px" alignItems="center">

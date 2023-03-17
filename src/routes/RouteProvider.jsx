@@ -4,6 +4,7 @@ import { Box } from "@chakra-ui/react"
 import { Route, Routes } from 'react-router-dom';
 import Home from '../components/Home/Home';
 import Product from '../components/Product/Product';
+import { Search } from '../components/Search/Search';
 
 const RouteProvider = () => {
     return (
@@ -11,6 +12,7 @@ const RouteProvider = () => {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/collections/:product' element={<Product />} />
+                <Route path='/search' element={<Search />} />
             </Routes>
         </Box>
 
