@@ -6,10 +6,12 @@ import { useState } from 'react';
 
 function App() {
 
+  let [ad_display, set_ad_display] = useState("flex");
+
   return (
     <div className="App">
-      <Navbar />
-      <RouteProvider />
+      <Navbar ad_display={ad_display} set_ad_display={set_ad_display} />
+      <RouteProvider ad_display={ad_display} />
       <Footer />
     </div>
   );

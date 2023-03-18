@@ -1,5 +1,5 @@
 import "./Navbar.css"
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useContext, useState } from 'react'
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
@@ -13,8 +13,9 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { Sidebar } from "./Sidebar";
 import { Logo } from "./Logo";
 import { GlobalContext } from "../../contexts/GlobalContextProvider";
+import { RxCross1 } from "react-icons/rx"
 
-const Navbar = () => {
+const Navbar = ({ ad_display, set_ad_display }) => {
 
     let { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate();
@@ -56,6 +57,13 @@ const Navbar = () => {
 
     return (
         <Flex className='navbar' w="100vw" direction="column" display={isLoginPage ? "none" : "flex"}>
+
+            <Flex display={ad_display} borderBottom="1px solid rgba(17, 30, 26, 0.9)" bg="#000000" w="100%" p="7px" color="white" whiteSpace="nowrap">
+                <Flex w="100%"></Flex>
+                <Heading textAlign="center" w="100%" as="h1" fontSize={["12px", "12px", "15px", "15px"]} fontWeight="medium"> FREE Base Of Glory Pore Minimizing Primer on spend of Rs.999 </Heading>
+                <Flex w="100%" justifyContent="flex-end" pr="30px"> <RxCross1 onClick={() => { set_ad_display("none") }} /> </Flex>
+            </Flex>
+
             <Flex
                 bg="#000000"
                 w="100%"
