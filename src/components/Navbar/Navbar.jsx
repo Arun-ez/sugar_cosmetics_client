@@ -154,7 +154,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
 
                 <Flex color="white" fontSize="20px" gap="20px">
                     <FiHeart style={{ cursor: "pointer" }} onClick={() => { navigate("/account/wishlist") }} />
-                    <RiShoppingBagLine style={{ cursor: "pointer" }} />
+                    <RiShoppingBagLine style={{ cursor: "pointer" }} onClick={() => { navigate("/cart") }} />
                     <TbDiscount2 style={{ cursor: "pointer" }} />
                 </Flex>
 

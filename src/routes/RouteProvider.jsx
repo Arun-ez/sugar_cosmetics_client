@@ -10,6 +10,7 @@ import { ViewFinder } from '../components/ViewFinder/ViewFinder';
 import { GlobalContext } from '../contexts/GlobalContextProvider';
 import { AuthValidationLayer } from './AuthValidationLayer';
 import { WishList } from '../components/WishList/WishList';
+import CartPage from '../components/Cart/Cart';
 
 const RouteProvider = ({ ad_display }) => {
 
@@ -52,6 +53,7 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/account' element={<AuthValidationLayer comp="login"> <Loginpage /> </AuthValidationLayer>} />
                 <Route path='/products/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
                 <Route path='/account/wishlist' element={<AuthValidationLayer> <WishList /> </AuthValidationLayer>} />
+                <Route path='/cart' element={<AuthValidationLayer> <CartPage /> </AuthValidationLayer>} />
             </Routes>
         </Box>
 
