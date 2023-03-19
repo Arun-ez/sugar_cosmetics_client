@@ -1,5 +1,5 @@
 
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Box } from "@chakra-ui/react"
 import { Route, Routes } from 'react-router-dom';
 import Home from '../components/Home/Home';
@@ -12,6 +12,31 @@ import { GlobalContext } from '../contexts/GlobalContextProvider';
 const RouteProvider = ({ ad_display }) => {
 
     let { isLoginPage } = useContext(GlobalContext);
+    let [window_width, set_window_width] = useState(0);
+    let [limit, set_limit] = useState(4);
+
+    const limit_decision = () => {
+        let width = window.innerWidth;
+        if (width <= 1500 && width > 1180) {
+            return 3;
+        } else if (width <= 1180 && width > 600) {
+            return 2;
+        } else if (width <= 600) {
+            return 1;
+        } else {
+            return 4;
+        }
+    }
+
+    window.addEventListener("resize", () => {
+        set_window_width(window.innerWidth);
+        set_limit(limit_decision());
+    })
+
+    useEffect(() => {
+        set_window_width(window.innerWidth)
+        set_limit(limit_decision());
+    }, [])
 
     return (
         <Box
@@ -19,11 +44,11 @@ const RouteProvider = ({ ad_display }) => {
             minH="80vh"
         >
             <Routes>
-                <Route path='/' element={<Home />} />
+                <Route path='/' element={<Home limit={limit} />} />
                 <Route path='/collections/:product' element={<Product />} />
                 <Route path='/search' element={<Search />} />
                 <Route path='/account' element={<Loginpage />} />
-                <Route path='/products/:id' element={<ViewFinder />} />
+                <Route path='/products/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
             </Routes>
         </Box>
 

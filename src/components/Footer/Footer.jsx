@@ -46,7 +46,7 @@ const Footer = () => {
                             h="100%"
                         />
 
-                        <Button borderRadius="0px" h="100%" pl="40px" pr="40px" bg="black" color="white"> SUBSCRIBE </Button>
+                        <Button borderRadius="0px" variant="ghost" colorScheme="black" h="100%" pl="40px" pr="40px" bg="black" color="white"> SUBSCRIBE </Button>
                     </Flex>
                 </Flex>
 
