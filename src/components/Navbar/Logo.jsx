@@ -5,6 +5,7 @@ import { Image } from "@chakra-ui/react"
 const Logo = ({ h, display, onClick }) => {
     return (
         <Image
+            cursor="pointer"
             onClick={onClick}
             h={h}
             display={display}

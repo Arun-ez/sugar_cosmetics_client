@@ -14,16 +14,35 @@ import { Sidebar } from "./Sidebar";
 import { Logo } from "./Logo";
 import { GlobalContext } from "../../contexts/GlobalContextProvider";
 import { RxCross1 } from "react-icons/rx"
+import { GoChevronDown } from "react-icons/go"
 
 const Navbar = ({ ad_display, set_ad_display }) => {
 
     let { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate();
     let search_ref = useRef();
-    let { isLoginPage, set_isLoginPage, current_user } = useContext(GlobalContext);
+    let { isLoginPage, set_isLoginPage, current_user, set_current_user, setAuth, isAuth } = useContext(GlobalContext);
+    let [display_logout, set_display_logout] = useState("none");
 
     const handle_drawer = () => {
         onOpen();
+    }
+
+    const toggle_logout = () => {
+        if (display_logout === "none") {
+            set_display_logout("flex");
+        } else {
+            set_display_logout("none");
+        }
+    }
+
+    const proceed_logout = () => {
+        localStorage.removeItem("isAuth");
+        localStorage.removeItem("current_user");
+        set_current_user({ name: "Login/Register", email: "", number: "" });
+        setAuth(false);
+        toggle_logout();
+        navigate("/")
     }
 
     const handle_search = () => {
@@ -50,9 +69,9 @@ const Navbar = ({ ad_display, set_ad_display }) => {
         { name: "GIFT & KITS", path: "/collections/kit" },
         { name: "BESTSELLERS", path: "/collections/seller" },
         { name: "NEW LAUNCHES", path: "/collections/new" },
-        { name: "OFFERS", path: "" },
-        { name: "BLOG", path: "" },
-        { name: "STORES", path: "" },
+        { name: "OFFERS", path: "/offer" },
+        { name: "BLOG", path: "/blog" },
+        { name: "STORES", path: "/stores" },
     ]
 
     return (
@@ -97,28 +116,46 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                     <Button borderRadius="0px" w="150px" gap="5px" onClick={handle_search}> <FiSearch fontSize="20px" /> Search </Button>
                 </Flex>
 
-                <Heading
-                    as="p"
-                    color="white"
-                    fontSize="15px"
-                    display={["none", "none", "flex", "flex"]}
-                    gap="4px"
-                    alignItems="center"
-                    cursor="pointer"
-                    onClick={() => {
-                        set_isLoginPage(true);
-                        navigate("/account")
-                    }}
+                <Flex alignItems="center" gap="5px" display={["none", "none", "flex", "flex"]}>
+                    <Heading
+                        as="p"
+                        color="white"
+                        fontSize="15px"
+                        display={["none", "none", "flex", "flex"]}
+                        gap="4px"
+                        alignItems="center"
+                        cursor="pointer"
+                        onClick={() => {
+                            navigate("/account")
+                        }}
 
-                >
-                    <HiUserCircle fontSize="25px" />
-                    {current_user}
-                </Heading>
+                    >
+                        <HiUserCircle fontSize="25px" />
+                        {current_user.name}
+                    </Heading>
+
+                    <GoChevronDown style={{ marginLeft: "5px", color: "white", display: isAuth ? "flex" : "none" }} onClick={toggle_logout} />
+
+                    <Flex
+                        position="absolute"
+                        m="80px 0px 0px 140px"
+                        fontSize="18px"
+                        pl="20px"
+                        fontWeight="medium"
+                        h="50px"
+                        alignItems="center"
+                        w="150px"
+                        bg="white"
+                        display={display_logout}
+                        cursor="pointer"
+                        onClick={proceed_logout}
+                        borderRadius="5px"> Logout </Flex>
+                </Flex>
 
                 <Flex color="white" fontSize="20px" gap="20px">
-                    <FiHeart />
-                    <RiShoppingBagLine />
-                    <TbDiscount2 />
+                    <FiHeart style={{ cursor: "pointer" }} onClick={() => { navigate("/account/wishlist") }} />
+                    <RiShoppingBagLine style={{ cursor: "pointer" }} />
+                    <TbDiscount2 style={{ cursor: "pointer" }} />
                 </Flex>
 
             </Flex>

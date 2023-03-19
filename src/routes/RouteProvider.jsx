@@ -8,6 +8,8 @@ import { Search } from '../components/Search/Search';
 import Loginpage from '../components/Loginpage/loginpage';
 import { ViewFinder } from '../components/ViewFinder/ViewFinder';
 import { GlobalContext } from '../contexts/GlobalContextProvider';
+import { AuthValidationLayer } from './AuthValidationLayer';
+import { WishList } from '../components/WishList/WishList';
 
 const RouteProvider = ({ ad_display }) => {
 
@@ -47,8 +49,9 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/' element={<Home limit={limit} />} />
                 <Route path='/collections/:product' element={<Product />} />
                 <Route path='/search' element={<Search />} />
-                <Route path='/account' element={<Loginpage />} />
+                <Route path='/account' element={<AuthValidationLayer comp="login"> <Loginpage /> </AuthValidationLayer>} />
                 <Route path='/products/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
+                <Route path='/account/wishlist' element={<AuthValidationLayer> <WishList /> </AuthValidationLayer>} />
             </Routes>
         </Box>
 
