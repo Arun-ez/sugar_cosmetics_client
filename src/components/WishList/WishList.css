@@ -1,0 +1,13 @@
+.side_nav_link {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.active {
+    color: #fc2779;
+}

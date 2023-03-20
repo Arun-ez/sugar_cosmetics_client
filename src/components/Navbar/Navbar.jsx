@@ -131,7 +131,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
 
                     >
                         <HiUserCircle fontSize="25px" />
-                        {current_user.name}
+                        {current_user.name === "Login/Register" ? "Login/Register" : "Hi, " + current_user.name}
                     </Heading>
 
                     <GoChevronDown style={{ marginLeft: "5px", color: "white", display: isAuth ? "flex" : "none" }} onClick={toggle_logout} />
@@ -155,7 +155,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                 <Flex color="white" fontSize="20px" gap="20px">
                     <FiHeart style={{ cursor: "pointer" }} onClick={() => { navigate("/account/wishlist") }} />
                     <RiShoppingBagLine style={{ cursor: "pointer" }} onClick={() => { navigate("/cart") }} />
-                    <TbDiscount2 style={{ cursor: "pointer" }} />
+                    <TbDiscount2 style={{ cursor: "pointer" }} onClick={() => { navigate("/offers") }} />
                 </Flex>
 
             </Flex>

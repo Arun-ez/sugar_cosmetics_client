@@ -19,8 +19,12 @@ import {
     Heading,
     Button
 } from "@chakra-ui/react"
+import { useNavigate } from 'react-router-dom'
 
 const Sidebar = ({ onClose, isOpen, }) => {
+
+    let navigate = useNavigate();
+
     return (
         <Drawer size='full' onClose={onClose} isOpen={isOpen} placement='left' >
             <DrawerContent bg="#000000" color="white">
@@ -49,11 +53,11 @@ const Sidebar = ({ onClose, isOpen, }) => {
                             </h2>
 
                             <AccordionPanel>
-                                HYYYYS
+
                             </AccordionPanel>
                         </AccordionItem>
 
-                        <AccordionItem>
+                        <AccordionItem onClick={() => { navigate("/offers"); onClose() }}>
                             <h2 style={{ margin: "10px 0px 10px 0px" }}>
                                 <AccordionButton display="flex" justifyContent="space-between">
                                     <Box> OFFERS </Box>

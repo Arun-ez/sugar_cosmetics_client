@@ -2,15 +2,17 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box } from "@chakra-ui/react"
 import { Route, Routes } from 'react-router-dom';
-import Home from '../components/Home/Home';
-import Product from '../components/Product/Product';
+import { Home } from '../components/Home/Home';
+import { Product } from '../components/Product/Product';
 import { Search } from '../components/Search/Search';
-import Loginpage from '../components/Loginpage/loginpage';
+import { Loginpage } from '../components/Loginpage/Loginpage';
 import { ViewFinder } from '../components/ViewFinder/ViewFinder';
 import { GlobalContext } from '../contexts/GlobalContextProvider';
 import { AuthValidationLayer } from './AuthValidationLayer';
 import { WishList } from '../components/WishList/WishList';
 import CartPage from '../components/Cart/Cart';
+import Checkout from '../components/Checkout/Checkout';
+import Offerspage from '../components/Offerspage/Offerspage';
 
 const RouteProvider = ({ ad_display }) => {
 
@@ -54,6 +56,8 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/products/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
                 <Route path='/account/wishlist' element={<AuthValidationLayer> <WishList /> </AuthValidationLayer>} />
                 <Route path='/cart' element={<AuthValidationLayer> <CartPage /> </AuthValidationLayer>} />
+                <Route path='/checkout' element={<Checkout />} />
+                <Route path='/offers' element={<Offerspage />} />
             </Routes>
         </Box>
 

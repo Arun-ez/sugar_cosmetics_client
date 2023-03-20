@@ -1,0 +1,15 @@
+.processing {
+    animation-name: process;
+    animation-duration: 0.7s;
+    animation-iteration-count: 1;
+}
+
+@keyframes process {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 50%;
+    }
+}
