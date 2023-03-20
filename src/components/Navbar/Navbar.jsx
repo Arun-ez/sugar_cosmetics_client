@@ -69,7 +69,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
         { name: "GIFT & KITS", path: "/collections/kit" },
         { name: "BESTSELLERS", path: "/collections/seller" },
         { name: "NEW LAUNCHES", path: "/collections/new" },
-        { name: "OFFERS", path: "/offer" },
+        { name: "OFFERS", path: "/offers" },
         { name: "BLOG", path: "/blog" },
         { name: "STORES", path: "/stores" },
     ]

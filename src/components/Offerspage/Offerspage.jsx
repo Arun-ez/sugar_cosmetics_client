@@ -1,13 +1,19 @@
 import { SimpleGrid, Box, Image, Heading, Flex, Text } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import { MdOutlineContentCopy } from 'react-icons/md'
 
 
 export default function Offerspage() {
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
+
     return (
         <Box backgroundColor='#f0f0f0' >
             <Box marginTop='140px'  >
                 <Heading as='h3' size='lg' textAlign={'center'} marginTop='24px' >OFFERS</Heading>
-                <SimpleGrid columns={4} spacing={10} padding='24px' >
+                <SimpleGrid columns={[1, 2, 3, 4]} spacing={10} padding='24px' >
                     <Box padding='12px' boxShadow='lg' backgroundColor={'white'} borderRadius='12px' >
                         <Image src='https://d32baadbbpueqt.cloudfront.net/Promotion/b6f5bb33-f4d1-4e22-96aa-b95175706aa8.jpg' alt='image not found' borderRadius='12px' />
                         <Flex w="60%" h="50px" border="1px dashed #fc2779" borderRadius="10px" bg="#fff0f6" margin='12px 0px'>
