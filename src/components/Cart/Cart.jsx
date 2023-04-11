@@ -14,13 +14,14 @@ export default function CartPage() {
 
     useEffect(() => {
         fetchcart();
+        window.scroll(0, 0);
+        document.title = "Sugar Cosmetics-Bag";
     }, [])
 
     let jsondata;
     async function fetchcart() {
         let res = await fetch('https://rich-pink-anemone-tie.cyclic.app/cart');
         jsondata = await res.json();
-        console.log(jsondata);
         setCartproduct(jsondata);
         totalfunc();
     }
@@ -63,7 +64,6 @@ export default function CartPage() {
         jsondata?.map((elem, index) => {
             currtotal += elem.Price * elem.qty
         }, 0)
-        console.log(currtotal);
         setTotal(currtotal);
 
     }
@@ -97,7 +97,7 @@ export default function CartPage() {
                         {
                             cartproduct.map((elem, id) => {
                                 return (
-                                    <div className='cartdiv' >
+                                    <div className='cartdiv' key={id} >
                                         <div className='innercartdiv' >
                                             <img className='product-img' src={elem.images[0]} alt="" />
                                             <div>

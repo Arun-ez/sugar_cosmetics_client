@@ -177,7 +177,6 @@ const ViewFinder = ({ window_width, limit }) => {
     return (
         <Flex direction="column" w="100%">
 
-
             {product.images ?
                 <>
 
@@ -188,7 +187,7 @@ const ViewFinder = ({ window_width, limit }) => {
                     </Flex>
 
                     <Flex
-                        w={["90%", "90%", "90%", "70%"]}
+                        w={["96%", "92%", "90%", "70%"]}
                         direction={["column", "column", "column", "row"]}
                         gap="20px"
                         alignItems={["center", "center", "center", "start"]}
@@ -198,7 +197,7 @@ const ViewFinder = ({ window_width, limit }) => {
                         <Flex w="80%" direction={["column-reverse", "column-reverse", "row", "row"]}>
 
                             {/* Image wrapper */}
-                            <Flex justifyContent="center" pt="10px" w={["100%", "100%", "120px", "120px"]} gap="5px" alignItems="center" direction={["row", "row", "column", "column"]}>
+                            <Flex justifyContent="center" pt="10px" w={["100%", "100%", "120px", "120px"]} gap={["10px", "10px", "5px", "5px"]} alignItems="center" direction={["row", "row", "column", "column"]}>
 
                                 {
                                     product.images.map((element, index) => {
@@ -224,7 +223,7 @@ const ViewFinder = ({ window_width, limit }) => {
                                     border="1px solid #e4e4e4"
                                     borderRadius="10px"
                                     p={["30px 50px 30px 50px", "30px 50px 30px 50px", "30px 70px 30px 70px", "30px 70px 30px 70px"]}
-                                    w={["350px", "350px", "350px", "400px"]} h="400px" src={product.images[active_index]} />
+                                    w={["350px", "350px", "350px", "400px"]} h={["300px", "300px", "400px", "400px"]} src={product.images[active_index]} />
                             </Flex>
                         </Flex>
 

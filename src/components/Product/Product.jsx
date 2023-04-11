@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
     Box,
     Flex,
@@ -23,6 +24,10 @@ const Product = () => {
     let param = useParams();
     let [data, setData] = useState([]);
     let [sort_param, set_sort_param] = useState("");
+
+    const redux_data = useSelector((store) => {
+        return store;
+    })
 
     const load = async () => {
         try {

@@ -1,4 +1,4 @@
-.maindiv{
+.maindiv {
     /* border: 1px solid black; */
     border-radius: 24px;
     margin-top: 150px;
@@ -6,53 +6,53 @@
     width: 95vw;
     margin-left: 35px;
     padding: 24px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;    
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     display: flex;
 }
 
-.left{
+.left {
     /* border: 1px solid black; */
     width: 50%;
     padding: 12px;
 }
 
-.right{
+.right {
     /* border: 1px solid black; */
     width: 50%;
     padding: 6px;
 }
 
-.cartdiv{
+.cartdiv {
     display: flex;
     justify-content: space-between;
 }
 
-.innerleft{
+.innerleft {
     border-radius: 6px;
     border: 1px solid black;
     margin: 12px 0px;
 }
 
-.innercartdiv{
+.innercartdiv {
     display: flex;
     margin: 12px;
 }
 
-.product-img{
+.product-img {
     width: 40px;
     margin-right: 12px;
 }
 
-.delbutton > img{
+.delbutton>img {
     width: 20px;
 }
 
-.leftcartdiv{
+.leftcartdiv {
     display: flex;
     padding: 6px;
 }
 
-.count-div{
+.count-div {
     /* width: 60px; */
     display: flex;
     /* border: 1px solid black; */
@@ -62,25 +62,25 @@
     /* padding-bottom: ; */
 }
 
-.count-btn{
+.count-btn {
     padding: 0px 6px;
 }
 
-.coupoun{
+.coupoun {
     border-radius: 6px;
     border: 1px solid black;
     margin: 12px 0px;
     padding: 12px;
 }
 
-.coupoun input{
+.coupoun input {
     border: 1px solid black;
     width: 500px;
-    padding: 8px ;
+    padding: 8px;
     border-radius: 6px;
 }
 
-.coupoun button{
+.coupoun button {
     border: 1px solid black;
     padding: 8px 40px;
     margin: 0px 20px;
@@ -88,7 +88,7 @@
     color: white;
 }
 
-.pricedetails{
+.pricedetails {
     border-radius: 6px;
     border: 1px solid black;
     margin: 12px 0px;
@@ -97,7 +97,7 @@
     justify-content: space-between;
 }
 
-.placeorder{
+.placeorder {
     background-color: black;
     color: white;
     padding: 12px 100px;

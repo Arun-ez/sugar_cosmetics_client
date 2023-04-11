@@ -7,11 +7,12 @@ export default function Offerspage() {
 
     useEffect(() => {
         window.scroll(0, 0);
+        document.title = "Sugar Cosmetics-Offers"
     }, [])
 
     return (
         <Box backgroundColor='#f0f0f0' >
-            <Box marginTop='140px'  >
+            <Box pt="15px">
                 <Heading as='h3' size='lg' textAlign={'center'} marginTop='24px' >OFFERS</Heading>
                 <SimpleGrid columns={[1, 2, 3, 4]} spacing={10} padding='24px' >
                     <Box padding='12px' boxShadow='lg' backgroundColor={'white'} borderRadius='12px' >
