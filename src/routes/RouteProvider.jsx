@@ -53,7 +53,7 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/collections/:product' element={<Product />} />
                 <Route path='/search' element={<Search />} />
                 <Route path='/account' element={<AuthValidationLayer comp="login"> <Loginpage /> </AuthValidationLayer>} />
-                <Route path='/products/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
+                <Route path='/products/:category/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
                 <Route path='/account/wishlist' element={<AuthValidationLayer> <WishList /> </AuthValidationLayer>} />
                 <Route path='/cart' element={<AuthValidationLayer> <CartPage /> </AuthValidationLayer>} />
                 <Route path='/checkout' element={<Checkout />} />

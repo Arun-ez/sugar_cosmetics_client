@@ -5,7 +5,7 @@ import { FiHeart } from "react-icons/fi"
 import { HiHeart } from "react-icons/hi"
 import { useNavigate } from "react-router-dom"
 
-const Card = ({ product, load }) => {
+const Card = ({ product, category }) => {
 
     const toast = useToast();
     let navigate = useNavigate();
@@ -22,8 +22,6 @@ const Card = ({ product, load }) => {
         })
 
         if (response.status == 500) {
-            load();
-
             toast({
                 position: "bottom-left",
                 duration: 1000,
@@ -125,7 +123,7 @@ const Card = ({ product, load }) => {
     }
 
     const goto_details = () => {
-        navigate(`/products/${product.id}`)
+        navigate(`/products/${category}/${product._id}`);
     }
 
     return (
@@ -135,7 +133,7 @@ const Card = ({ product, load }) => {
                 <p onClick={goto_details} style={{ fontSize: "12px", cursor: "pointer" }}> {product.Title} </p>
 
                 <Flex cursor="pointer" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
-                    <Heading as="h1" fontSize="20px"> ₹{product.Price} </Heading>
+                    <Heading as="h1" fontSize="20px"> ₹{product.price} </Heading>
                     <Heading as="h1" fontSize="15px" color="#fc2779"> {product.brandcolor} </Heading>
                 </Flex>
                 <br />

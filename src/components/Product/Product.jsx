@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
     Box,
     Flex,
@@ -14,36 +14,77 @@ import {
     AccordionIcon,
     AccordionPanel,
     Radio,
-    RadioGroup
+    RadioGroup,
+    Checkbox
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md"
 import { Card } from '../Home/Card';
+import { get, filter } from '../../redux/products/actions';
+import { SORT, FILTER } from '../../redux/products/action_types';
 
 const Product = () => {
     let navigate = useNavigate();
     let param = useParams();
-    let [data, setData] = useState([]);
     let [sort_param, set_sort_param] = useState("");
+    const dispatch = useDispatch();
+    const [filter_options, set_filter_options] = useState([]);
 
-    const redux_data = useSelector((store) => {
-        return store;
+    const data = useSelector((store) => {
+        return store.ProductReducer.data;
     })
 
-    const load = async () => {
-        try {
-            let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products?category=${param.product}${sort_param}`);
-            let base = await response.json();
-            setData(base);
-        } catch (error) {
-            console.log(error);
-        }
+    const handle_filter_options = () => {
+        let options = {};
+
+        data.forEach(({ filter }) => {
+            if (filter !== "") {
+                options[filter] = filter;
+            }
+        })
+
+        let filters = [];
+
+        Object.keys(options).forEach((key) => {
+            filters.push({ name: key, checked: false });
+        })
+
+        set_filter_options(filters);
+    }
+
+    const filter_onchange_handler = (id) => {
+        let mapped = filter_options.map((elm, idx) => {
+            if (idx === id) {
+                return {
+                    ...elm,
+                    checked: !elm.checked
+                }
+            }
+
+            return elm;
+        })
+
+        set_filter_options(mapped);
+        filter(dispatch, mapped);
     }
 
     useEffect(() => {
         document.title = param.product[0].toUpperCase() + param.product.slice(1);
-        load();
+
+        if (!sort_param) {
+            dispatch({ type: SORT, payload: { sort: "", order: "" } });
+        } else {
+            const [sort, order] = sort_param.split("_");
+            dispatch({ type: SORT, payload: { sort, order } });
+        }
+
+        get(dispatch, param.product);
         window.scrollTo(0, 0);
     }, [param, sort_param]);
+
+
+    useEffect(() => {
+        handle_filter_options();
+    }, [data]);
 
     return (
         <Box>
@@ -71,8 +112,8 @@ const Product = () => {
                                 <RadioGroup onChange={set_sort_param} value={sort_param}>
                                     <Flex borderTop="1px solid whitesmoke" gap="5px" direction="column" alignItems="left" w="100%" pt="8px" fontWeight="md">
                                         <Radio colorScheme="pink" value=""> Relevance </Radio>
-                                        <Radio colorScheme="pink" value="&_sort=Price&_order=desc"> Price: High To Low </Radio>
-                                        <Radio colorScheme="pink" value='&_sort=Price&_order=asc'> Price: Low To High </Radio>
+                                        <Radio colorScheme="pink" value="price_asc"> Price: Low To High </Radio>
+                                        <Radio colorScheme="pink" value="price_dsc"> Price: High To Low </Radio>
                                     </Flex>
                                 </RadioGroup>
                             </AccordionPanel>
@@ -96,6 +137,23 @@ const Product = () => {
                                 </h2>
 
                                 <AccordionPanel>
+
+                                    <Flex direction="column" gap="5px">
+                                        {filter_options.map(({ name, isChecked }, id) => {
+                                            return (
+                                                <Checkbox
+                                                    defaultChecked={isChecked}
+                                                    colorScheme='pink'
+                                                    size='md'
+                                                    key={id}
+                                                    onChange={() => { filter_onchange_handler(id) }}
+                                                >
+                                                    {name}
+
+                                                </Checkbox>
+                                            )
+                                        })}
+                                    </Flex>
 
                                 </AccordionPanel>
                             </AccordionItem>
@@ -152,7 +210,7 @@ const Product = () => {
                 <Flex w="100%" justifyContent="center">
                     <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
                         {data.map((element, id) => {
-                            return <Card load={load} product={element} key={id} />
+                            return <Card product={element} category={param.product} key={id} />
                         })}
                     </SimpleGrid>
                 </Flex>

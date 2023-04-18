@@ -36,9 +36,9 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
 
     const load = async () => {
         try {
-            let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products?category=${type}`);
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${type}`);
             let base = await response.json();
-            set_data(base);
+            set_data(base.data);
         } catch (err) {
             console.log(err);
         }
@@ -69,7 +69,7 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
                     {data ?
                         <>
                             {get_in_range().map((item, id) => {
-                                return <Card load={load} product={item} key={id} />
+                                return <Card product={item} category={type} key={id} />
                             })}
                         </>
 

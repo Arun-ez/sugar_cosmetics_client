@@ -16,6 +16,7 @@ const ProductReducer = (state = initial, action) => {
         case GET_PRODUCTS_REQUEST: {
             return {
                 ...state,
+                category: action.payload,
                 isLoading: true,
                 isError: false
             }
@@ -41,7 +42,8 @@ const ProductReducer = (state = initial, action) => {
         case SORT: {
             return {
                 ...state,
-                sortBy: action.payload
+                sortBy: action.payload.sort,
+                sortOrder: action.payload.order
             }
         }
 

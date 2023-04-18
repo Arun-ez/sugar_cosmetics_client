@@ -29,17 +29,17 @@ import { HomeView } from '../Home/HomeView'
 const ViewFinder = ({ window_width, limit }) => {
 
     let navigate = useNavigate();
-    let { id } = useParams();
+    let { id, category } = useParams();
     const toast = useToast();
     let [product, set_product] = useState({});
     let [active_index, set_active_index] = useState(0);
 
     const load = async () => {
         try {
-            let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products/${id}`);
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${category}/${id}`);
             let data = await response.json();
             document.title = data.Title;
-            set_product(data);
+            set_product(data.data);
         } catch (error) {
             console.log(error);
         }
@@ -251,7 +251,7 @@ const ViewFinder = ({ window_width, limit }) => {
                                 gap={(window_width > 991 && window_width <= 1230) || window_width < 600 ? "15px" : "30px"}
                             >
                                 <Flex alignItems="center" gap="10px">
-                                    <Heading as="h1" fontWeight="bold" fontSize="20px"> {"₹" + product.Price + ".00"} </Heading>
+                                    <Heading as="h1" fontWeight="bold" fontSize="20px"> {"₹" + product.price + ".00"} </Heading>
                                     <Heading as="h1" fontWeight="bold" opacity="90%" fontSize="13px" color="#fc2779"> {"(50% Off)"} </Heading>
                                 </Flex>
 
