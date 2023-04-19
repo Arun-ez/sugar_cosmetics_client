@@ -2,35 +2,91 @@ import Navbar from "../Navbar/Navbar"
 import { useState, useEffect } from "react";
 import '../Checkout/checkout.css'
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useToast, Flex } from "@chakra-ui/react";
 
 const Checkout = () => {
-
+    const toast = useToast();
     const [cartproduct, setCartproduct] = useState([]);
     const [total, setTotal] = useState(0);
     let navigate = useNavigate();
+    let token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
+
+    const notify = (message) => {
+        setTimeout(() => {
+            toast({
+                position: "bottom-left",
+                duration: 1000,
+                isClosable: true,
+                render: () => {
+                    return (
+                        <Flex w="250px"
+                            h="70px"
+                            alignItems="center"
+                            borderRadius="4px"
+                            fontSize="17px"
+                            fontWeight="medium"
+                            direction="column"
+                            justifyContent="center"
+                            color='white'
+                            bg='#121212'
+                        >
+                            {message}
+                        </Flex>
+
+                    )
+                }
+            })
+        }, 300)
+    }
+
+    const total_price = (data) => {
+        let currtotal = 0;
+        data.forEach((element, index) => {
+            currtotal += element.price * element.qty
+        })
+        setTotal(currtotal);
+    }
+
+    const load = async () => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            let json = await response.json();
+            setCartproduct(json.data);
+            total_price(json.data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    const clear_cart = async () => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart/clear/all`, {
+                method: "DELETE",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            notify("Order placed");
+            navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        fetchcart();
+        load();
     }, [])
-
-    let jsondata;
-    async function fetchcart() {
-        let res = await fetch('https://rich-pink-anemone-tie.cyclic.app/cart');
-        jsondata = await res.json();
-        console.log(jsondata);
-        setCartproduct(jsondata);
-        totalfunc();
-    }
-
-    function totalfunc() {
-        let currtotal = 0;
-        jsondata?.map((elem, index) => {
-            currtotal += elem.Price * elem.qty
-        }, 0)
-        console.log(currtotal);
-        setTotal(currtotal);
-
-    }
 
     return (
         <div className="maindiv" >
@@ -65,15 +121,12 @@ const Checkout = () => {
                                         <img className='product-img' src={elem.images[0]} alt="" />
                                         <div>
                                             <p>{elem.Title}</p>
-                                            <p style={{ fontWeight: 'bold' }} > {elem.Price} </p>
+                                            <p style={{ fontWeight: 'bold' }} > {elem.price} </p>
                                         </div>
                                     </div>
                                     <div className='leftcartdiv'>
-                                        {/* <button className='delbutton'  ><img src="https://img.icons8.com/small/256/filled-trash.png" alt="" /></button> */}
                                         <div className='count-div' >
-                                            {/* <button className='count-btn'  >+</button> */}
                                             <button className='count-btn' >qty : {elem.qty} </button>
-                                            {/* <button className='count-btn'  >-</button> */}
                                         </div>
                                     </div>
                                 </div>
@@ -106,10 +159,7 @@ const Checkout = () => {
                             <button><img src="data:image/png;base64,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" alt="" /></button>
                         </div>
                         <input type="text" placeholder="ENTER UPI ID" />
-                        <button className="proceed" onClick={() => {
-                            alert("payment successful");
-                            navigate("/");
-                        }}>PROCEED TO PAYMENT ₹ {total} </button>
+                        <button className="proceed" onClick={clear_cart}>PROCEED TO PAYMENT ₹ {total} </button>
                     </div>
                 </div>
             </div>
