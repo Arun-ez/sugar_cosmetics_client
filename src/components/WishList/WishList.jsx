@@ -37,7 +37,7 @@ const WishList = () => {
     }
 
     useEffect(() => {
-        document.title = "Sugar Cosmetics-Wishlist"
+        document.title = "Sugar Cosmetics - Wishlist"
         window.scroll(0, 0);
         load();
     }, [])

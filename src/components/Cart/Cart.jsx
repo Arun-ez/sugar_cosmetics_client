@@ -75,7 +75,7 @@ const CartPage = () => {
 
     useEffect(() => {
         window.scroll(0, 0);
-        document.title = "Sugar Cosmetics-Bag";
+        document.title = "Sugar Cosmetics - Bag";
         load();
     }, [])
 

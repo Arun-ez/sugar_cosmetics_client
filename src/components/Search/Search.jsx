@@ -59,7 +59,7 @@ const Search = () => {
     }
 
     useEffect(() => {
-        document.title = "Sugar Cosmetics-Search"
+        document.title = "Sugar Cosmetics - Search"
         load();
         window.scrollTo(0, 0);
     }, [query, sort_param]);

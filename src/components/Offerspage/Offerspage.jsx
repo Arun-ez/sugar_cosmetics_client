@@ -7,7 +7,7 @@ const Offerspage = () => {
 
     useEffect(() => {
         window.scroll(0, 0);
-        document.title = "Sugar Cosmetics-Offers"
+        document.title = "Sugar Cosmetics - Offers"
     }, [])
 
     return (
