@@ -50,9 +50,9 @@ const Search = () => {
 
     const load = async () => {
         try {
-            let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products?q=${query}${sort_param}`);
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search/${query}`);
             let base = await response.json();
-            setData(base);
+            setData(base.data);
         } catch (error) {
             console.log(error);
         }
@@ -172,7 +172,7 @@ const Search = () => {
                         <Flex w="100%" justifyContent="center">
                             <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
                                 {data.map((element, id) => {
-                                    return <Card load={load} product={element} key={id} />
+                                    return <Card product={element} category={element.category} key={id} />
                                 })}
                             </SimpleGrid>
                         </Flex>
