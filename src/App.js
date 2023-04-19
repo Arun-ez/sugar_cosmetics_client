@@ -3,19 +3,22 @@ import Navbar from './components/Navbar/Navbar';
 import RouteProvider from './routes/RouteProvider';
 import Footer from './components/Footer/Footer';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { token_login } from './redux/auth/actions';
 
 function App() {
 
-  let AuthData = useSelector((store) => {
-    return store.AuthReducer;
+  let dispatch = useDispatch();
+
+  let token = useSelector((store) => {
+    return store.AuthReducer.token;
   })
 
   useEffect(() => {
-    console.log(AuthData);
+    if (token) {
+      dispatch(token_login);
+    }
   }, [])
-
-  // console.log(localStorage.getItem("sugar_token"));
 
   let [ad_display, set_ad_display] = useState("flex");
 

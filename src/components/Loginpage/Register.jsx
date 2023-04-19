@@ -1,12 +1,21 @@
 
-import React, { useRef } from 'react'
-import { Input, Button, Heading } from "@chakra-ui/react"
+import React, { useEffect, useRef } from 'react'
+import { Input, Button, Heading } from "@chakra-ui/react";
+import { SIGNUP_REQUEST } from '../../redux/auth/action_types';
+import { signup_request } from '../../redux/auth/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Register = ({ set_process_index, progress_data }) => {
 
     let first_ref = useRef();
     let second_ref = useRef();
     let email_ref = useRef();
+    let password_ref = useRef();
+    const dispatch = useDispatch();
+
+    let auth_data = useSelector((store) => {
+        return store.AuthReducer;
+    })
 
     const post_userdata = async (user) => {
         try {
@@ -34,9 +43,18 @@ const Register = ({ set_process_index, progress_data }) => {
     const register = () => {
         let name = first_ref.current.value + " " + second_ref.current.value;
         let email = email_ref.current.value;
-        let user = { name, email, number: progress_data.number }
-        post_userdata(user);
+        let password = password_ref.current.value;
+        dispatch({ type: SIGNUP_REQUEST, payload: { name, email, password } });
+        dispatch(signup_request);
     }
+
+    useEffect(() => {
+
+        if (auth_data.signupStatus === true) {
+            set_process_index(0);
+        }
+
+    }, [auth_data])
 
     return (
         <>
@@ -71,6 +89,17 @@ const Register = ({ set_process_index, progress_data }) => {
                 height='60px'
                 border='1px solid grey'
                 ref={email_ref}
+            />
+
+            <br />
+
+            <Input
+                type='email'
+                placeholder='Enter new Password'
+                width='400px'
+                height='60px'
+                border='1px solid grey'
+                ref={password_ref}
             />
             <Button bg='black' color='white' marginTop='36px' variant='ghost' onClick={register} > SIGN ME UP </Button>
         </>

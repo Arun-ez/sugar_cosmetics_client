@@ -38,7 +38,7 @@ const ViewFinder = ({ window_width, limit }) => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${category}/${id}`);
             let data = await response.json();
-            document.title = data.Title;
+            document.title = data.data.Title;
             set_product(data.data);
         } catch (error) {
             console.log(error);

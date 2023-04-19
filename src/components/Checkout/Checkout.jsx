@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import '../Checkout/checkout.css'
 import { useNavigate } from "react-router-dom";
 
-export default function Checkout() {
+const Checkout = () => {
 
     const [cartproduct, setCartproduct] = useState([]);
     const [total, setTotal] = useState(0);
@@ -116,3 +116,5 @@ export default function Checkout() {
         </div>
     )
 }
+
+export { Checkout }

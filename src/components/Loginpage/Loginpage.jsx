@@ -31,7 +31,6 @@ const Loginpage = () => {
         <Otp
             set_process_index={set_process_index}
             progress_data={progress_data}
-            login_success={login_success}
         />,
         <Register
             set_process_index={set_process_index}

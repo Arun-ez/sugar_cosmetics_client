@@ -16,11 +16,14 @@ import { BiGift } from "react-icons/bi"
 import { SlBadge } from "react-icons/sl"
 import "./WishList.css"
 import empty from "./empty.png"
+import { useSelector } from 'react-redux';
 
 const WishList = () => {
 
     let [data, set_data] = useState([]);
-    let { current_user } = useContext(GlobalContext);
+    let user = useSelector((store) => {
+        return store.AuthReducer.user;
+    })
     let navigate = useNavigate();
 
     const load = async () => {
@@ -53,9 +56,9 @@ const WishList = () => {
                     bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png">
                     <Image w="100px" h="100px" src="https://media.sugarcosmetics.com/upload/accountMask.png" alt="user_logo" />
                     <Image w="30px" position="absolute" mt="85px" src={batch} alt="batch" />
-                    <Heading as="h1" mt="20px" fontSize="16px"> {current_user.name} </Heading>
-                    <Text mt="5px" fontSize="12px"> {current_user.email} </Text>
-                    <Text mt="5px" fontSize="12px"> {current_user.number} </Text>
+                    <Heading as="h1" mt="20px" fontSize="16px"> {user.name} </Heading>
+                    <Text mt="5px" fontSize="12px"> {user.email} </Text>
+                    <Text mt="5px" fontSize="12px"> {user.number} </Text>
                 </Flex>
 
                 <Flex w="21%"

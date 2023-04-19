@@ -15,14 +15,24 @@ import { Logo } from "./Logo";
 import { GlobalContext } from "../../contexts/GlobalContextProvider";
 import { RxCross1 } from "react-icons/rx"
 import { GoChevronDown } from "react-icons/go"
+import { useDispatch, useSelector } from "react-redux";
+import { LOGOUT_REQUEST } from "../../redux/auth/action_types";
 
 const Navbar = ({ ad_display, set_ad_display }) => {
 
     let { isOpen, onOpen, onClose } = useDisclosure();
     let navigate = useNavigate();
     let search_ref = useRef();
-    let { isLoginPage, set_isLoginPage, current_user, set_current_user, setAuth, isAuth } = useContext(GlobalContext);
+    let dispatch = useDispatch();
+    let { isLoginPage, set_isLoginPage } = useContext(GlobalContext);
     let [display_logout, set_display_logout] = useState("none");
+    let user = useSelector((store) => {
+        return store.AuthReducer.user;
+    })
+
+    let isAuth = useSelector((store) => {
+        return store.AuthReducer.isAuth;
+    })
 
     const handle_drawer = () => {
         onOpen();
@@ -37,11 +47,8 @@ const Navbar = ({ ad_display, set_ad_display }) => {
     }
 
     const proceed_logout = () => {
-        localStorage.removeItem("isAuth");
-        localStorage.removeItem("current_user");
-        set_current_user({ name: "Login/Register", email: "", number: "" });
-        setAuth(false);
         toggle_logout();
+        dispatch({ type: LOGOUT_REQUEST })
         navigate("/")
     }
 
@@ -131,7 +138,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
 
                     >
                         <HiUserCircle fontSize="25px" />
-                        {current_user.name === "Login/Register" ? "Login/Register" : "Hi, " + current_user.name}
+                        {user.name === "Login/Register" ? "Login/Register" : "Hi, " + user.name}
                     </Heading>
 
                     <GoChevronDown style={{ marginLeft: "5px", color: "white", display: isAuth ? "flex" : "none" }} onClick={toggle_logout} />

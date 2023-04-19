@@ -210,7 +210,7 @@ const Product = () => {
                 <Flex w="100%" justifyContent="center">
                     <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
                         {data.map((element, id) => {
-                            return <Card product={element} category={param.product} key={id} />
+                            return <Card product={element} category={element.category} key={id} />
                         })}
                     </SimpleGrid>
                 </Flex>

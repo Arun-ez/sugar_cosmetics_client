@@ -1,5 +1,5 @@
 
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILED } from "./action_type"
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILED } from "./action_types"
 
 const initial = {
     isAuth: false,
@@ -8,7 +8,8 @@ const initial = {
     isError: false,
     Error: "",
     form_data: {},
-    user: {}
+    signupStatus: false,
+    user: { name: "Login/Register", email: "", number: "" }
 }
 
 const AuthReducer = (state = initial, action) => {
@@ -17,6 +18,8 @@ const AuthReducer = (state = initial, action) => {
         case LOGIN_REQUEST: {
             return {
                 ...state,
+                form_data: action.payload,
+                signupStatus: false,
                 isLoading: true,
                 isError: false
             }
@@ -24,7 +27,7 @@ const AuthReducer = (state = initial, action) => {
 
         case LOGIN_SUCCESS: {
 
-            localStorage.setItem("sugar_token", action.payload);
+            localStorage.setItem("sugar_token", action.payload.token);
 
             return {
                 ...state,

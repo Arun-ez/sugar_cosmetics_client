@@ -4,24 +4,58 @@ import { Flex, Heading, Image, Button, Box, useToast } from "@chakra-ui/react"
 import { FiHeart } from "react-icons/fi"
 import { HiHeart } from "react-icons/hi"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const Card = ({ product, category }) => {
 
     const toast = useToast();
-    let navigate = useNavigate();
-
+    const navigate = useNavigate();
     const [animate_display, set_animate_display] = useState("none");
 
-    const add_wishlist = async () => {
-        let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products/${product.id}`, {
-            method: "PATCH",
-            body: JSON.stringify({ isListed: !product.isListed }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+    let token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
 
-        if (response.status == 500) {
+    const add_wishlist = async () => {
+        // let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products/${product.id}`, {
+        //     method: "PATCH",
+        //     body: JSON.stringify({ isListed: !product.isListed }),
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // })
+
+        // if (response.status == 500) {
+        //     toast({
+        //         position: "bottom-left",
+        //         duration: 1000,
+        //         isClosable: true,
+        //         render: () => {
+        //             return (
+        //                 <Flex w="250px"
+        //                     h="70px"
+        //                     alignItems="center"
+        //                     borderRadius="4px"
+        //                     fontSize="17px"
+        //                     fontWeight="medium"
+        //                     direction="column"
+        //                     justifyContent="center"
+        //                     color='white'
+        //                     bg='#121212'
+        //                 >
+        //                     {product.isListed ? "Removed from wishlist" : "Added to wishlist."}
+
+        //                 </Flex>
+
+        //             )
+        //         }
+        //     })
+        // }
+
+    }
+
+    const notify = (message) => {
+        setTimeout(() => {
             toast({
                 position: "bottom-left",
                 duration: 1000,
@@ -39,87 +73,48 @@ const Card = ({ product, category }) => {
                             color='white'
                             bg='#121212'
                         >
-                            {product.isListed ? "Removed from wishlist" : "Added to wishlist."}
-
+                            {message}
                         </Flex>
 
                     )
                 }
             })
-        }
 
-    }
+            set_animate_display("none");
 
-    const notify = (status) => {
-        if (status == 500) {
-            setTimeout(() => {
-                toast({
-                    position: "bottom-left",
-                    duration: 1000,
-                    isClosable: true,
-                    render: () => {
-                        return (
-                            <Flex w="250px"
-                                h="70px"
-                                alignItems="center"
-                                borderRadius="4px"
-                                fontSize="17px"
-                                fontWeight="medium"
-                                direction="column"
-                                justifyContent="center"
-                                color='white'
-                                bg='#121212'
-                            >
-                                Item Added Succesfully.
-                            </Flex>
-
-                        )
-                    }
-                })
-
-                set_animate_display("none");
-
-            }, 500)
-        }
-    }
-
-    const post_request = async (qty) => {
-        let response = await fetch("https://rich-pink-anemone-tie.cyclic.app/cart", {
-            method: "POST",
-            body: JSON.stringify({ ...product, qty: qty }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-
-        notify(response.status);
-    }
-
-    const patch_request = async (qty) => {
-        let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/cart/${product.id}`, {
-            method: "PATCH",
-            body: JSON.stringify({ qty: qty }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-
-        notify(response.status);
+        }, 500)
     }
 
     const add_to_cart = async () => {
 
+
+        if (!token) {
+            navigate("/account");
+            return;
+        }
+
         set_animate_display("flex");
 
-        fetch(`https://rich-pink-anemone-tie.cyclic.app/cart/${product.id}`)
-            .then((res) => { return res.json() })
-            .then((obj) => {
-                if (obj.qty) {
-                    patch_request(obj.qty + 1);
-                } else {
-                    post_request(1)
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+                method: "POST",
+                body: JSON.stringify(product),
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
                 }
             })
+
+            if (response.status === 200) {
+                notify("Item Added Succesfully.");
+            } else {
+                notify("Failed to add");
+            }
+
+
+        } catch (error) {
+            notify("Failed to add");
+        }
     }
 
     const goto_details = () => {

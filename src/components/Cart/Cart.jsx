@@ -1,88 +1,83 @@
-import { Box, Flex, Heading } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar'
 import '../Cart/cart.css'
 import './cart.css'
+import { useSelector } from 'react-redux';
 
-export default function CartPage() {
+const CartPage = () => {
+    const navigate = useNavigate();
     const [cartproduct, setCartproduct] = useState([]);
-    const [count, setCount] = useState(1);
-    const [total, setTotal] = useState(0)
+    const [total, setTotal] = useState(0);
+    const token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
 
-    let navigate = useNavigate();
 
-    useEffect(() => {
-        fetchcart();
-        window.scroll(0, 0);
-        document.title = "Sugar Cosmetics-Bag";
-    }, [])
-
-    let jsondata;
-    async function fetchcart() {
-        let res = await fetch('https://rich-pink-anemone-tie.cyclic.app/cart');
-        jsondata = await res.json();
-        setCartproduct(jsondata);
-        totalfunc();
-    }
-
-    async function addCount(qty, id) {
-        let res = await fetch(`https://rich-pink-anemone-tie.cyclic.app/cart/${id}`, {
-            method: "PATCH",
-            body: JSON.stringify({ qty: qty + 1 }),
-            headers: {
-                "Content-Type": "application/json"
-            }
+    const total_price = (data) => {
+        let currtotal = 0;
+        data.forEach((element, index) => {
+            currtotal += element.price * element.qty
         })
-
-        if (res.status == 500) {
-            fetchcart();
-            totalfunc()
-        }
+        setTotal(currtotal);
     }
 
-    async function minusCount(qty, id) {
-        if (qty > 1) {
-            let res = await fetch(`https://rich-pink-anemone-tie.cyclic.app/cart/${id}`, {
-                method: "PATCH",
-                body: JSON.stringify({ qty: qty - 1 }),
+    const load = async () => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+                method: "GET",
                 headers: {
-                    "Content-Type": "application/json"
+                    "authorization": `Bearer ${token}`
                 }
             })
 
-            if (res.status == 500) {
-                fetchcart();
-                totalfunc()
-            }
-        }
-
-    }
-
-    function totalfunc() {
-        let currtotal = 0;
-        jsondata?.map((elem, index) => {
-            currtotal += elem.Price * elem.qty
-        }, 0)
-        setTotal(currtotal);
-
-    }
-
-    async function handledel(id) {
-        let res = await fetch(`https://rich-pink-anemone-tie.cyclic.app/cart/${id}`, {
-            method: "DELETE",
-        })
-        console.log(res);
-        if (res.status == 500) {
-            fetchcart();
-            totalfunc()
+            let json = await response.json();
+            setCartproduct(json.data);
+            total_price(json.data);
+        } catch (err) {
+            console.log(err);
         }
     }
 
-    function nowcheckout() {
-        navigate('/checkout');
+    const quantity_handler = async (product, payload) => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart/${product._id}`, {
+                method: "PATCH",
+                body: JSON.stringify({ qty: product.qty + payload }),
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            load();
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+    const remove_item = async (product) => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart/${product._id}`, {
+                method: "DELETE",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            load();
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        window.scroll(0, 0);
+        document.title = "Sugar Cosmetics-Bag";
+        load();
+    }, [])
 
 
     return (
@@ -106,11 +101,11 @@ export default function CartPage() {
                                             </div>
                                         </div>
                                         <div className='leftcartdiv'>
-                                            <button className='delbutton' onClick={() => { handledel(elem.id) }} ><img src="https://img.icons8.com/small/256/filled-trash.png" alt="" /></button>
+                                            <button className='delbutton' onClick={() => { remove_item(elem) }} ><img src="https://img.icons8.com/small/256/filled-trash.png" alt="" /></button>
                                             <div className='count-div' >
-                                                <button className='count-btn' onClick={() => { addCount(elem.qty, elem.id) }} >+</button>
+                                                <button className='count-btn' onClick={() => { quantity_handler(elem, 1) }} >+</button>
                                                 <button className='count-btn' > {elem.qty} </button>
-                                                <button className='count-btn' onClick={() => { minusCount(elem.qty, elem.id) }} >-</button>
+                                                <button className='count-btn' disabled={elem.qty <= 1} onClick={() => { quantity_handler(elem, -1) }} >-</button>
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +138,13 @@ export default function CartPage() {
                             <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >₹{total}</h1>
                         </div>
                     </div>
-                    <button className='placeorder' onClick={nowcheckout} > ₹{total} PLACE ORDER</button>
+                    <button
+                        className='placeorder'
+                        style={total > 0 ? { opacity: "100%", pointerEvents: "auto" } : { opacity: "50%", pointerEvents: "none" }}
+                        onClick={() => { navigate("/checkout") }}
+                    >
+                        ₹{total} PLACE ORDER
+                    </button>
                 </div>
 
             </div>
@@ -152,19 +153,4 @@ export default function CartPage() {
     )
 }
 
-{/* <div className='pricedetails' >
-                        <div className='innercartdiv' >
-                            <p>Subtotal</p>
-                            <p>Discout</p>
-                            <p>SUGAR FAM rewards</p>
-                            <p>Shipping</p>
-                            <h1 style={{fontWeight:'bold', fontSize:'20px'}} >Total</h1>
-                        </div>
-                        <div className='leftcartdiv'>
-                            <p>850</p>
-                            <p>0.00</p>
-                            <p>0.00</p>
-                            <p>0.00</p>
-                            <h1 style={{fontWeight:'bold', fontSize:'20px'}} >850</h1>
-                        </div>
-    </div> */}
+export { CartPage };
