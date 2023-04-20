@@ -36,28 +36,6 @@ const load = async (dispatch, get_state) => {
     }
 }
 
-// const load = async (dispatch, get_state) => {
-//     const { category, sortBy, sortOrder, filterBy } = dispatch(get_state).ProductReducer;
-
-//     let value = "";
-//     filterBy.forEach(({ name, checked }) => {
-
-//         if (checked) {
-//             value += `filter=${name}&`
-//         }
-//     })
-
-//     try {
-//         let response = await fetch(`${BASE_URL}/products/${category}?sort=${sortBy}&order=${sortOrder}&${value}`);
-//         let data = await response.json();
-//         dispatch({ type: FILTER, payload: filter_options });
-//         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data.data });
-
-//     } catch (error) {
-//         dispatch({ type: GET_PRODUCTS_FAILURE });
-//     }
-// }
-
 const sort_and_filter_handler = async (dispatch, get_state) => {
     const { category, sortBy, sortOrder, filterBy } = dispatch(get_state).ProductReducer;
 
