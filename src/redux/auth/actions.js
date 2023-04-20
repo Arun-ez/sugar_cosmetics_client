@@ -18,8 +18,7 @@ const native_login = async (dispatch, get_state) => {
         let json = await response.json();
 
         if (json.error) {
-            let [key, message] = json.error.split(":");
-            alert(message);
+            alert(json.error);
             return;
         }
 
@@ -27,6 +26,7 @@ const native_login = async (dispatch, get_state) => {
             alert(json.failed);
             return;
         }
+
 
         dispatch({ type: LOGIN_SUCCESS, payload: { token: json.success.token, user: { name: json.success.name, email: json.success.email } } });
     } catch (error) {
