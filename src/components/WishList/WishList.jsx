@@ -1,10 +1,9 @@
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Flex, SimpleGrid, Image, Box, Heading, Text, Button } from "@chakra-ui/react"
 import { Card } from '../Home/Card';
 import batch from "./batch.svg"
-import { GlobalContext } from '../../contexts/GlobalContextProvider';
 import { BsWhatsapp } from "react-icons/bs"
 import { FiShare2 } from "react-icons/fi"
 import { MdOutlineContentCopy } from "react-icons/md"
@@ -28,7 +27,7 @@ const WishList = () => {
 
     const load = async () => {
         try {
-            let response = await fetch("https://rich-pink-anemone-tie.cyclic.app/products?isListed=true");
+            let response = await fetch("");
             let base = await response.json();
             set_data(base);
         } catch (err) {
@@ -39,7 +38,7 @@ const WishList = () => {
     useEffect(() => {
         document.title = "Sugar Cosmetics - Wishlist"
         window.scroll(0, 0);
-        load();
+        //load();
     }, [])
 
     return (
