@@ -14,46 +14,31 @@ import {
     AccordionIcon,
     AccordionPanel,
     Radio,
-    RadioGroup,
-    Checkbox
+    RadioGroup
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md"
 import { Card } from '../Home/Card';
-import { get, filter } from '../../redux/products/actions';
-import { SORT, FILTER } from '../../redux/products/action_types';
+import { get, sort, filter } from '../../redux/products/actions';
 
 const Product = () => {
     let navigate = useNavigate();
     let param = useParams();
     let [sort_param, set_sort_param] = useState("");
     const dispatch = useDispatch();
-    const [filter_options, set_filter_options] = useState([]);
 
     const data = useSelector((store) => {
         return store.ProductReducer.data;
     })
 
-    const handle_filter_options = () => {
-        let options = {};
-
-        data.forEach(({ filter }) => {
-            if (filter !== "") {
-                options[filter] = filter;
-            }
-        })
-
-        let filters = [];
-
-        Object.keys(options).forEach((key) => {
-            filters.push({ name: key, checked: false });
-        })
-
-        set_filter_options(filters);
-    }
+    const filter_options = useSelector((store) => {
+        return store.ProductReducer.filterBy;
+    })
 
     const filter_onchange_handler = (id) => {
         let mapped = filter_options.map((elm, idx) => {
             if (idx === id) {
+
+
                 return {
                     ...elm,
                     checked: !elm.checked
@@ -63,28 +48,19 @@ const Product = () => {
             return elm;
         })
 
-        set_filter_options(mapped);
         filter(dispatch, mapped);
     }
 
     useEffect(() => {
         document.title = param.product[0].toUpperCase() + param.product.slice(1);
-
-        if (!sort_param) {
-            dispatch({ type: SORT, payload: { sort: "", order: "" } });
-        } else {
-            const [sort, order] = sort_param.split("_");
-            dispatch({ type: SORT, payload: { sort, order } });
-        }
-
         get(dispatch, param.product);
+        set_sort_param("");
         window.scrollTo(0, 0);
-    }, [param, sort_param]);
-
+    }, [param]);
 
     useEffect(() => {
-        handle_filter_options();
-    }, [data]);
+        sort(dispatch, sort_param);
+    }, [sort_param])
 
     return (
         <Box>
@@ -137,24 +113,22 @@ const Product = () => {
                                 </h2>
 
                                 <AccordionPanel>
-
-                                    <Flex direction="column" gap="5px">
-                                        {filter_options.map(({ name, isChecked }, id) => {
+                                    <Flex direction="column" gap="1px">
+                                        {filter_options.map(({ name, checked }, id) => {
                                             return (
-                                                <Checkbox
-                                                    defaultChecked={isChecked}
-                                                    colorScheme='pink'
-                                                    size='md'
-                                                    key={id}
-                                                    onChange={() => { filter_onchange_handler(id) }}
-                                                >
-                                                    {name}
+                                                <label className='checkbox'>
+                                                    <input
+                                                        type="checkbox"
+                                                        value={name}
+                                                        checked={checked}
+                                                        onChange={() => { filter_onchange_handler(id) }}
+                                                    />
 
-                                                </Checkbox>
+                                                    {name}
+                                                </label>
                                             )
                                         })}
                                     </Flex>
-
                                 </AccordionPanel>
                             </AccordionItem>
 

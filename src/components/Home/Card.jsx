@@ -16,44 +16,6 @@ const Card = ({ product, category }) => {
         return store.AuthReducer.token;
     })
 
-    const add_wishlist = async () => {
-        // let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products/${product.id}`, {
-        //     method: "PATCH",
-        //     body: JSON.stringify({ isListed: !product.isListed }),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // })
-
-        // if (response.status == 500) {
-        //     toast({
-        //         position: "bottom-left",
-        //         duration: 1000,
-        //         isClosable: true,
-        //         render: () => {
-        //             return (
-        //                 <Flex w="250px"
-        //                     h="70px"
-        //                     alignItems="center"
-        //                     borderRadius="4px"
-        //                     fontSize="17px"
-        //                     fontWeight="medium"
-        //                     direction="column"
-        //                     justifyContent="center"
-        //                     color='white'
-        //                     bg='#121212'
-        //                 >
-        //                     {product.isListed ? "Removed from wishlist" : "Added to wishlist."}
-
-        //                 </Flex>
-
-        //             )
-        //         }
-        //     })
-        // }
-
-    }
-
     const notify = (message) => {
         setTimeout(() => {
             toast({
@@ -83,6 +45,10 @@ const Card = ({ product, category }) => {
             set_animate_display("none");
 
         }, 500)
+    }
+
+    const add_wishlist = async () => {
+
     }
 
     const add_to_cart = async () => {
@@ -122,34 +88,46 @@ const Card = ({ product, category }) => {
     }
 
     return (
-        <Flex w="100%" p="20px">
-            <Flex bg="white" direction="column" p="30px" borderRadius="15px" justifyContent="space-around" alignItems="center" w="100%" boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px">
-                <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h="220px" borderRadius="15px" />
+        <Flex w={["85%", "100%", "100%", "100%"]} p={["5px", "10px", "20px", "20px"]} justifySelf="center">
+            <Flex
+                bg="white"
+                direction="column"
+                p={["5px", "15px", "20px", "30px"]}
+                borderRadius="15px"
+                alignItems="center"
+                justifyContent="space-evenly"
+                w="100%"
+                boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
+            >
+                <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["190px", "220px", "220px", "220px"]} borderRadius="15px" />
+                <br />
                 <p onClick={goto_details} style={{ fontSize: "12px", cursor: "pointer" }}> {product.Title} </p>
 
-                <Flex cursor="pointer" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
+                <Flex cursor="pointer" mt="10px" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
                     <Heading as="h1" fontSize="20px"> ₹{product.price} </Heading>
                     <Heading as="h1" fontSize="15px" color="#fc2779"> {product.brandcolor} </Heading>
                 </Flex>
-                <br />
-                <Flex w="100%" justifyContent="center" alignItems="center" gap="15px">
+
+
+                <Flex mt="20px" w="100%" justifyContent="center" alignItems="center" gap="13px">
                     <Button
                         variant="solid"
-                        w="35px"
-                        h="42px"
+                        w="33px"
+                        h="40px"
                         p="2"
                         bg="none"
                         border="1px solid black"
                         hover="none"
                         onClick={add_wishlist}
-                        borderRadius="10px"> {product.isListed ? <HiHeart fontSize="25px" /> : <FiHeart fontSize="25px" />}  </Button>
+                        borderRadius="10px"> {product.isListed ? <HiHeart fontSize="23px" /> : <FiHeart fontSize="23px" />}
+                    </Button>
 
-                    <Flex direction="column" w="80%" pb="6px" h="47px" justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
+                    <Flex direction="column" w={["60%", "60%", "70%", "80%"]} pb="6px" h="47px" justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
                         <Button
                             variant="ghost"
-                            fontSize="15px"
+                            fontSize={["12px", "12px", "12px", "14px"]}
                             colorScheme="black"
-                            w="80%"
+                            w="100%"
                             color="white"
                             hover="none"
                             onClick={add_to_cart}
@@ -157,7 +135,7 @@ const Card = ({ product, category }) => {
 
                         </Button>
 
-                        <Box display={animate_display} className='processing' h="4px" bg="#fc2779"></Box>
+                        <Box display={animate_display} className='processing' h="3px" bg="#fc2779"></Box>
                     </Flex>
 
                 </Flex>

@@ -44,7 +44,7 @@ const HomeDeals = ({ heading, headingColor, data, limit }) => {
                 <Box h="2px" w="50px" bg="#fc2779"></Box>
             </Flex>
 
-            <Flex h="450px">
+            <Flex h={["200px", "250px", "300px", "400px"]}>
                 <Flex w="100%" justifyContent="space-around" pl="40px" pr="40px">
 
                     {data ?

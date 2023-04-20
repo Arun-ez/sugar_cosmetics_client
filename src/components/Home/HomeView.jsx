@@ -61,7 +61,8 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
             <Flex h="450px">
 
                 <Flex w="10%" justifyContent="center" alignItems="center">
-                    <MdArrowBackIos onClick={handle_prev} style={{ display: button_display, cursor: "pointer", background: "white", color: "#fc2779", fontWeight: "bold", fontSize: "37px", padding: "7px", borderRadius: "50%", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
+                    <MdArrowBackIos onClick={handle_prev}
+                        style={{ display: button_display, cursor: "pointer", background: "white", color: "#fc2779", fontWeight: "bold", fontSize: "33px", padding: "5px", borderRadius: "50%", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
                 </Flex>
 
                 <Flex w="100%" justifyContent="space-around">
@@ -82,7 +83,9 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
                 </Flex>
 
                 <Flex w="10%" justifyContent="center" alignItems="center">
-                    <MdArrowForwardIos onClick={handle_next} style={{ display: button_display, cursor: "pointer", background: "white", color: "#fc2779", fontSize: "37px", padding: "7px", borderRadius: "50%", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
+                    <MdArrowForwardIos
+                        onClick={handle_next}
+                        style={{ display: button_display, cursor: "pointer", background: "white", color: "#fc2779", fontSize: "33px", padding: "7px", borderRadius: "50%", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
                 </Flex>
 
             </Flex>

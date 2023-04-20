@@ -61,46 +61,6 @@ const ViewFinder = ({ window_width, limit }) => {
         return arr;
     }
 
-    const add_wishlist = async () => {
-        // let response = await fetch(`https://rich-pink-anemone-tie.cyclic.app/products/${product.id}`, {
-        //     method: "PATCH",
-        //     body: JSON.stringify({ isListed: !product.isListed }),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // })
-
-        // if (response.status == 500) {
-        //     load();
-
-        //     toast({
-        //         position: "bottom-left",
-        //         duration: 1000,
-        //         isClosable: true,
-        //         render: () => {
-        //             return (
-        //                 <Flex w="250px"
-        //                     h="70px"
-        //                     alignItems="center"
-        //                     borderRadius="4px"
-        //                     fontSize="17px"
-        //                     fontWeight="medium"
-        //                     direction="column"
-        //                     justifyContent="center"
-        //                     color='white'
-        //                     bg='#121212'
-        //                 >
-        //                     {product.isListed ? "Removed from wishlist" : "Added to wishlist."}
-
-        //                 </Flex>
-
-        //             )
-        //         }
-        //     })
-        // }
-
-    }
-
     const notify = (message) => {
         setTimeout(() => {
             toast({
@@ -132,6 +92,9 @@ const ViewFinder = ({ window_width, limit }) => {
         }, 500)
     }
 
+    const add_wishlist = async () => {
+
+    }
 
     const add_to_cart = async () => {
 
@@ -294,7 +257,7 @@ const ViewFinder = ({ window_width, limit }) => {
 
                                     </Button>
 
-                                    <Box display={animate_display} className='processing' h="4px" bg="#fc2779"></Box>
+                                    <Box display={animate_display} className='processing' h="3px" bg="#fc2779"></Box>
                                 </Flex>
                             </Flex>
 
