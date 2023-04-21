@@ -39,9 +39,9 @@ const HomeDeals = ({ heading, headingColor, data, limit }) => {
     return (
         <Flex direction="column">
             <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
-                <Box h="2px" w="50px" bg="#fc2779"></Box>
-                <Heading as="h2" fontSize="20px" color={headingColor}> {heading} </Heading>
-                <Box h="2px" w="50px" bg="#fc2779"></Box>
+                <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color={headingColor}> {heading} </Heading>
+                <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
             </Flex>
 
             <Flex h={["200px", "250px", "300px", "400px"]}>
@@ -62,17 +62,33 @@ const HomeDeals = ({ heading, headingColor, data, limit }) => {
                     }
                 </Flex>
 
-                <Flex pl="150px" pr="150px" w="100%" h="450px" justifyContent="space-between" alignItems="center" position="absolute">
+                <Flex pl="150px" pr="150px" w="100%" h={["200px", "250px", "300px", "400px"]} justifyContent="space-between" alignItems="center" position="absolute">
                     <MdArrowBackIos
                         onMouseOver={() => { set_btn_visibilty("rgba(0, 0, 0, 0.8)") }}
                         onMouseLeave={() => { set_btn_visibilty("rgba(0, 0, 0, 0.6)") }}
                         onClick={handle_prev}
-                        style={{ backdropFilter: "blur(5px)", backgroundColor: btn_visibility, color: "white", fontSize: "30px", padding: "7px", borderRadius: "50%" }} />
+                        style={{
+                            backdropFilter: "blur(5px)",
+                            backgroundColor: btn_visibility,
+                            color: "white",
+                            fontSize: "30px",
+                            padding: "7px",
+                            borderRadius: "50%"
+                        }}
+                    />
                     <MdArrowForwardIos
                         onMouseOver={() => { set_btn_visibilty("rgba(0, 0, 0, 0.8)") }}
                         onMouseLeave={() => { set_btn_visibilty("rgba(0, 0, 0, 0.6)") }}
                         onClick={handle_next}
-                        style={{ backdropFilter: "blur(5px)", backgroundColor: btn_visibility, color: "white", fontSize: "30px", padding: "7px", borderRadius: "50%" }} />
+                        style={{
+                            backdropFilter: "blur(5px)",
+                            backgroundColor: btn_visibility,
+                            color: "white",
+                            fontSize: "30px",
+                            padding: "7px",
+                            borderRadius: "50%"
+                        }}
+                    />
                 </Flex>
 
             </Flex>

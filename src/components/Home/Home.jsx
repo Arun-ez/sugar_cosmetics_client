@@ -78,10 +78,10 @@ const Home = ({ limit }) => {
                 <HomeView limit={limit} heading="BESTSELLERS" headingColor="white" type="seller" />
             </Box>
 
-            <Flex pl="25%" boxShadow="rgba(17, 17, 26, 0.1) 0px 1px 0px;" pr="30px" justifyContent="space-between" alignItems="center" bgImage="https://media.sugarcosmetics.com/upload/Reward_Banner_Desktop.png" backgroundSize="cover" w="95%" h="170px" m="auto">
+            <Flex pl={["10%", "10%", "25%", "25%"]} boxShadow="rgba(17, 17, 26, 0.1) 0px 1px 0px;" pr="30px" justifyContent="space-between" alignItems="center" bgImage="https://media.sugarcosmetics.com/upload/Reward_Banner_Desktop.png" backgroundSize="cover" w="95%" h="170px" m="auto">
                 <Flex direction="column" justifyContent="space-around" h="60%">
-                    <Heading as="h1" fontSize="20px"> SUGAR FAM REWARDS </Heading>
-                    <p style={{ fontSize: "18px" }}> Enjoy up to <span style={{ fontWeight: "bold" }}> 20% off  </span> in SUGAR exclusive stores or on our Website/App. </p>
+                    <Heading as="h1" fontSize={["15px", "20px", "20px", "20px"]} > SUGAR FAM REWARDS </Heading>
+                    <p style={{ fontSize: "15px" }}> Enjoy up to <span style={{ fontWeight: "bold" }}> 20% off  </span> in SUGAR exclusive stores or on our Website/App. </p>
                 </Flex>
                 <Flex direction="column" justifyContent="space-between" h="40%">
                     <p style={{ fontSize: "10px", whiteSpace: "nowrap" }}> T&C applies</p>
@@ -96,9 +96,9 @@ const Home = ({ limit }) => {
             <Flex w="100%" direction="column" alignItems="center">
 
                 <Flex w="100%" mb="30px" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
-                    <Box h="2px" w="50px" bg="#fc2779"></Box>
-                    <Heading as="h2" fontSize="20px" color="black"> GODDESS OF FLAWLESS BB SERUM </Heading>
-                    <Box h="2px" w="50px" bg="#fc2779"></Box>
+                    <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                    <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color="black"> GODDESS OF FLAWLESS BB SERUM </Heading>
+                    <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                 </Flex>
 
                 <iframe
@@ -123,9 +123,9 @@ const Home = ({ limit }) => {
 
             <Flex w="100%" direction="column" alignItems="center" gap="20px">
                 <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
-                    <Box h="2px" w="50px" bg="#fc2779"></Box>
-                    <Heading as="h2" fontSize="20px" color="black"> REFER YOUR FRIENDS </Heading>
-                    <Box h="2px" w="50px" bg="#fc2779"></Box>
+                    <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                    <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color="black"> REFER YOUR FRIENDS </Heading>
+                    <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                 </Flex>
                 <Image width="96%" borderRadius="15px" src='https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F8638d096-d168-404e-9b83-56967625b5e6.jpg&w=1920&q=75' />
             </Flex>
@@ -138,9 +138,9 @@ const Home = ({ limit }) => {
 
             <Flex w="100%" direction="column" alignItems="center">
                 <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
-                    <Box h="2px" w="50px" bg="#fc2779"></Box>
-                    <Heading as="h2" fontSize="20px" color="black"> THIS OR THAT </Heading>
-                    <Box h="2px" w="50px" bg="#fc2779"></Box>
+                    <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                    <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color="black"> THIS OR THAT </Heading>
+                    <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                 </Flex>
                 <Flex direction={["column", "column", "row", "row"]} alignItems="center" w="100%" gap="30px" pl="1%" pr="1%" mt="20px" justifyContent="center">
                     <Image borderRadius="20px" w={["80%", "80%", "46%", "46%"]} src="https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F50d277c9-c605-4c1a-b9da-ae952189292d.jpg&w=1080&q=75" alt='this' />

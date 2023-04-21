@@ -63,7 +63,7 @@ const Register = ({ set_process_index, progress_data }) => {
             <Input
                 type='text'
                 placeholder='First Name'
-                width='400px'
+                width={['80%', '80%', '50%', '50%']}
                 height='60px'
                 border='1px solid grey'
                 ref={first_ref}
@@ -74,7 +74,7 @@ const Register = ({ set_process_index, progress_data }) => {
             <Input
                 type='text'
                 placeholder='Last Name'
-                width='400px'
+                width={['80%', '80%', '50%', '50%']}
                 height='60px'
                 border='1px solid grey'
                 ref={second_ref}
@@ -85,7 +85,7 @@ const Register = ({ set_process_index, progress_data }) => {
             <Input
                 type='email'
                 placeholder='Enter email id'
-                width='400px'
+                width={['80%', '80%', '50%', '50%']}
                 height='60px'
                 border='1px solid grey'
                 ref={email_ref}
@@ -96,7 +96,7 @@ const Register = ({ set_process_index, progress_data }) => {
             <Input
                 type='email'
                 placeholder='Enter new Password'
-                width='400px'
+                width={['80%', '80%', '50%', '50%']}
                 height='60px'
                 border='1px solid grey'
                 ref={password_ref}

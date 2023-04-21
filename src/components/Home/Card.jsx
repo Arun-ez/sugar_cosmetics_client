@@ -84,22 +84,22 @@ const Card = ({ product, category }) => {
     }
 
     const goto_details = () => {
-        navigate(`/products/${category}/${product._id}`);
+        navigate(`/collections/${category}/${product._id}`);
     }
 
     return (
-        <Flex w={["85%", "100%", "100%", "100%"]} p={["5px", "10px", "20px", "20px"]} justifySelf="center">
+        <Flex w={["95%", "100%", "100%", "100%"]} p={["10px", "10px", "20px", "20px"]} justifySelf="center">
             <Flex
                 bg="white"
                 direction="column"
-                p={["5px", "15px", "20px", "30px"]}
+                p={["15px", "15px", "20px", "30px"]}
                 borderRadius="15px"
                 alignItems="center"
                 justifyContent="space-evenly"
                 w="100%"
                 boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
             >
-                <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["190px", "220px", "220px", "220px"]} borderRadius="15px" />
+                <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["180px", "220px", "220px", "220px"]} borderRadius="15px" />
                 <br />
                 <p onClick={goto_details} style={{ fontSize: "12px", cursor: "pointer" }}> {product.Title} </p>
 

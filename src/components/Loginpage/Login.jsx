@@ -43,15 +43,14 @@ const Login = ({ set_process_index, progress_data, set_progress_data }) => {
             <Image src='https://media.sugarcosmetics.com/upload/Hi!.png' width='150px' height='100px' alt='Dan Abramov' />
             <Heading as='h5' fontSize='20px' margin='14px' > Login/Sign Up Using Email </Heading>
             <Input
-                type='tel'
+                type='text'
                 placeholder='Enter Your Email'
-                width='400px'
+                width={['80%', '80%', '50%', '50%']}
                 height='60px'
                 border='1px solid grey'
                 ref={email_ref}
             />
             <Text
-                width='700px'
                 margin='24px'
                 fontSize='14px'
                 color='grey'

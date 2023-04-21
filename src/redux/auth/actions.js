@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT_REQUEST, SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILED } from "./action_types";
+import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNUP_SUCCESS, SIGNUP_FAILED } from "./action_types";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -79,7 +79,6 @@ const signup_request = async (dispatch, get_state) => {
                 "Content-Type": "application/json"
             }
         })
-        let json = await response.json();
         alert("Signup successful please login");
         dispatch({ type: SIGNUP_SUCCESS });
     } catch (error) {
@@ -87,13 +86,6 @@ const signup_request = async (dispatch, get_state) => {
         alert(message);
         dispatch({ type: SIGNUP_FAILED, payload: message });
     }
-}
-
-
-const logout_request = (dispatch, get_state) => {
-    localStorage.removeItem("isAuth");
-    localStorage.removeItem("current_user");
-    dispatch({ type: LOGOUT_REQUEST });
 }
 
 export { native_login, token_login, signup_request }

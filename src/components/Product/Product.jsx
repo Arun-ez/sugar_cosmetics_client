@@ -38,7 +38,6 @@ const Product = () => {
         let mapped = filter_options.map((elm, idx) => {
             if (idx === id) {
 
-
                 return {
                     ...elm,
                     checked: !elm.checked
@@ -116,7 +115,7 @@ const Product = () => {
                                     <Flex direction="column" gap="1px">
                                         {filter_options.map(({ name, checked }, id) => {
                                             return (
-                                                <label className='checkbox'>
+                                                <label className='checkbox' key={id}>
                                                     <input
                                                         type="checkbox"
                                                         value={name}

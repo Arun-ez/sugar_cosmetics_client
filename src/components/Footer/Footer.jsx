@@ -25,13 +25,13 @@ const Footer = () => {
                 <Flex bg={`url(${footer_bg})`} h="300px" w="100%" direction="column" alignItems="center" bgRepeat="no-repeat" backgroundSize="cover" position="absolute">
 
                     <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
-                        <Box h="2px" w="50px" bg="#fc2779"></Box>
-                        <Heading as="h2" fontSize="25px"> LET’S STAY IN TOUCH </Heading>
-                        <Box h="2px" w="50px" bg="#fc2779"></Box>
+                        <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                        <Heading as="h2" fontSize={["20px", "25px", "25px", "25px"]}> LET’S STAY IN TOUCH </Heading>
+                        <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                     </Flex>
 
-                    <Flex h="40px" justifyContent="center" alignItems="center" pb="20px" whiteSpace="nowrap" fontSize={["12px", "14px", "15px", "15px"]}>
-                        <p> Get the latest beauty tips straight to your inbox. Can’t wait to connect! </p>
+                    <Flex h="40px" justifyContent="center" alignItems="center" pb="20px" whiteSpace={["normal", "nowrap", "nowrap", "nowrap"]} fontSize={["12px", "14px", "15px", "15px"]}>
+                        <p style={{ textAlign: "center" }}> Get the latest beauty tips straight to your inbox. Can’t wait to connect! </p>
                     </Flex>
 
                     <Flex w={["80%", "80%", "60%", "40%"]} h="45px" border="1px solid gray" borderRadius="8px" overflow="hidden">
@@ -57,20 +57,91 @@ const Footer = () => {
                         </Box>
                     </Flex>
                     <Flex h="80px" mt="60px" fontSize="17px" color="black" justifyContent="center" alignItems="center" gap="20px">
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("https://www.facebook.com/trySUGAR/") }}> <FaFacebookF /> </Flex>
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("https://www.tumblr.com/sugarcosmetics-blog") }}> <FaTumblr /> </Flex>
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("https://www.youtube.com/channel/UCKVqnev2idvmUNKc2b91B8g") }}> <FaYoutube /> </Flex>
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("https://twitter.com/trySUGAR") }}> <FaTwitter /> </Flex>
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("https://www.instagram.com/trysugar/?hl=en") }}> <FaInstagram /> </Flex>
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("mailto:?subject=Check%20this%20https://in.sugarcosmetics.com/pages/offer") }}> <AiFillMail /> </Flex>
-                        <Flex w="30px" h="30px" borderRadius="50%" bg="#999999" justifyContent="center" alignItems="center" _hover={{ background: 'white' }} cursor="pointer" onClick={() => { window.open("https://in.pinterest.com/sugarcosmetics/") }}> <FaPinterestP /> </Flex>
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("https://www.facebook.com/trySUGAR/") }}> <FaFacebookF />
+                        </Flex>
+
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("https://www.tumblr.com/sugarcosmetics-blog") }}> <FaTumblr />
+                        </Flex>
+
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("https://www.youtube.com/channel/UCKVqnev2idvmUNKc2b91B8g") }}
+                        > <FaYoutube />
+                        </Flex>
+
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("https://twitter.com/trySUGAR") }}> <FaTwitter /> </Flex>
+
+
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("https://www.instagram.com/trysugar/?hl=en") }}> <FaInstagram
+                            /> </Flex>
+
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("mailto:?subject=Check%20this%20https://in.sugarcosmetics.com/pages/offer") }}
+                        > <AiFillMail />
+                        </Flex>
+                        <Flex w={["25px", "30px", "30px", "30px"]}
+                            h={["25px", "30px", "30px", "30px"]}
+                            borderRadius="50%"
+                            bg="#999999"
+                            justifyContent="center"
+                            alignItems="center"
+                            _hover={{ background: 'white' }}
+                            cursor="pointer"
+                            onClick={() => { window.open("https://in.pinterest.com/sugarcosmetics/") }}> <FaPinterestP
+                            /> </Flex>
+
                     </Flex>
                     <Flex justifyContent={["space-around", "space-around", "space-around", "center"]} gap={["10px", "10px", "0px", "100px"]} w="94%" h="80px" alignItems="center" borderTop="1px solid #c4c4c4" borderBottom="1px solid #c4c4c4" whiteSpace="nowrap">
-                        <Heading as="h1" fontSize={["12px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> Stores </Heading>
-                        <Heading as="h1" fontSize={["12px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> Terms & Conditions </Heading>
-                        <Heading as="h1" fontSize={["12px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> Returns </Heading>
-                        <Heading as="h1" fontSize={["12px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> FAQs </Heading>
-                        <Heading as="h1" fontSize={["12px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> About Us </Heading>
+                        <Heading as="h1" fontSize={["11px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> Stores </Heading>
+                        <Heading as="h1" fontSize={["11px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> Terms & Conditions </Heading>
+                        <Heading as="h1" fontSize={["11px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> Returns </Heading>
+                        <Heading as="h1" fontSize={["11px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> FAQs </Heading>
+                        <Heading as="h1" fontSize={["11px", "15px", "18px", "18px"]} color="white" cursor="pointer" _hover={{ textDecoration: "underline" }}> About Us </Heading>
                     </Flex>
                     <Flex direction="column" color="white" borderBottom="1px solid #c4c4c4" w="94%">
 
@@ -109,7 +180,7 @@ const Footer = () => {
 
                     </Flex>
 
-                    <Flex color="white" gap="20px" alignItems="center">
+                    <Flex color="white" gap={["0px", "20px", "20px", "20px"]} pt={["20px", "0px", "0px", "0px"]} alignItems="center" direction={["column", "row", "row", "row"]}>
                         <Flex direction="column">
                             <Heading as="h2" fontSize={["12px", "14px", "20px", "20px"]}> GET THE NEW SUGAR APP TODAY! </Heading>
                             <Heading as="h2" size="sm" opacity="50%" mt="5px" fontSize={["10px", "11px", "12px", "12px"]} fontWeight="medium"> Tap into a better shopping experience. </Heading>
@@ -123,7 +194,7 @@ const Footer = () => {
                         <p> Copyright © 2023 SUGAR Cosmetics. All rights reserved. </p>
                     </Flex>
                 </Flex>
-            </Flex>
+            </Flex >
         </>
 
 

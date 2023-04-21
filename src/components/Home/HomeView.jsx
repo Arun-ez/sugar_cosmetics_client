@@ -53,14 +53,14 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
     return (
         <Flex direction="column" onMouseOver={() => { set_button_display("block") }} onMouseLeave={() => { set_button_display("none") }}>
             <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
-                <Box h="2px" w="50px" bg="#fc2779"></Box>
-                <Heading as="h2" fontSize="20px" color={headingColor}> {heading} </Heading>
-                <Box h="2px" w="50px" bg="#fc2779"></Box>
+                <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color={headingColor}> {heading} </Heading>
+                <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
             </Flex>
 
             <Flex h="450px">
 
-                <Flex w="10%" justifyContent="center" alignItems="center">
+                <Flex w={["20%", "20%", "10%", "10%"]} justifyContent="center" alignItems="center">
                     <MdArrowBackIos onClick={handle_prev}
                         style={{ display: button_display, cursor: "pointer", background: "white", color: "#fc2779", fontWeight: "bold", fontSize: "33px", padding: "5px", borderRadius: "50%", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
                 </Flex>
@@ -82,7 +82,7 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
                     }
                 </Flex>
 
-                <Flex w="10%" justifyContent="center" alignItems="center">
+                <Flex w={["20%", "20%", "10%", "10%"]} justifyContent="center" alignItems="center">
                     <MdArrowForwardIos
                         onClick={handle_next}
                         style={{ display: button_display, cursor: "pointer", background: "white", color: "#fc2779", fontSize: "33px", padding: "7px", borderRadius: "50%", boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px" }} />
