@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar'
-import '../Cart/cart.css'
-import './cart.css'
 import { useSelector } from 'react-redux';
+import { Flex, Text, Heading, Image } from '@chakra-ui/react';
+import { MdArrowForwardIos } from 'react-icons/md';
+import { RiDeleteBinLine } from 'react-icons/ri'
 
 const CartPage = () => {
     const navigate = useNavigate();
@@ -82,74 +82,96 @@ const CartPage = () => {
 
     return (
 
-        <div >
-            <Navbar />
-            <div className='maindiv' >
-                <div className='left' >
-                    <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >BAG SUMMARY</h1>
-                    <div className='innerleft' >
+        <Flex direction="column" bgColor="#f2f2f2" alignItems="center">
+            <Flex pl="20px" bgColor="#ffffff" h="50px" w="100%" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
+                <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
+                <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />
+                <Heading as="h1" fontSize="15px"> Bag </Heading>
+            </Flex>
+            <Flex
+                direction={["column", "column", "column", "row"]}
+                bgColor="#ffffff"
+                width="96%"
+                mt="20px"
+                mb="20px"
+                borderRadius="25px"
+                p="30px"
+                gap="20px"
+            >
+                <Flex direction="column" w="100%">
+                    <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} > BAG SUMMARY </h1>
+                    <Flex direction="column" gap="10px" mt="10px" w="100%">
 
                         {
                             cartproduct.map((elem, id) => {
                                 return (
-                                    <div className='cartdiv' key={id} >
-                                        <div className='innercartdiv' >
-                                            <img className='product-img' src={elem.images[0]} alt="" />
-                                            <div>
-                                                <p>{elem.Title}</p>
-                                                <p style={{ fontWeight: 'bold' }} > {elem.Price} </p>
-                                            </div>
-                                        </div>
-                                        <div className='leftcartdiv'>
-                                            <button className='delbutton' onClick={() => { remove_item(elem) }} ><img src="https://img.icons8.com/small/256/filled-trash.png" alt="" /></button>
-                                            <div className='count-div' >
-                                                <button className='count-btn' onClick={() => { quantity_handler(elem, 1) }} >+</button>
-                                                <button className='count-btn' > {elem.qty} </button>
-                                                <button className='count-btn' disabled={elem.qty <= 1} onClick={() => { quantity_handler(elem, -1) }} >-</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <Flex key={id} justifyContent="space-between" border="1px solid #f2f2f2" borderRadius="10px" >
+                                        <Flex p="15px" gap="15px">
+                                            <Image w="40px" src={elem.images[0]} alt="product" borderRadius="7px" />
+                                            <Flex direction="column">
+                                                <p>{elem.Title.substring(0, 60) + " . . ."}</p>
+                                                <p style={{ fontWeight: 'bold', opacity: "90%" }} > ₹{elem.price} </p>
+                                            </Flex>
+                                        </Flex>
+                                        <Flex justifyContent="center" alignItems="center" w="200px" pl="20px" pr="20px">
+
+                                            <Flex w="100%" justifyContent="center">
+                                                <RiDeleteBinLine fontSize="17px" color="#212529" onClick={() => { remove_item(elem) }} />
+                                            </Flex>
+
+                                            <Flex w="100%" justifyContent="space-around" border="1px solid #212529" p="5px" borderRadius="10px" bor>
+                                                <button disabled={elem.qty <= 1} onClick={() => { quantity_handler(elem, -1) }} >-</button>
+                                                <button > {elem.qty} </button>
+                                                <button onClick={() => { quantity_handler(elem, 1) }} >+</button>
+                                            </Flex>
+                                        </Flex>
+                                    </Flex>
                                 )
                             })
                         }
 
-                    </div>
-                </div>
-                <div className="right">
+                    </Flex>
+                </Flex>
+                <Flex direction="column" w="100%">
                     <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >APPLY COUPON</h1>
-                    <div className="coupoun">
-                        <input type="text" placeholder='Enter gift code or discount code' />
-                        <button>Apply</button>
-                    </div>
-                    <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >PRICE DETAILS</h1>
-                    <div className='pricedetails' >
-                        <div className='innerpricediv' >
+                    <Flex border="1px solid #f2f2f2" padding="15px" borderRadius="10px" mt="10px" justifyContent="space-between">
+                        <input style={{ border: "1px solid #f2f2f2", width: "70%", padding: "10px", borderRadius: "5px" }} type="text" placeholder='Enter gift code or discount code' />
+                        <button style={{ backgroundColor: "black", color: "white", paddingLeft: "40px", paddingRight: "40px" }}>Apply</button>
+                    </Flex>
+                    <h1 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: "10px" }} >PRICE DETAILS</h1>
+                    <Flex justifyContent="space-between" mt="10px" border="1px solid #f2f2f2" borderRadius="10px" p="20px">
+                        <div>
                             <p>Subtotal</p>
                             <p>Discout</p>
                             <p>SUGAR FAM rewards</p>
                             <p>Shipping</p>
                             <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >Total</h1>
                         </div>
-                        <div className='leftpricediv'>
+                        <div>
                             <p>₹{total}</p>
                             <p>₹0.00</p>
                             <p>₹0.00</p>
                             <p>₹0.00</p>
                             <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >₹{total}</h1>
                         </div>
-                    </div>
+                    </Flex>
                     <button
-                        className='placeorder'
-                        style={total > 0 ? { opacity: "100%", pointerEvents: "auto" } : { opacity: "50%", pointerEvents: "none" }}
+                        style={{
+                            backgroundColor: "black",
+                            color: "white",
+                            padding: "12px",
+                            borderRadius: "6px",
+                            marginTop: "30px",
+                            opacity: total > 0 ? "100%" : "50%",
+                            pointerEvents: total > 0 ? "auto" : "none"
+                        }}
                         onClick={() => { navigate("/checkout") }}
                     >
                         ₹{total} PLACE ORDER
                     </button>
-                </div>
-
-            </div>
-
-        </div>
+                </Flex>
+            </Flex>
+        </Flex>
     )
 }
 

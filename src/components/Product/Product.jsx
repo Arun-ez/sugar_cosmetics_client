@@ -64,9 +64,9 @@ const Product = () => {
     return (
         <Box>
             <Flex pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
-                <Text opacity="70%" onClick={() => { navigate("/") }}> Home </Text>
-                <MdArrowForwardIos style={{ opacity: "60%", fontSize: "15px" }} />
-                <Heading as="h1" fontSize="17px"> {param.product[0].toUpperCase() + param.product.slice(1)} </Heading>
+                <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
+                <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />
+                <Heading as="h1" fontSize="15px"> {param.product[0].toUpperCase() + param.product.slice(1)} </Heading>
             </Flex>
 
             <Flex>

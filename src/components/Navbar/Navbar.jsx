@@ -24,7 +24,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
     let navigate = useNavigate();
     let search_ref = useRef();
     let dispatch = useDispatch();
-    let { isLoginPage, set_isLoginPage } = useContext(GlobalContext);
+    let { isLoginPage } = useContext(GlobalContext);
     let [display_logout, set_display_logout] = useState("none");
     let user = useSelector((store) => {
         return store.AuthReducer.user;
@@ -132,6 +132,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                         gap="4px"
                         alignItems="center"
                         cursor="pointer"
+                        fontWeight="medium"
                         onClick={() => {
                             navigate("/account")
                         }}
