@@ -110,8 +110,6 @@ const Checkout = () => {
                 </div>
                 <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} > BAG SUMMARY </h1>
                 <div className="productreview">
-
-
                     {
                         cartproduct.map((elem, id) => {
                             return (
@@ -133,8 +131,6 @@ const Checkout = () => {
                         })
                     }
                 </div>
-
-
             </div>
             <div className="right">
                 <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} > PAYMENT METHOD </h1>
