@@ -1,6 +1,6 @@
-import Navbar from "../Navbar/Navbar"
-import { useState, useEffect } from "react";
 import '../Checkout/checkout.css'
+import { useState, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useToast, Flex } from "@chakra-ui/react";
@@ -90,7 +90,6 @@ const Checkout = () => {
 
     return (
         <div className="maindiv" >
-            <Navbar />
             <div className="left">
                 <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >PRICE DETAILS</h1>
                 <div className='pricedetails' >
