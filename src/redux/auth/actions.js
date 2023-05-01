@@ -62,7 +62,6 @@ const token_login = async (dispatch, get_state) => {
 
         dispatch({ type: LOGIN_SUCCESS, payload: { token: token, user: { name: json.success.name, email: json.success.email } } });
     } catch (error) {
-        console.log("hey")
         dispatch({ type: LOGIN_FAILED, payload: error.message });
     }
 }
