@@ -43,7 +43,7 @@ const AuthReducer = (state = initial, action) => {
             return {
                 ...state,
                 token: null,
-                user: {},
+                user: { name: "Login/Register", email: "", number: "" },
                 isLoading: false,
                 isError: true,
                 Error: action.payload

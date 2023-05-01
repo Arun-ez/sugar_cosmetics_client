@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Flex, Heading } from "@chakra-ui/react"
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md"
 import { Card } from './Card'
+import { Spinner } from '@chakra-ui/react'
 
 const HomeView = ({ heading, type, headingColor, limit }) => {
 
@@ -77,6 +78,14 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
                         :
 
                         <>
+                            <Spinner
+                                mt="150px"
+                                thickness='4px'
+                                speed='0.65s'
+                                emptyColor='gray.200'
+                                color='pink.500'
+                                size='xl'
+                            />
                         </>
 
                     }

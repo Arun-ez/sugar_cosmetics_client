@@ -19,6 +19,7 @@ import {
 import { MdArrowForwardIos } from "react-icons/md"
 import { Card } from '../Home/Card';
 import { get, sort, filter } from '../../redux/products/actions';
+import { Spinner } from '@chakra-ui/react';
 
 const Product = () => {
     let navigate = useNavigate();
@@ -181,11 +182,30 @@ const Product = () => {
                 </Flex>
 
                 <Flex w="100%" justifyContent="center">
-                    <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
-                        {data.map((element, id) => {
-                            return <Card product={element} category={element.category} key={id} />
-                        })}
-                    </SimpleGrid>
+
+                    {data.length ?
+                        <>
+                            <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
+                                {data.map((element, id) => {
+                                    return <Card product={element} category={element.category} key={id} />
+                                })}
+                            </SimpleGrid>
+                        </>
+
+                        :
+
+                        <>
+                            <Spinner
+                                mt="150px"
+                                thickness='4px'
+                                speed='0.65s'
+                                emptyColor='gray.200'
+                                color='pink.500'
+                                size='xl'
+                            />
+                        </>
+                    }
+
                 </Flex>
 
             </Flex>
