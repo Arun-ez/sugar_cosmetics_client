@@ -119,7 +119,7 @@ const CartPage = () => {
                                                 <RiDeleteBinLine fontSize="17px" color="#212529" onClick={() => { remove_item(elem) }} />
                                             </Flex>
 
-                                            <Flex w="100%" justifyContent="space-around" border="1px solid #212529" p="5px" borderRadius="10px" bor>
+                                            <Flex w="100%" justifyContent="space-around" border="1px solid #212529" p="5px" borderRadius="10px">
                                                 <button disabled={elem.qty <= 1} onClick={() => { quantity_handler(elem, -1) }} >-</button>
                                                 <button > {elem.qty} </button>
                                                 <button onClick={() => { quantity_handler(elem, 1) }} >+</button>
@@ -157,8 +157,11 @@ const CartPage = () => {
                     </Flex>
                     <button
                         style={{
+                            width: "200px",
+                            alignSelf: "flex-end",
                             backgroundColor: "black",
                             color: "white",
+                            fontSize: "14px",
                             padding: "12px",
                             borderRadius: "6px",
                             marginTop: "30px",

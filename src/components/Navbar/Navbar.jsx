@@ -142,7 +142,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                         {user.name === "Login/Register" ? "Login/Register" : "Hi, " + user.name}
                     </Heading>
 
-                    <GoChevronDown style={{ marginLeft: "5px", color: "white", display: isAuth ? "flex" : "none" }} onClick={toggle_logout} />
+                    <GoChevronDown style={{ marginLeft: "5px", cursor: "pointer", color: "white", display: isAuth ? "flex" : "none" }} onClick={toggle_logout} />
 
                     <Flex
                         position="absolute"
@@ -157,7 +157,10 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                         display={display_logout}
                         cursor="pointer"
                         onClick={proceed_logout}
-                        borderRadius="5px"> Logout </Flex>
+                        borderRadius="5px"
+                    >
+                        Logout
+                    </Flex>
                 </Flex>
 
                 <Flex color="white" fontSize="20px" gap="20px">
