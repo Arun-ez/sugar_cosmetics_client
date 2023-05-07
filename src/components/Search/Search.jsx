@@ -4,6 +4,7 @@ import { Card } from '../Home/Card';
 import { useEffect, useState } from 'react'
 import { useQuery } from '../../useQuery';
 import { HomeView } from "../Home/HomeView";
+import { Spinner } from "@chakra-ui/react";
 import {
     Box,
     Flex,
@@ -19,10 +20,12 @@ import {
     RadioGroup,
     Image
 } from '@chakra-ui/react';
+import { useDispatch } from "react-redux";
 
 const Search = () => {
     let [data, setData] = useState([]);
     let [sort_param, set_sort_param] = useState("");
+    const dispatch = useDispatch();
     let query = useQuery();
 
     let [limit, set_limit] = useState(4);
@@ -170,11 +173,28 @@ const Search = () => {
                         </Flex>
 
                         <Flex w="100%" justifyContent="center">
-                            <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
-                                {data.map((element, id) => {
-                                    return <Card product={element} category={element.category} key={id} />
-                                })}
-                            </SimpleGrid>
+                            {data.length ?
+                                <>
+                                    <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
+                                        {data.map((element, id) => {
+                                            return <Card product={element} category={element.category} key={id} />
+                                        })}
+                                    </SimpleGrid>
+                                </>
+
+                                :
+
+                                <>
+                                    <Spinner
+                                        mt="150px"
+                                        thickness='4px'
+                                        speed='0.65s'
+                                        emptyColor='gray.200'
+                                        color='pink.500'
+                                        size='xl'
+                                    />
+                                </>
+                            }
                         </Flex>
 
                     </Flex>

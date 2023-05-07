@@ -45,7 +45,7 @@ const HomeDeals = ({ heading, headingColor, data, limit }) => {
             </Flex>
 
             <Flex h={["200px", "250px", "300px", "400px"]}>
-                <Flex w="100%" justifyContent="space-around" pl="40px" pr="40px">
+                <Flex w="100%" justifyContent="space-around">
 
                     {data ?
                         <>
@@ -62,7 +62,7 @@ const HomeDeals = ({ heading, headingColor, data, limit }) => {
                     }
                 </Flex>
 
-                <Flex pl="150px" pr="150px" w="100%" h={["200px", "250px", "300px", "400px"]} justifyContent="space-between" alignItems="center" position="absolute">
+                <Flex pl="100px" pr="100px" w="100%" h={["200px", "250px", "300px", "400px"]} justifyContent="space-between" alignItems="center" position="absolute">
                     <MdArrowBackIos
                         onMouseOver={() => { set_btn_visibilty("rgba(0, 0, 0, 0.8)") }}
                         onMouseLeave={() => { set_btn_visibilty("rgba(0, 0, 0, 0.6)") }}

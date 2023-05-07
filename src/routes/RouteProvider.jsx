@@ -12,6 +12,7 @@ import { AuthValidationLayer } from './AuthValidationLayer';
 import { WishList } from '../components/WishList/WishList';
 import { CartPage } from '../components/Cart/Cart';
 import { Checkout } from '../components/Checkout/Checkout';
+import { Category } from '../components/Category/Category';
 import { Offerspage } from '../components/Offerspage/Offerspage';
 import { NotFoundPage } from '../components/NotFoundPage/NotFoundPage';
 
@@ -59,6 +60,7 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/cart' element={<AuthValidationLayer comp="cart"> <CartPage /> </AuthValidationLayer>} />
                 <Route path='/checkout' element={<Checkout />} />
                 <Route path='/offers' element={<Offerspage />} />
+                <Route path='/categories' element={<Category />} />
                 <Route path='/*' element={<NotFoundPage />} />
             </Routes>
         </Box>

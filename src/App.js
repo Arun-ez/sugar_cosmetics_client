@@ -5,6 +5,7 @@ import Footer from './components/Footer/Footer';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { token_login } from './redux/auth/actions';
+import { BottomBar } from './components/BottomBar/BottomBar';
 
 function App() {
 
@@ -26,7 +27,9 @@ function App() {
     <div className="App">
       <Navbar ad_display={ad_display} set_ad_display={set_ad_display} />
       <RouteProvider ad_display={ad_display} />
+
       <Footer />
+      <BottomBar />
     </div>
   );
 }

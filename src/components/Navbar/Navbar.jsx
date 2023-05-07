@@ -1,5 +1,6 @@
 import "./Navbar.css"
-import React, { useRef, useContext, useState } from 'react'
+import { Sidebar } from "../Sidebar/Sidebar";
+import { useRef, useContext, useState } from 'react'
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/input';
 import { Button } from '@chakra-ui/button';
@@ -10,7 +11,6 @@ import { FiSearch } from "react-icons/fi"
 import { TbDiscount2 } from "react-icons/tb"
 import { RiShoppingBagLine } from "react-icons/ri"
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Sidebar } from "./Sidebar";
 import { Logo } from "./Logo";
 import { GlobalContext } from "../../contexts/GlobalContextProvider";
 import { RxCross1 } from "react-icons/rx"
@@ -73,7 +73,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
         { name: "FACE", path: "/collections/face" },
         { name: "SKINCARE", path: "/collections/skincare" },
         { name: "ACCESSORIES", path: "/collections/accessories" },
-        { name: "GIFT & KITS", path: "/collections/kit" },
+        { name: "GIFTS & KITS", path: "/collections/kit" },
         { name: "BESTSELLERS", path: "/collections/seller" },
         { name: "NEW LAUNCHES", path: "/collections/new" },
         { name: "OFFERS", path: "/offers" },

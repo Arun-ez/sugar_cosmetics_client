@@ -1,0 +1,20 @@
+.bottom_bar {
+    position: fixed;
+    margin-top: calc(100vh - 60px);
+    color: white;
+    z-index: 9999;
+}
+
+.bottom_bar span {
+    font-size: 20px;
+}
+
+.bottom_bar p {
+    font-size: 12px;
+}
+
+.bottom_bar_links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

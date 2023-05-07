@@ -1,9 +1,7 @@
-import React from 'react'
-import { Logo } from './Logo'
+import { Logo } from '../Navbar/Logo'
 import { RxCross2 } from "react-icons/rx"
 import { MdOutlineArrowForwardIos } from "react-icons/md"
 import {
-    Image,
     Drawer,
     DrawerBody,
     DrawerContent,
@@ -13,11 +11,7 @@ import {
     AccordionButton,
     AccordionIcon,
     Box,
-    AccordionPanel,
-    DrawerFooter,
-    Flex,
-    Heading,
-    Button
+    AccordionPanel
 } from "@chakra-ui/react"
 import { useNavigate } from 'react-router-dom'
 
@@ -26,7 +20,7 @@ const Sidebar = ({ onClose, isOpen, }) => {
     let navigate = useNavigate();
 
     return (
-        <Drawer size='full' onClose={onClose} isOpen={isOpen} placement='left' >
+        <Drawer size='full' onClose={onClose} isOpen={isOpen} placement='left'>
             <DrawerContent bg="#000000" color="white">
                 <DrawerHeader onClick={() => { onClose() }} display="flex" alignItems="center" gap="20px">
                     <RxCross2 />
@@ -35,7 +29,7 @@ const Sidebar = ({ onClose, isOpen, }) => {
                 <DrawerBody>
                     <Accordion allowMultiple={true}>
 
-                        <AccordionItem borderTop="none">
+                        <AccordionItem borderTop="none" onClick={() => { navigate("/categories"); onClose() }}>
                             <h2 style={{ margin: "10px 0px 10px 0px" }}>
                                 <AccordionButton display="flex" justifyContent="space-between">
                                     <Box> BROWSE BY CATEGORY </Box>
@@ -140,20 +134,6 @@ const Sidebar = ({ onClose, isOpen, }) => {
 
                     </Accordion>
                 </DrawerBody>
-
-                <DrawerFooter bg="#212121" display="flex" justifyContent="start" gap="20px">
-                    <Flex h="97px" w="60px">
-                        <Image src="https://media.sugarcosmetics.com/upload/sugarCosmeticsMobileIcon2.png" />
-                    </Flex>
-
-                    <Flex flexDirection="column" w="65%" gap="15px">
-                        <Heading as="h1" fontSize="18px"> GET THE NEW SUGAR APP TODAY! </Heading>
-                        <Button
-                            color="black"
-                            onClick={() => { window.open("https://play.google.com/store/apps/details?id=com.app.sugarcosmetics") }}
-                        > Install Now </Button>
-                    </Flex>
-                </DrawerFooter>
             </DrawerContent>
         </Drawer >
     )

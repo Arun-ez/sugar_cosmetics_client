@@ -74,7 +74,7 @@ const Home = ({ limit }) => {
         <Box>
             <BannerCarousel images={banner1} w="100%" m="auto" />
 
-            <Box mt="50px" pb="50px" bgImage="https://media.sugarcosmetics.com/upload/homePageBackGroundTexture.jpg">
+            <Box mt="20px" pb="50px" bgImage="https://media.sugarcosmetics.com/upload/homePageBackGroundTexture.jpg">
                 <HomeView limit={limit} heading="BESTSELLERS" headingColor="white" type="seller" />
             </Box>
 
@@ -102,7 +102,7 @@ const Home = ({ limit }) => {
                 </Flex>
 
                 <iframe
-                    width="70%"
+                    width="90%"
                     height={get_height()}
                     src="https://www.youtube.com/embed/OouP8T83MoU"
                     title="YouTube video player"
@@ -142,9 +142,9 @@ const Home = ({ limit }) => {
                     <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color="black"> THIS OR THAT </Heading>
                     <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                 </Flex>
-                <Flex direction={["column", "column", "row", "row"]} alignItems="center" w="100%" gap="30px" pl="1%" pr="1%" mt="20px" justifyContent="center">
-                    <Image borderRadius="20px" w={["80%", "80%", "46%", "46%"]} src="https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F50d277c9-c605-4c1a-b9da-ae952189292d.jpg&w=1080&q=75" alt='this' />
-                    <Image borderRadius="20px" w={["80%", "80%", "46%", "46%"]} src="https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F597e2c6d-4144-497c-90c2-5d09de375506.jpg&w=1080&q=75" alt='that' />
+                <Flex direction={["column", "column", "row", "row"]} alignItems="center" w="100%" gap="30px" mt="20px" justifyContent="center">
+                    <Image borderRadius="20px" w={["90%", "90%", "46%", "46%"]} src="https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F50d277c9-c605-4c1a-b9da-ae952189292d.jpg&w=1080&q=75" alt='this' />
+                    <Image borderRadius="20px" w={["90%", "90%", "46%", "46%"]} src="https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F597e2c6d-4144-497c-90c2-5d09de375506.jpg&w=1080&q=75" alt='that' />
                 </Flex>
             </Flex>
 
