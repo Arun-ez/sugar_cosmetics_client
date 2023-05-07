@@ -1,8 +1,8 @@
 .bottom_bar {
     position: fixed;
-    margin-top: calc(100vh - 60px);
     color: white;
-    z-index: 9999;
+    z-index: 1000;
+    bottom: 0;
 }
 
 .bottom_bar span {
