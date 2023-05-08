@@ -1,11 +1,13 @@
-import { GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, SORT, FILTER } from "./action_types"
+import { GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE, SET_STATUS_LIST, SET_WISH_LIST, SORT, FILTER } from "./action_types"
 
 const initial = {
     data: [],
     category: "",
+    statuslist: [],
     sortBy: "",
     sortOrder: "",
     filterBy: [],
+    wishlist: [],
     isLoading: false,
     isError: false
 }
@@ -36,6 +38,20 @@ const ProductReducer = (state = initial, action) => {
                 ...state,
                 isLoading: false,
                 isError: true
+            }
+        }
+
+        case SET_STATUS_LIST: {
+            return {
+                ...state,
+                statuslist: action.payload
+            }
+        }
+
+        case SET_WISH_LIST: {
+            return {
+                ...state,
+                wishlist: action.payload
             }
         }
 

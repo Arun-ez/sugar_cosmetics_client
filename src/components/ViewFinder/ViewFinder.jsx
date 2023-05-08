@@ -25,13 +25,16 @@ import { TbTruckReturn } from "react-icons/tb"
 import { HiOutlineBadgeCheck } from "react-icons/hi"
 import { GrStar } from "react-icons/gr"
 import { HomeView } from '../Home/HomeView'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { sort_and_filter_handler } from '../../redux/products/actions'
 
 const ViewFinder = ({ window_width, limit }) => {
 
-    let navigate = useNavigate();
-    let { id, category } = useParams();
     const toast = useToast();
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
+    let { id, category } = useParams();
+    let [status, set_status] = useState(false);
     let [product, set_product] = useState({});
     let [active_index, set_active_index] = useState(0);
 
@@ -42,8 +45,23 @@ const ViewFinder = ({ window_width, limit }) => {
     const load = async () => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${category}/${id}`);
+
+            if (token) {
+                let status_response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist/exist/${id}`, {
+                    method: "GET",
+                    headers: {
+                        "authorization": `Bearer ${token}`
+                    }
+                });
+
+                let curr_status = await status_response.json();
+                set_status(curr_status.status);
+            }
+
             let data = await response.json();
+
             document.title = data.data.Title;
+
             set_product(data.data);
         } catch (error) {
             console.log(error);
@@ -93,7 +111,63 @@ const ViewFinder = ({ window_width, limit }) => {
     }
 
     const add_wishlist = async () => {
+        if (!token) {
+            navigate("/account");
+            return;
+        }
 
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist`, {
+                method: "POST",
+                body: JSON.stringify(product),
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            if (response.status === 200) {
+                notify("Item Added to Wishlist");
+            } else {
+                notify("Failed to add");
+            }
+
+            dispatch(sort_and_filter_handler);
+            load();
+
+
+        } catch (error) {
+            notify("Failed to add");
+        }
+    }
+
+    const remove_wishlist = async () => {
+        if (!token) {
+            navigate("/account");
+            return;
+        }
+
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            if (response.status === 200) {
+                notify("Item Removed from Wishlist");
+            } else {
+                notify("Failed to remove");
+            }
+
+            dispatch(sort_and_filter_handler);
+            load();
+
+        } catch (error) {
+            notify("Failed to remove");
+        }
     }
 
     const add_to_cart = async () => {
@@ -242,8 +316,8 @@ const ViewFinder = ({ window_width, limit }) => {
                                     bg="none"
                                     border="1px solid black"
                                     hover="none"
-                                    onClick={add_wishlist}
-                                    borderRadius="10px"> {product.isListed ? <HiHeart fontSize="25px" /> : <FiHeart fontSize="25px" />}  </Button>
+                                    onClick={status === true ? remove_wishlist : add_wishlist}
+                                    borderRadius="10px"> {status === true ? <HiHeart fontSize="25px" /> : <FiHeart fontSize="25px" />}  </Button>
 
                                 <Flex direction="column" w="50%" pb="6px" h="50px" justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
                                     <Button

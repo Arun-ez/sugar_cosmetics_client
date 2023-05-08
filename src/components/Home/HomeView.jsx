@@ -71,7 +71,7 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
                     {data ?
                         <>
                             {get_in_range().map((item, id) => {
-                                return <Card product={item} category={type} key={id} />
+                                return <Card product={item} key={id} />
                             })}
                         </>
 

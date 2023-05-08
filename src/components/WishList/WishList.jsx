@@ -15,30 +15,30 @@ import { BiGift } from "react-icons/bi"
 import { SlBadge } from "react-icons/sl"
 import "./WishList.css"
 import empty from "./empty.png"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { get_wishlist } from '../../redux/products/actions';
 
 const WishList = () => {
 
-    let [data, set_data] = useState([]);
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
+
+    let data = useSelector((store) => {
+        return store.ProductReducer.wishlist
+    })
+
     let user = useSelector((store) => {
         return store.AuthReducer.user;
     })
-    let navigate = useNavigate();
 
-    const load = async () => {
-        try {
-            let response = await fetch("");
-            let base = await response.json();
-            set_data(base);
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    let token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
 
     useEffect(() => {
         document.title = "Sugar Cosmetics - Wishlist"
         window.scroll(0, 0);
-        //load();
+        dispatch(get_wishlist);
     }, [])
 
     return (
@@ -189,7 +189,7 @@ const WishList = () => {
                     <>
                         <SimpleGrid w="95%" columns={[1, 2, 2, 3]}>
                             {data.map((element, id) => {
-                                return <Card load={load} product={element} key={id} />
+                                return <Card status={true} product={element} key={id} />
                             })}
                         </SimpleGrid>
                     </>

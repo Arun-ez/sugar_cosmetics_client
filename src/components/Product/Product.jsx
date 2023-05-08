@@ -35,6 +35,10 @@ const Product = () => {
         return store.ProductReducer.filterBy;
     })
 
+    const statuslist = useSelector((store) => {
+        return store.ProductReducer.statuslist;
+    })
+
     const filter_onchange_handler = (id) => {
         let mapped = filter_options.map((elm, idx) => {
             if (idx === id) {
@@ -182,12 +186,11 @@ const Product = () => {
                 </Flex>
 
                 <Flex w="100%" justifyContent="center">
-
                     {data.length ?
                         <>
                             <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
                                 {data.map((element, id) => {
-                                    return <Card product={element} category={element.category} key={id} />
+                                    return <Card product={element} status={statuslist[id]} key={id} />
                                 })}
                             </SimpleGrid>
                         </>

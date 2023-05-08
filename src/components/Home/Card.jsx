@@ -4,12 +4,14 @@ import { Flex, Heading, Image, Button, Box, useToast } from "@chakra-ui/react"
 import { FiHeart } from "react-icons/fi"
 import { HiHeart } from "react-icons/hi"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { sort_and_filter_handler, get_wishlist } from "../../redux/products/actions"
 
-const Card = ({ product, category }) => {
+const Card = ({ product, status }) => {
 
     const toast = useToast();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [animate_display, set_animate_display] = useState("none");
 
     let token = useSelector((store) => {
@@ -48,7 +50,62 @@ const Card = ({ product, category }) => {
     }
 
     const add_wishlist = async () => {
+        if (!token) {
+            navigate("/account");
+            return;
+        }
 
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist`, {
+                method: "POST",
+                body: JSON.stringify(product),
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            if (response.status === 200) {
+                notify("Item Added to Wishlist");
+            } else {
+                notify("Failed to add");
+            }
+
+            dispatch(sort_and_filter_handler);
+            dispatch(get_wishlist);
+
+        } catch (error) {
+            notify("Failed to add");
+        }
+    }
+
+    const remove_wishlist = async () => {
+        if (!token) {
+            navigate("/account");
+            return;
+        }
+
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist/${product._id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            if (response.status === 200) {
+                notify("Item Removed from Wishlist");
+            } else {
+                notify("Failed to remove");
+            }
+
+            dispatch(sort_and_filter_handler);
+            dispatch(get_wishlist);
+
+        } catch (error) {
+            notify("Failed to remove");
+        }
     }
 
     const add_to_cart = async () => {
@@ -84,7 +141,7 @@ const Card = ({ product, category }) => {
     }
 
     const goto_details = () => {
-        navigate(`/collections/${category}/${product._id}`);
+        navigate(`/collections/${product.category}/${product._id}`);
     }
 
     return (
@@ -118,8 +175,8 @@ const Card = ({ product, category }) => {
                         bg="none"
                         border="1px solid black"
                         hover="none"
-                        onClick={add_wishlist}
-                        borderRadius="10px"> {product.isListed ? <HiHeart fontSize="23px" /> : <FiHeart fontSize="23px" />}
+                        onClick={status === true ? remove_wishlist : add_wishlist}
+                        borderRadius="10px"> {status === true ? <HiHeart fontSize="23px" /> : <FiHeart fontSize="23px" />}
                     </Button>
 
                     <Flex direction="column" w={["60%", "60%", "70%", "80%"]} pb="6px" h="47px" justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
