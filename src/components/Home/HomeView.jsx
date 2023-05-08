@@ -4,12 +4,22 @@ import { Box, Flex, Heading } from "@chakra-ui/react"
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md"
 import { Card } from './Card'
 import { Spinner } from '@chakra-ui/react'
+import { get_wishlist_status } from '../../redux/products/actions'
+import { useSelector } from 'react-redux'
 
 const HomeView = ({ heading, type, headingColor, limit }) => {
 
     let [data, set_data] = useState(null);
     let [start, set_start] = useState(0);
+    let [status, set_status] = useState([]);
     let [button_display, set_button_display] = useState("none")
+    let token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
+
+    let wishlist = useSelector((store) => {
+        return store.ProductReducer.wishlist
+    })
 
     const handle_next = () => {
 
@@ -39,6 +49,12 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${type}`);
             let base = await response.json();
+
+            if (token) {
+                let status_response = await get_wishlist_status(base, token);
+                set_status(status_response)
+            }
+
             set_data(base.data);
         } catch (err) {
             console.log(err);
@@ -48,7 +64,7 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
 
     useEffect(() => {
         load();
-    }, [type]);
+    }, [type, wishlist, start]);
 
 
     return (
@@ -71,7 +87,7 @@ const HomeView = ({ heading, type, headingColor, limit }) => {
                     {data ?
                         <>
                             {get_in_range().map((item, id) => {
-                                return <Card product={item} key={id} />
+                                return <Card product={item} status={status[start + id]} key={id} />
                             })}
                         </>
 

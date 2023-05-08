@@ -11,12 +11,12 @@ function App() {
 
   let dispatch = useDispatch();
 
-  let token = useSelector((store) => {
-    return store.AuthReducer.token;
+  let { token, user } = useSelector((store) => {
+    return store.AuthReducer;
   })
 
   useEffect(() => {
-    if (token) {
+    if (token && !user.email) {
       dispatch(token_login);
     }
   }, [])

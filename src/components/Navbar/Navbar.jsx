@@ -49,7 +49,8 @@ const Navbar = ({ ad_display, set_ad_display }) => {
     const proceed_logout = () => {
         toggle_logout();
         dispatch({ type: LOGOUT_REQUEST })
-        navigate("/")
+        navigate("/");
+        window.location.reload();
     }
 
     const handle_search = () => {

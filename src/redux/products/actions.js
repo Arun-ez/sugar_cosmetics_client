@@ -77,8 +77,11 @@ const load = async (dispatch, get_state) => {
         let response = await fetch(`${BASE_URL}/products/${category}`);
         let data = await response.json();
         let filter_options = handle_filter_options(data.data);
-        let status = await get_wishlist_status(data, token);
-        dispatch({ type: SET_STATUS_LIST, payload: status });
+        if (token) {
+            let status = await get_wishlist_status(data, token);
+            dispatch({ type: SET_STATUS_LIST, payload: status });
+        }
+
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data.data });
         dispatch({ type: FILTER, payload: filter_options });
     } catch (error) {
@@ -101,8 +104,10 @@ const sort_and_filter_handler = async (dispatch, get_state) => {
     try {
         let response = await fetch(`${BASE_URL}/products/${category}?sort=${sortBy}&order=${sortOrder}&${value}`);
         let data = await response.json();
-        let status = await get_wishlist_status(data, token);
-        dispatch({ type: SET_STATUS_LIST, payload: status });
+        if (token) {
+            let status = await get_wishlist_status(data, token);
+            dispatch({ type: SET_STATUS_LIST, payload: status });
+        }
         dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data.data });
     } catch (error) {
         dispatch({ type: GET_PRODUCTS_FAILURE });
