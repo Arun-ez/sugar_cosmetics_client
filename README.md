@@ -2,9 +2,9 @@
 
 Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics products
 
-## Check <a href="https://sugar-cosmetics-clone-seven.vercel.app"> Demo </a>
+## Go <a href="https://sugar-cosmetics-clone-seven.vercel.app"> Live </a>
 
-## Check Backend <a href="https://github.com/Arun-ez/sugar_cosmetics_backend"> here </a>
+## Check for the Backend Server <a href="https://github.com/Arun-ez/sugar_cosmetics_backend"> here </a>
 
 ## Tech Stack
 
@@ -37,6 +37,27 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_5.b0611ed1cf2e317cbc8d.png)
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_6.73c5440a21a2e6bd1751.png)
 
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env.local file
+
+`REACT_APP_SERVER_URL` - backend server url
+`REACT_APP_KEY_ID` - razorpay key_id
+
+
+## Run Locally
+
+Clone the project
+
+```  git clone https://github.com/Arun-ez/SUGAR_COSMETICS-clone.git  ```
+
+```  npm i  ```
+
+```  npm start  ```
+
+
+
 ## Contributor 
 
 ### Arun Shaw
@@ -46,4 +67,9 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 ### Aahwan verma
 - [Github](https://github.com/Vaahwan)
 - [Linkedin](https://www.linkedin.com/in/aahwan-verma-aa3903241/)
+
+
+## Support
+
+For support, email arunshaw433@gmail.com
 
