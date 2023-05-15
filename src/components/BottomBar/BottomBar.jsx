@@ -12,7 +12,7 @@ const BottomBar = () => {
     const list = [
         { name: "Home", path: "/", icon: <AiTwotoneHome /> },
         { name: "Categories", path: "/categories", icon: <TbCategory /> },
-        { name: "Account", path: "/account", icon: <AiOutlineUser /> },
+        { name: "Account", path: "/account/orders", icon: <AiOutlineUser /> },
         { name: "Offers", path: "/offers", icon: <IoGiftSharp /> },
     ]
 
