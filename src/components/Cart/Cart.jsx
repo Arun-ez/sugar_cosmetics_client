@@ -1,19 +1,177 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Flex, Text, Heading, Image, Button } from '@chakra-ui/react';
+import { Flex, Text, Heading, Image, Button, useToast } from '@chakra-ui/react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { HomeView } from '../Home/HomeView';
 
 const CartPage = ({ limit }) => {
+    const toast = useToast();
     const navigate = useNavigate();
+    const [blur, set_blur] = useState(false);
     const [cartproduct, setCartproduct] = useState([]);
     const [total, setTotal] = useState(0);
     const token = useSelector((store) => {
         return store.AuthReducer.token;
     })
 
+    const notify = (message) => {
+        setTimeout(() => {
+            toast({
+                position: "bottom-left",
+                duration: 1000,
+                isClosable: true,
+                render: () => {
+                    return (
+                        <Flex w="250px"
+                            h="70px"
+                            alignItems="center"
+                            borderRadius="4px"
+                            fontSize="17px"
+                            fontWeight="medium"
+                            direction="column"
+                            justifyContent="center"
+                            color='white'
+                            bg='#121212'
+                        >
+                            {message}
+                        </Flex>
+
+                    )
+                }
+            })
+        }, 300)
+    }
+
+    const getDate = (payload) => {
+        const date = new Date();
+        date.setDate(date.getDate() + payload);
+
+        const year = date.getFullYear();
+        const month = date.getMonth().toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+
+        return `${day}-${month}-${year}`;
+    }
+
+    const clear_cart = async () => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart/clear/all`, {
+                method: "DELETE",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            navigate("/account/orders");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const create_order = async (id) => {
+
+        let payload = {
+            orderId: id,
+            amount: total,
+            products: cartproduct,
+            created: getDate(0),
+            delivery: getDate(7),
+            status: false
+        };
+
+
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/order`, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            let data = await response.json();
+
+            if (data.hasOwnProperty("success")) {
+                notify("Order Placed");
+                clear_cart();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const verify_payment = async (details, id) => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/payment/verify`, {
+                method: "POST",
+                body: JSON.stringify(details),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            let data = await response.json();
+
+            if (data.status === true) {
+                create_order(id)
+            }
+
+
+        } catch (error) {
+            navigate("/invalid");
+        }
+
+        set_blur(false);
+    }
+
+    const grant_razorpay = ({ id, amount, currency }) => {
+
+        const options = {
+            order_id: id,
+            name: "Sugar Cosmetics",
+            amount: amount,
+            key: process.env.REACT_APP_KEY_ID,
+            currency: currency,
+            theme: {
+                color: "#000"
+            },
+
+            modal: {
+                ondismiss: () => {
+                    set_blur(false);
+                }
+            },
+
+            handler: (response) => {
+                verify_payment(response, id);
+            }
+        }
+
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+    }
+
+    const payment_handler = async () => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/payment/create`, {
+                method: "POST",
+                body: JSON.stringify({ amount: total }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            let data = await response.json();
+            grant_razorpay(data);
+            set_blur(true);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const total_price = (data) => {
         let currtotal = 0;
@@ -83,7 +241,7 @@ const CartPage = ({ limit }) => {
 
     return (
 
-        <Flex direction="column" bgColor="#f2f2f2">
+        <Flex direction="column" bgColor="#f2f2f2" filter={blur ? "blur(10px)" : ""} transition="all 0.6s">
             <Flex pl="20px" bgColor="#ffffff" h="50px" w="100%" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
                 <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
                 <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />
@@ -175,7 +333,7 @@ const CartPage = ({ limit }) => {
                                     opacity: total > 0 ? "100%" : "50%",
                                     pointerEvents: total > 0 ? "auto" : "none"
                                 }}
-                                onClick={() => { navigate("/checkout") }}
+                                onClick={payment_handler}
                             >
                                 ₹{total} PLACE ORDER
                             </button>

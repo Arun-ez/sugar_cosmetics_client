@@ -49,8 +49,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
     const proceed_logout = () => {
         toggle_logout();
         dispatch({ type: LOGOUT_REQUEST })
-        navigate("/");
-        window.location.reload();
+        window.location.href = "/";
     }
 
     const handle_search = () => {
@@ -135,7 +134,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                         cursor="pointer"
                         fontWeight="medium"
                         onClick={() => {
-                            navigate("/account")
+                            navigate("/account/orders")
                         }}
 
                     >

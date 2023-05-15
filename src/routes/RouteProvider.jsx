@@ -11,10 +11,11 @@ import { GlobalContext } from '../contexts/GlobalContextProvider';
 import { AuthValidationLayer } from './AuthValidationLayer';
 import { WishList } from '../components/WishList/WishList';
 import { CartPage } from '../components/Cart/Cart';
-import { Checkout } from '../components/Checkout/Checkout';
 import { Category } from '../components/Category/Category';
 import { Offerspage } from '../components/Offerspage/Offerspage';
 import { NotFoundPage } from '../components/NotFoundPage/NotFoundPage';
+import { AccountNavigator } from '../components/AccountNavigator/AccountNavigator';
+import { Orders } from '../components/Orders/Orders';
 
 const RouteProvider = ({ ad_display }) => {
 
@@ -56,9 +57,14 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/search' element={<Search />} />
                 <Route path='/account' element={<AuthValidationLayer comp="login"> <Loginpage /> </AuthValidationLayer>} />
                 <Route path='/collections/:category/:id' element={<ViewFinder window_width={window_width} limit={limit} />} />
-                <Route path='/account/wishlist' element={<AuthValidationLayer> <WishList /> </AuthValidationLayer>} />
+                <Route path='/account/orders' element={<AuthValidationLayer> <AccountNavigator> <Orders /> </AccountNavigator> </AuthValidationLayer>} />
+                <Route path='/account/address' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
+                <Route path='/account/wishlist' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
+                <Route path='/account/whatsapp' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
+                <Route path='/account/refer' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
+                <Route path='/account/rewards' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
+
                 <Route path='/cart' element={<AuthValidationLayer comp="cart"> <CartPage limit={limit} /> </AuthValidationLayer>} />
-                <Route path='/checkout' element={<Checkout />} />
                 <Route path='/offers' element={<Offerspage />} />
                 <Route path='/categories' element={<Category />} />
                 <Route path='/*' element={<NotFoundPage />} />

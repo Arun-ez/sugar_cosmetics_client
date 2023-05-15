@@ -27,7 +27,7 @@ const native_login = async (dispatch, get_state) => {
             return;
         }
 
-        window.location.href = "/";
+        // window.location.href = "/";
         dispatch({ type: LOGIN_SUCCESS, payload: { token: json.success.token, user: { name: json.success.name, email: json.success.email } } });
     } catch (error) {
         alert(error.message);

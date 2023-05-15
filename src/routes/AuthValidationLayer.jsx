@@ -1,7 +1,9 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const AuthValidationLayer = ({ children, comp }) => {
+
+    const navigate = useNavigate();
 
     let isAuth = useSelector((store) => {
         return store.AuthReducer.isAuth;
@@ -16,7 +18,7 @@ const AuthValidationLayer = ({ children, comp }) => {
     }
 
     if (comp == "login") {
-        return <Navigate to="/account/wishlist" />
+        navigate(-1);
     }
 
     return children;
