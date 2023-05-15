@@ -26,6 +26,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 - Login and Signup
 - Sorting and Filtering
+- Search products
 - Add to cart
 - Add to wishlist
 - Order Items
