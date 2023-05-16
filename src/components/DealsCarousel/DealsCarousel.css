@@ -1,0 +1,7 @@
+.deals_wrapper .carousel_container {
+    width: 100%;
+}
+
+.deals_wrapper .carousel_container button {
+    z-index: 1;
+}

@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Flex, Text, Heading, Image, Button, useToast } from '@chakra-ui/react';
+import { Flex, Text, Heading, Image, Button, useToast, Spinner } from '@chakra-ui/react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
-import { HomeView } from '../Home/HomeView';
+import { CardCarousel } from '../CardCarousel/CardCarousel';
 
-const CartPage = ({ limit }) => {
+const Cart = () => {
     const toast = useToast();
     const navigate = useNavigate();
+    const [loading, set_loading] = useState(true);
     const [blur, set_blur] = useState(false);
     const [cartproduct, setCartproduct] = useState([]);
     const [total, setTotal] = useState(0);
@@ -235,6 +236,15 @@ const CartPage = ({ limit }) => {
     useEffect(() => {
         window.scroll(0, 0);
         document.title = "Sugar Cosmetics - Bag";
+
+        if (cartproduct.length > 0) {
+            set_loading(false);
+        } else {
+            setTimeout(() => {
+                set_loading(false);
+            }, 3000)
+        }
+
         load();
     }, [])
 
@@ -344,19 +354,39 @@ const CartPage = ({ limit }) => {
                 :
 
                 <>
-                    <Flex m="50px auto 50px auto" gap="10px" direction="column" justifyContent="center" pb="55px" alignItems="center" width="90%" borderRadius="15px" h="450px" bgPosition="center" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
-                        <Image src='https://in.sugarcosmetics.com/Cart_nofound.svg' />
-                        <Text textAlign="center" fontWeight="bold" opacity="70%" lineHeight="20px"> Hey! It's lonely here. <br />Your bag seems to have no company.<br /> Why not add some products?</Text>
+                    {loading ?
+                        <>
+                            <Flex minH="60vh" justifyContent="center" alignItems="center">
+                                <Spinner
+                                    thickness='4px'
+                                    speed='0.65s'
+                                    emptyColor='gray.200'
+                                    color='pink.500'
+                                    size='xl'
+                                />
+                            </Flex>
 
-                        <Button
-                            variant="ghost" p="22px" bg="black"
-                            colorScheme="black" color="white"
-                            onClick={() => { navigate("/") }}
-                        > SHOP NOW </Button>
-                    </Flex>
+                        </>
 
-                    <HomeView limit={limit} heading="BESTSELLERS" headingColor="black" type="seller" />
+                        :
 
+                        <>
+                            <Flex m="50px auto 50px auto" gap="10px" direction="column" justifyContent="center" pb="55px" alignItems="center" width="90%" borderRadius="15px" h="450px" bgPosition="center" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
+                                <Image src='https://in.sugarcosmetics.com/Cart_nofound.svg' />
+                                <Text textAlign="center" fontWeight="bold" opacity="70%" lineHeight="20px"> Hey! It's lonely here. <br />Your bag seems to have no company.<br /> Why not add some products?</Text>
+
+                                <Button
+                                    variant="ghost" p="22px" bg="black"
+                                    colorScheme="black" color="white"
+                                    onClick={() => { navigate("/") }}
+                                > SHOP NOW </Button>
+                            </Flex>
+                        </>
+
+                    }
+
+
+                    <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
                 </>
             }
 
@@ -364,4 +394,4 @@ const CartPage = ({ limit }) => {
     )
 }
 
-export { CartPage };
+export { Cart };

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Flex, Heading, Image, Text, Button } from "@chakra-ui/react";
+import { Flex, Heading, Image, Text, Button, Spinner } from "@chakra-ui/react";
 
 const Orders = () => {
 
     const navigate = useNavigate();
     const [orders, set_orders] = useState([]);
+    const [loading, set_loading] = useState(true);
 
     const token = useSelector((store) => {
         return store.AuthReducer.token;
@@ -30,6 +31,14 @@ const Orders = () => {
         document.title = "Sugar Cosmetics - Orders"
         window.scroll(0, 0);
         load();
+
+        if (orders.length > 0) {
+            set_loading(false);
+        } else {
+            setTimeout(() => {
+                set_loading(false);
+            }, 3000);
+        }
     }, [])
 
     return (
@@ -80,17 +89,38 @@ const Orders = () => {
                 :
 
                 <>
-                    <Flex mt="50px" justifyContent="center" direction="column" pb="55px" alignItems="center" width="100%" borderRadius="15px" h="650px" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
-                        <Image src="/order_empty.jfif" />
-                        <Text fontWeight="medium"> Order Empty </Text>
-                        <Text fontWeight="medium" opacity="70%"> What! No order yet? Get going already! </Text>
-                        <Button
-                            variant="ghost" p="22px" bg="black"
-                            colorScheme="black" color="white"
-                            mt="20px"
-                            onClick={() => { navigate("/") }}
-                        > SHOP NOW </Button>
-                    </Flex>
+
+                    {loading ?
+                        <>
+                            <Flex minH="60vh" justifyContent="center" alignItems="center">
+                                <Spinner
+                                    thickness='4px'
+                                    speed='0.65s'
+                                    emptyColor='gray.200'
+                                    color='pink.500'
+                                    size='xl'
+                                />
+                            </Flex>
+                        </>
+                        :
+                        <>
+                            <Flex mt="50px" justifyContent="center" direction="column" pb="55px" alignItems="center" width="100%" borderRadius="15px" h="650px" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
+                                <Image src="/order_empty.jfif" />
+                                <Text fontWeight="medium"> Order Empty </Text>
+                                <Text fontWeight="medium" opacity="70%"> What! No order yet? Get going already! </Text>
+                                <Button
+                                    variant="ghost" p="22px" bg="black"
+                                    colorScheme="black" color="white"
+                                    mt="20px"
+                                    onClick={() => { navigate("/") }}
+                                > SHOP NOW </Button>
+                            </Flex>
+
+                        </>
+
+                    }
+
+
                 </>
             }
         </Flex>

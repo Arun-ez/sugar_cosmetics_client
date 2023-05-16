@@ -1,9 +1,9 @@
 import no_results from "./no_results.png"
 import React from 'react'
-import { Card } from '../Home/Card';
+import { Card } from '../Card/Card';
 import { useEffect, useState } from 'react'
 import { useQuery } from '../../useQuery';
-import { HomeView } from "../Home/HomeView";
+import { CardCarousel } from "../CardCarousel/CardCarousel";
 import { Spinner } from "@chakra-ui/react";
 import {
     Box,
@@ -27,29 +27,6 @@ const Search = () => {
     let [sort_param, set_sort_param] = useState("");
     const dispatch = useDispatch();
     let query = useQuery();
-
-    let [limit, set_limit] = useState(4);
-
-    const limit_decision = () => {
-        let width = window.innerWidth;
-        if (width <= 1500 && width > 1180) {
-            return 3;
-        } else if (width <= 1180 && width > 600) {
-            return 2;
-        } else if (width <= 600) {
-            return 1;
-        } else {
-            return 4;
-        }
-    }
-
-    window.onresize = () => {
-        set_limit(limit_decision());
-    }
-
-    useEffect(() => {
-        set_limit(limit_decision());
-    }, []);
 
     const load = async () => {
         try {
@@ -172,12 +149,12 @@ const Search = () => {
 
                         </Flex>
 
-                        <Flex w="100%" justifyContent="center">
+                        <Flex w="100%" justifyContent="center" mt="20px">
                             {data.length ?
                                 <>
-                                    <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
+                                    <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
                                         {data.map((element, id) => {
-                                            return <Card product={element} category={element.category} key={id} />
+                                            return <Card product={element} key={id} />
                                         })}
                                     </SimpleGrid>
                                 </>
@@ -206,8 +183,10 @@ const Search = () => {
                 <>
                     <Image boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset" borderRadius="15px" m="auto" mt="200px" src={no_results} />
                     <br />
-                    <HomeView limit={limit} heading="BESTSELLERS" headingColor="black" type="seller" />
-                    <HomeView limit={limit} heading="JUST-IN" headingColor="black" type="accessories" />
+
+                    <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
+
+                    <CardCarousel headingColor="black" type="eyes"> JUST-IN </CardCarousel>
                 </>
 
 

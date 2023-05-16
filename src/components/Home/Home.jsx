@@ -1,31 +1,10 @@
 import { Box, Flex, Heading, Image } from "@chakra-ui/react"
-import { HomeView } from './HomeView'
-import { HomeDeals } from './HomeDeals'
 import { BannerCarousel } from '../BannerCarousel/BannerCarousel'
+import { CardCarousel } from "../CardCarousel/CardCarousel"
+import { DealsCarousel } from "../DealsCarousel/DealsCarousel"
 import { useEffect } from "react"
 
-
-const Home = ({ limit }) => {
-
-    const get_height = () => {
-        switch (limit) {
-            case 4: {
-                return "600vw"
-            }
-
-            case 2: {
-                return "400vw"
-            }
-
-            case 1: {
-                return "200vw"
-            }
-
-            default: {
-                return "400vw"
-            }
-        }
-    }
+const Home = () => {
 
     const banner1 = [
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F0be8dd72-3086-45d4-919d-3e435ca3d818.jpg&w=1920&q=75",
@@ -55,14 +34,12 @@ const Home = ({ limit }) => {
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Fcad57234-a923-4191-8f1e-62ced44a02af.gif&w=1920&q=75"
     ]
 
-
-
     let deals = [
-        "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Fb1530b24-5333-4464-9ae0-8d25c74c2637.jpg&w=1920&q=75",
+        "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Fb7928b85-893a-48cb-9afd-715e7b5ceb8b.jpg&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F3946e48e-b0c7-4e7d-a19d-0479dd685bf3.jpg&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F95774b5d-77f6-4e9a-b322-867653f13338.jpg&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Ff858b50a-75dd-4aa9-b334-ef73f2e3b1df.jpg&w=1920&q=75",
-        "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F1613c6dc-b4c1-47e1-8174-4f4e070f4e50.jpg&w=1920&q=75",
+        "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Ff7ab913e-22bf-4301-be48-a94da8d8c0c0.jpg&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Fb1530b24-5333-4464-9ae0-8d25c74c2637.jpg&w=1920&q=75",
     ]
 
@@ -84,9 +61,14 @@ const Home = ({ limit }) => {
         <Box>
             <BannerCarousel images={banner1} w="100%" m="auto" />
 
-            <Box mt="20px" pb="50px" bgImage="https://media.sugarcosmetics.com/upload/homePageBackGroundTexture.jpg">
-                <HomeView limit={limit} heading="BESTSELLERS" headingColor="white" type="seller" />
-            </Box>
+            <CardCarousel
+                bgImage="https://media.sugarcosmetics.com/upload/homePageBackGroundTexture.jpg"
+                headingColor="white"
+                type="seller"
+            >
+                BESTSELLERS
+            </CardCarousel>
+
 
             <Flex pl={["10%", "10%", "25%", "25%"]} boxShadow="rgba(17, 17, 26, 0.1) 0px 1px 0px;" pr="30px" justifyContent="space-between" alignItems="center" bgImage="https://media.sugarcosmetics.com/upload/Reward_Banner_Desktop.png" backgroundSize="cover" w="95%" h="170px" m="auto">
                 <Flex direction="column" justifyContent="space-around" h="60%">
@@ -99,11 +81,11 @@ const Home = ({ limit }) => {
                 </Flex>
             </Flex>
 
-            <HomeDeals limit={limit === 4 ? 3 : limit} heading="HOT DEALS" data={deals} headingColor="black" />
+            <DealsCarousel data={deals} headingColor="black"> HOT DEALS </DealsCarousel>
 
-            <HomeView limit={limit} heading="JUST-IN" headingColor="black" type="accessories" />
+            <CardCarousel headingColor="black" type="eyes"> JUST-IN </CardCarousel>
 
-            <Flex w="100%" direction="column" alignItems="center">
+            <Flex w="100%" direction="column" alignItems="center" h={["300px", "400px", "500px", "600px"]}>
 
                 <Flex w="100%" mb="30px" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
                     <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
@@ -113,7 +95,7 @@ const Home = ({ limit }) => {
 
                 <iframe
                     width="90%"
-                    height={get_height()}
+                    height="100%"
                     src="https://www.youtube.com/embed/OouP8T83MoU"
                     title="YouTube video player"
                     frameBorder="0"
@@ -125,13 +107,14 @@ const Home = ({ limit }) => {
                 </iframe>
             </Flex>
 
-            <HomeDeals limit={limit === 4 ? 3 : limit} heading="TOP PICKS OF THE WEEK" data={top_deals} headingColor="black" />
+            <DealsCarousel data={top_deals} headingColor="black"> TOP PICKS OF THE WEEK </DealsCarousel>
 
-            <HomeView limit={limit} heading="BUY NOW PAY LATER" headingColor="black" type="face" />
+            <CardCarousel headingColor="black" type="face"> BUY NOW PAY LATER </CardCarousel>
 
-            <HomeView limit={limit} heading="GIFTING" headingColor="black" type="eyes" />
+            <CardCarousel headingColor="black" type="kit"> GIFTING </CardCarousel>
 
-            <Flex w="100%" direction="column" alignItems="center" gap="20px">
+
+            <Flex w="100%" direction="column" alignItems="center" gap="20px" mb="50px">
                 <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" whiteSpace="nowrap">
                     <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                     <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color="black"> REFER YOUR FRIENDS </Heading>
@@ -140,9 +123,7 @@ const Home = ({ limit }) => {
                 <Image width="96%" borderRadius="15px" src='https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F8638d096-d168-404e-9b83-56967625b5e6.jpg&w=1920&q=75' />
             </Flex>
 
-            <Box mt="50px" pb="50px" bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png">
-                <HomeView limit={limit} heading="SUPER SAVERS" headingColor="white" type="kit" />
-            </Box>
+            <CardCarousel type="accessories" headingColor="white" bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png"> SUPER SAVERS </CardCarousel>
 
             <BannerCarousel images={banner2} w="100%" m="20px auto" br="20px" />
 
@@ -158,7 +139,7 @@ const Home = ({ limit }) => {
                 </Flex>
             </Flex>
 
-            <HomeView limit={limit} heading="SKINCARE BASICS" headingColor="black" type="skincare" />
+            <CardCarousel headingColor="black" type="skincare"> SKINCARE BASICS </CardCarousel>
 
         </Box>
     )

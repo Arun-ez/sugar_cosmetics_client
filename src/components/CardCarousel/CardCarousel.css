@@ -1,0 +1,13 @@
+.carousel_container {
+    width: 90%;
+}
+
+.card_wrapper .carousel_container>button {
+    background-color: #fc2779;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.card_wrapper .carousel_container>button:hover {
+    background-color: #fc5394;
+}

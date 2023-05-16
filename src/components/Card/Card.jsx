@@ -1,6 +1,6 @@
-import "./Home.css"
+import "./Card.css"
 import { useState } from 'react'
-import { Flex, Heading, Image, Button, Box, useToast } from "@chakra-ui/react"
+import { Flex, Heading, Image, Button, Box, Text, useToast } from "@chakra-ui/react"
 import { FiHeart } from "react-icons/fi"
 import { HiHeart } from "react-icons/hi"
 import { useNavigate } from "react-router-dom"
@@ -145,56 +145,58 @@ const Card = ({ product, status }) => {
     }
 
     return (
-        <Flex w={["95%", "100%", "100%", "100%"]} p={["10px", "10px", "20px", "20px"]} justifySelf="center">
-            <Flex
-                bg="white"
-                direction="column"
-                p={["15px", "15px", "20px", "30px"]}
-                borderRadius="15px"
-                alignItems="center"
-                justifyContent="space-evenly"
-                w="100%"
-                boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
-            >
-                <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["180px", "220px", "220px", "220px"]} borderRadius="15px" />
-                <br />
-                <p onClick={goto_details} style={{ fontSize: "12px", cursor: "pointer" }}> {product.Title} </p>
 
-                <Flex cursor="pointer" mt="10px" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
-                    <Heading as="h1" fontSize="20px"> ₹{product.price} </Heading>
-                    <Heading as="h1" fontSize="15px" color="#fc2779"> {product.brandcolor} </Heading>
+        <Flex
+            bg="white"
+            direction="column"
+            p={["15px", "15px", "20px", "30px"]}
+            borderRadius="15px"
+            alignItems="center"
+            justifyContent="space-evenly"
+            w="100%"
+            boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
+        >
+
+
+
+            <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["130px", "220px", "220px", "220px"]} borderRadius="15px" />
+            <br />
+            <Text fontWeight="medium" fontSize={["8px", "10px", "13px", "13px"]} cursor="pointer" onClick={goto_details} > {product.Title.substring(0, 20) + "..."} </Text>
+
+            <Flex cursor="pointer" mt="10px" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
+                <Heading as="h1" fontSize={["12px", "15px", "20px", "20px"]}> ₹{product.price} </Heading>
+                <Heading as="h1" fontSize={["8px", "10px", "15px", "15px"]} color="#fc2779"> {product.brandcolor} </Heading>
+            </Flex>
+
+
+            <Flex mt="20px" w="100%" justifyContent="space-between" alignItems="center" gap="5px">
+                <Flex
+                    justifyContent="center"
+                    alignItems="center"
+                    w={["32px", "38px", "45px", "45px"]}
+                    h={["32px", "38px", "45px", "45px"]}
+                    bg="none"
+                    border="1px solid black"
+                    hover="none"
+                    cursor="pointer"
+                    onClick={status === true ? remove_wishlist : add_wishlist}
+                    borderRadius="10px"> {status === true ? <HiHeart fontSize="21px" /> : <FiHeart fontSize="21px" />}
                 </Flex>
 
-
-                <Flex mt="20px" w="100%" justifyContent="center" alignItems="center" gap="13px">
+                <Flex direction="column" w={["60%", "60%", "70%", "80%"]} pb="6px" h={["35px", "40px", "47px", "47px"]} justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
                     <Button
-                        variant="solid"
-                        w="33px"
-                        h="40px"
-                        p="2"
-                        bg="none"
-                        border="1px solid black"
+                        variant="ghost"
+                        fontSize={["8px", "10px", "12px", "12px"]}
+                        colorScheme="black"
+                        w="100%"
+                        color="white"
                         hover="none"
-                        onClick={status === true ? remove_wishlist : add_wishlist}
-                        borderRadius="10px"> {status === true ? <HiHeart fontSize="23px" /> : <FiHeart fontSize="23px" />}
+                        onClick={add_to_cart}
+                    > ADD TO BAG
+
                     </Button>
 
-                    <Flex direction="column" w={["60%", "60%", "70%", "80%"]} pb="6px" h="47px" justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
-                        <Button
-                            variant="ghost"
-                            fontSize={["12px", "12px", "12px", "14px"]}
-                            colorScheme="black"
-                            w="100%"
-                            color="white"
-                            hover="none"
-                            onClick={add_to_cart}
-                        > ADD TO BAG
-
-                        </Button>
-
-                        <Box display={animate_display} className='processing' h="3px" bg="#fc2779"></Box>
-                    </Flex>
-
+                    <Box display={animate_display} className='processing' h="3px" bg="#fc2779"></Box>
                 </Flex>
 
             </Flex>

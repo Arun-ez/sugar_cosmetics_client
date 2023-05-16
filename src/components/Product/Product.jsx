@@ -17,7 +17,7 @@ import {
     RadioGroup
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md"
-import { Card } from '../Home/Card';
+import { Card } from '../Card/Card';
 import { get, sort, filter } from '../../redux/products/actions';
 import { Spinner } from '@chakra-ui/react';
 
@@ -185,10 +185,10 @@ const Product = () => {
 
                 </Flex>
 
-                <Flex w="100%" justifyContent="center">
+                <Flex w="100%" justifyContent="center" mt="20px">
                     {data.length ?
                         <>
-                            <SimpleGrid w="90%" columns={[1, 2, 2, 3]}>
+                            <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
                                 {data.map((element, id) => {
                                     return <Card product={element} status={statuslist[id]} key={id} />
                                 })}
