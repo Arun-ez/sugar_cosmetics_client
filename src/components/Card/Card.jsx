@@ -138,6 +138,10 @@ const Card = ({ product, status }) => {
         } catch (error) {
             notify("Failed to add");
         }
+
+        setTimeout(() => {
+            set_animate_display("none");
+        }, 700)
     }
 
     const goto_details = () => {
@@ -159,7 +163,7 @@ const Card = ({ product, status }) => {
 
 
 
-            <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["130px", "220px", "220px", "220px"]} borderRadius="15px" />
+            <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["150px", "220px", "220px", "220px"]} borderRadius="15px" />
             <br />
             <Text fontWeight="medium" fontSize={["8px", "10px", "13px", "13px"]} cursor="pointer" onClick={goto_details} > {product.Title.substring(0, 20) + "..."} </Text>
 
