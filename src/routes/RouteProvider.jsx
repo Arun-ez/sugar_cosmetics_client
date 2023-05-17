@@ -34,7 +34,7 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/account' element={<AuthValidationLayer comp="login"> <Loginpage /> </AuthValidationLayer>} />
                 <Route path='/collections/:category/:id' element={<ViewFinder />} />
                 <Route path='/account/orders' element={<AuthValidationLayer> <AccountNavigator> <Orders /> </AccountNavigator> </AuthValidationLayer>} />
-                <Route path='/account/address' element={<AuthValidationLayer> <AccountNavigator> <Address /> </AccountNavigator> </AuthValidationLayer>} />
+                <Route path='/account/addresses' element={<AuthValidationLayer> <AccountNavigator> <Address /> </AccountNavigator> </AuthValidationLayer>} />
                 <Route path='/account/wishlist' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
                 <Route path='/account/whatsapp' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />
                 <Route path='/account/refer' element={<AuthValidationLayer> <AccountNavigator> <WishList /> </AccountNavigator> </AuthValidationLayer>} />

@@ -6,7 +6,6 @@ import { Card } from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_wishlist } from '../../redux/products/actions';
 import empty from "./empty.png"
-import "./WishList.css"
 
 const WishList = () => {
 

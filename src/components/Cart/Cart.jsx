@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Flex, Text, Heading, Image, Button, useToast, Spinner } from '@chakra-ui/react';
+import { Flex, Text, Heading, Image, Button, useToast, Spinner, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, useDisclosure } from '@chakra-ui/react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { CardCarousel } from '../CardCarousel/CardCarousel';
+import { AddressPicker } from '../AddressPicker/AddressPicker';
 
 const Cart = () => {
     const toast = useToast();
@@ -12,7 +13,22 @@ const Cart = () => {
     const [loading, set_loading] = useState(true);
     const [blur, set_blur] = useState(false);
     const [cartproduct, setCartproduct] = useState([]);
+    const [address, set_address] = useState([]);
+    const [address_index, set_address_index] = useState(0);
     const [total, setTotal] = useState(0);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const [prefill, set_prefill] = useState({
+        firstName: "",
+        lastName: "",
+        number: "",
+        flat_no: "",
+        locality: "",
+        pincode: "",
+        state: "",
+        city: ""
+    })
+
     const token = useSelector((store) => {
         return store.AuthReducer.token;
     })
@@ -43,6 +59,22 @@ const Cart = () => {
                 }
             })
         }, 300)
+    }
+
+    const load_addresses = async () => {
+        try {
+            let resposne = await fetch(`${process.env.REACT_APP_SERVER_URL}/address`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            })
+
+            let base = await resposne.json();
+            set_address(base.data);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const getDate = (payload) => {
@@ -86,7 +118,7 @@ const Cart = () => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/order`, {
                 method: "POST",
-                body: JSON.stringify(payload),
+                body: JSON.stringify({ ...payload, address: address[address_index] }),
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`
@@ -246,6 +278,7 @@ const Cart = () => {
         }
 
         load();
+        load_addresses();
     }, [])
 
 
@@ -314,22 +347,82 @@ const Cart = () => {
                                 <button style={{ backgroundColor: "black", color: "white", paddingLeft: "40px", paddingRight: "40px" }}>Apply</button>
                             </Flex>
                             <h1 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: "10px" }} >PRICE DETAILS</h1>
-                            <Flex justifyContent="space-between" mt="10px" border="1px solid #f2f2f2" borderRadius="10px" p="20px">
-                                <div>
-                                    <p>Subtotal</p>
-                                    <p>Discout</p>
-                                    <p>SUGAR FAM rewards</p>
-                                    <p>Shipping</p>
-                                    <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >Total</h1>
-                                </div>
-                                <div>
-                                    <p>₹{total}</p>
-                                    <p>₹0.00</p>
-                                    <p>₹0.00</p>
-                                    <p>₹0.00</p>
-                                    <h1 style={{ fontWeight: 'bold', fontSize: '20px' }} >₹{total}</h1>
-                                </div>
+                            <Flex direction="column" mt="10px" border="1px solid #f2f2f2" borderRadius="10px" p="20px">
+
+                                <Flex color="#757575" fontWeight="medium" justify="space-between" w="100%"> <Text> Subtotal <i style={{ fontSize: "12px" }}> (Inclusive of taxes) </i> </Text> <Text> ₹{total} </Text>  </Flex>
+                                <Flex color="#757575" fontWeight="medium" justify="space-between" w="100%"> <Text> Discount </Text> <Text> ₹{`0.00`} </Text>  </Flex>
+                                <Flex color="#757575" fontWeight="medium" justify="space-between" w="100%"> <Text> SUGAR FAM rewards </Text> <Text> ₹{`0.00`} </Text>  </Flex>
+                                <Flex color="#757575" fontWeight="medium" justify="space-between" w="100%"> <Text> Shipping </Text> <Text> ₹{`0.00`} </Text>  </Flex>
+
+                                <Flex pt={1} justify="space-between" w="100%" borderTop="1px dashed #bdbdbd" mt={2} fontWeight="bold" fontSize="17px"> <Text> Total </Text> <Text> ₹{total} </Text> </Flex>
                             </Flex>
+
+                            {address.length ?
+
+                                <>
+                                    <Flex justifyContent="space-between" alignItems="center">
+                                        <h1 style={{ fontWeight: 'bold', fontSize: '20px', marginTop: "10px" }} > DELIVERY ADDRESS </h1>
+                                        <Text onClick={onOpen} cursor="pointer" fontWeight="medium" fontSize="14px" color="#fc2779"> + Add New Address </Text>
+                                    </Flex>
+
+
+
+                                    <Flex color="#757575" direction="column" mt="10px" border="1px solid #f2f2f2" borderRadius="10px" overflow="hidden">
+
+                                        <Flex direction="column" p="20px">
+                                            <Text fontWeight="bold"> {address[address_index].name} </Text>
+                                            <Text> {address[address_index].flatno}, </Text>
+                                            <Text> {address[address_index].locality}, </Text>
+                                            <Text> {address[address_index].city},{address[address_index].state},{address[address_index].pincode} </Text>
+                                            <Text> Ph Number : {address[address_index].number} </Text>
+                                        </Flex>
+
+
+
+                                        <Flex>
+                                            <Accordion allowMultiple={true} w="100%">
+                                                <AccordionItem border="none">
+                                                    <h2 style={{ backgroundColor: "#F5F5F5", paddingTop: "7px", paddingBottom: "7px" }}>
+                                                        <AccordionButton display="flex" justifyContent="space-between" _hover="none">
+                                                            <Flex fontSize="14px" color="black" fontWeight="medium"> Select An Address </Flex>
+                                                            <AccordionIcon />
+                                                        </AccordionButton>
+                                                    </h2>
+
+                                                    <AccordionPanel>
+                                                        {address.map((elm, idx) => {
+                                                            return (
+                                                                <Flex
+                                                                    key={idx}
+                                                                    direction="column"
+                                                                    p="15px" border="1px solid #f2f2f2"
+                                                                    mt={5} borderRadius="15px"
+                                                                    cursor="pointer"
+                                                                    bg={idx === address_index ? "#f2f2f2" : ""}
+                                                                    onClick={() => { set_address_index(idx) }}
+                                                                >
+                                                                    <Text fontWeight="bold"> {elm.name} </Text>
+                                                                    <Text> {elm.flatno}, </Text>
+                                                                    <Text> {elm.locality}, </Text>
+                                                                    <Text> {elm.city},{elm.state},{elm.pincode} </Text>
+                                                                    <Text> Ph Number : {elm.number} </Text>
+                                                                </Flex>
+                                                            )
+                                                        })}
+                                                    </AccordionPanel>
+                                                </AccordionItem>
+                                            </Accordion>
+                                        </Flex>
+                                    </Flex>
+                                </>
+
+                                :
+
+                                <>
+                                </>
+
+                            }
+
                             <button
                                 style={{
                                     width: "200px",
@@ -343,7 +436,7 @@ const Cart = () => {
                                     opacity: total > 0 ? "100%" : "50%",
                                     pointerEvents: total > 0 ? "auto" : "none"
                                 }}
-                                onClick={payment_handler}
+                                onClick={address.length > 0 ? payment_handler : onOpen}
                             >
                                 ₹{total} PLACE ORDER
                             </button>
@@ -386,9 +479,12 @@ const Cart = () => {
                     }
 
 
+
                     <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
                 </>
             }
+
+            <AddressPicker reload={load_addresses} isOpen={isOpen} onClose={onClose} prefill={prefill} />
 
         </Flex>
     )

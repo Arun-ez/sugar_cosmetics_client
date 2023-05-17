@@ -9,7 +9,7 @@ import { BiReceipt } from "react-icons/bi"
 import { HiOutlineLocationMarker } from "react-icons/hi"
 import { CiHeart } from "react-icons/ci"
 import { BiGift } from "react-icons/bi"
-import { SlBadge } from "react-icons/sl"
+import "./AccountNavigator.css"
 
 const AccountNavigator = ({ children }) => {
 
@@ -38,7 +38,7 @@ const AccountNavigator = ({ children }) => {
 
                 <Flex w="21%"
                     minW="300px"
-                    h="560px"
+                    h="500px"
                     position="absolute"
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px"
@@ -52,7 +52,8 @@ const AccountNavigator = ({ children }) => {
                     <Box whiteSpace="nowrap">
                         <Heading pl="20px" as="h1" mt="20px" fontSize="17px"> Refer Friends </Heading>
                         <Text pl="20px" opacity="80%"> Share your code and get up to ₹300 </Text>
-                        <Flex gap="10px" mt="10px" pl="20px" pb="20px" borderBottom="1px solid #e3e3e3">
+
+                        <Flex justifyContent="space-around" mt="10px" pb="20px" borderBottom="1px solid #e3e3e3">
                             <Flex w="60%" h="50px" border="1px dashed #fc2779" borderRadius="10px" bg="#fff0f6">
                                 <Flex h="100%" w="70%" justifyContent="center" alignItems="center">
                                     <Text> user2585 </Text>
@@ -69,6 +70,7 @@ const AccountNavigator = ({ children }) => {
                                 <FiShare2 style={{ color: "white", fontSize: "20px" }} />
                             </Flex>
                         </Flex>
+
                     </Box>
 
                     <Box whiteSpace="nowrap">
@@ -78,7 +80,7 @@ const AccountNavigator = ({ children }) => {
                                     <BiReceipt style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="medium"> Orders </Heading>
+                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Orders </Heading>
                             </Flex>
 
                             <Flex>
@@ -86,13 +88,13 @@ const AccountNavigator = ({ children }) => {
                             </Flex>
                         </NavLink>
 
-                        <NavLink className="side_nav_link" to="/account/address">
+                        <NavLink className="side_nav_link" to="/account/addresses">
                             <Flex alignItems="center" gap="10px">
                                 <Box w="40px" display="flex" justifyContent="center" alignItems="center" h="40px" borderRadius="50%" border="1px solid #e3e3e3">
                                     <HiOutlineLocationMarker style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="medium"> Addresses </Heading>
+                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Addresses </Heading>
                             </Flex>
 
                             <Flex>
@@ -106,7 +108,7 @@ const AccountNavigator = ({ children }) => {
                                     <CiHeart style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="medium"> Wishlist </Heading>
+                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Wishlist </Heading>
                             </Flex>
 
                             <Flex>
@@ -120,7 +122,7 @@ const AccountNavigator = ({ children }) => {
                                     <BsWhatsapp style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="medium"> WhatsApp Store </Heading>
+                                <Heading as="h1" fontSize="18px" fontWeight="normal"> WhatsApp Store </Heading>
                             </Flex>
 
                             <Flex>
@@ -128,27 +130,13 @@ const AccountNavigator = ({ children }) => {
                             </Flex>
                         </NavLink>
 
-                        <NavLink className="side_nav_link" to="/account/refer">
+                        <NavLink className="side_nav_link" to="/account/refer" style={{ borderBottom: "none" }}>
                             <Flex alignItems="center" gap="10px">
                                 <Box w="40px" display="flex" justifyContent="center" alignItems="center" h="40px" borderRadius="50%" border="1px solid #e3e3e3">
                                     <BiGift style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="medium"> Refer & Earn </Heading>
-                            </Flex>
-
-                            <Flex>
-                                <MdKeyboardArrowRight style={{ fontSize: "20px" }} />
-                            </Flex>
-                        </NavLink>
-
-                        <NavLink className="side_nav_link" to="/account/rewards">
-                            <Flex alignItems="center" gap="10px">
-                                <Box w="40px" display="flex" justifyContent="center" alignItems="center" h="40px" borderRadius="50%" border="1px solid #e3e3e3">
-                                    <SlBadge style={{ fontSize: "22px" }} />
-                                </Box>
-
-                                <Heading as="h1" fontSize="18px" fontWeight="medium"> SUGAR FAM Rewards </Heading>
+                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Refer & Earn </Heading>
                             </Flex>
 
                             <Flex>

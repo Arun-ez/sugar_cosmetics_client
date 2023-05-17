@@ -42,7 +42,7 @@ const Orders = () => {
     }, [])
 
     return (
-        <Flex w="100%" alignItems="center" p="30px" direction="column">
+        <Flex w="100%" alignItems="center" p="20px" direction="column">
 
             {orders.length ?
 
