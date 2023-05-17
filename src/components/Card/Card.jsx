@@ -168,8 +168,8 @@ const Card = ({ product, status }) => {
             <Text fontWeight="medium" fontSize={["8px", "10px", "13px", "13px"]} cursor="pointer" onClick={goto_details} > {product.Title.substring(0, 20) + "..."} </Text>
 
             <Flex cursor="pointer" mt="10px" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
-                <Heading as="h1" fontSize={["12px", "15px", "20px", "20px"]}> ₹{product.price} </Heading>
-                <Heading as="h1" fontSize={["8px", "10px", "15px", "15px"]} color="#fc2779"> {product.brandcolor} </Heading>
+                <Heading as="h1" fontSize={["12px", "15px", "17px", "17px"]}> ₹{product.price} </Heading>
+                <Heading as="h1" fontSize={["8px", "10px", "12px", "12px"]} color="#fc2779"> {product.brandcolor} </Heading>
             </Flex>
 
 
@@ -190,7 +190,7 @@ const Card = ({ product, status }) => {
                 <Flex direction="column" w={["60%", "60%", "70%", "80%"]} pb="6px" h={["35px", "40px", "47px", "47px"]} justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
                     <Button
                         variant="ghost"
-                        fontSize={["8px", "10px", "12px", "12px"]}
+                        fontSize={["8px", "10px", "14px", "14px"]}
                         colorScheme="black"
                         w="100%"
                         color="white"

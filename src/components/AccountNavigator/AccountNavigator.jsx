@@ -19,7 +19,7 @@ const AccountNavigator = ({ children }) => {
 
     return (
         <Flex minH="900px" direction={["column", "column", "column", "row"]}>
-            <Flex direction="column" alignItems="center" mt="20px" w={["100%", "100%", "100%", "35%"]}>
+            <Flex direction="column" alignItems="center" mt="20px" w={["100%", "100%", "100%", "35%"]} minW="375px">
                 <Flex
                     direction="column"
                     color="white"
@@ -37,6 +37,7 @@ const AccountNavigator = ({ children }) => {
                 </Flex>
 
                 <Flex w="21%"
+                    minW="300px"
                     h="560px"
                     position="absolute"
                     borderRadius="15px"

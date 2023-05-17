@@ -63,9 +63,10 @@ const Orders = () => {
                                     </Flex>
 
                                     <Flex w="100%" direction="column" gap="10px">
-                                        {products.map(({ Title, images, category, _id }) => {
+                                        {products.map(({ Title, images, category, _id }, id) => {
                                             return (
                                                 <Flex
+                                                    key={id}
                                                     bgColor="#f2f2f2"
                                                     borderRadius="10px"
                                                     p="10px" gap="10px"
