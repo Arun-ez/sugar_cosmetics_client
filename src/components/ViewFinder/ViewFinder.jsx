@@ -39,6 +39,7 @@ const ViewFinder = () => {
     let [product, set_product] = useState({});
     let [active_index, set_active_index] = useState(0);
     let [window_width, set_window_width] = useState(0);
+    const [animate_display, set_animate_display] = useState("");
 
     let token = useSelector((store) => {
         return store.AuthReducer.token;
@@ -75,7 +76,7 @@ const ViewFinder = () => {
         }
     }
 
-    const [animate_display, set_animate_display] = useState("none");
+
 
     const get_starts = () => {
         let arr = [];
@@ -112,7 +113,7 @@ const ViewFinder = () => {
                 }
             })
 
-            set_animate_display("none");
+            set_animate_display("");
 
         }, 500)
     }
@@ -185,7 +186,7 @@ const ViewFinder = () => {
             return;
         }
 
-        set_animate_display("flex");
+        set_animate_display("processing");
 
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
@@ -327,19 +328,26 @@ const ViewFinder = () => {
                                         onClick={status === true ? remove_wishlist : add_wishlist}
                                         borderRadius="10px"> {status === true ? <HiHeart fontSize="25px" /> : <FiHeart fontSize="25px" />}  </Button>
 
-                                    <Flex direction="column" w="50%" pb="6px" h="50px" justifyContent="space-around" alignItems="center" bg="black" borderRadius="5px">
-                                        <Button
-                                            variant="ghost"
-                                            fontSize="15px"
-                                            colorScheme="black"
-                                            w="80%"
-                                            color="white"
-                                            onClick={add_to_cart}
-                                        > ADD TO BAG
+                                    <Flex
+                                        direction="column"
+                                        color="white"
+                                        fontWeight="500"
+                                        w="50%"
+                                        py="10px"
+                                        justifyContent="space-center"
+                                        alignItems="center"
+                                        bg="black"
+                                        borderRadius="5px"
+                                        onClick={add_to_cart}
+                                        cursor="pointer"
+                                    >
 
-                                        </Button>
+                                        ADD TO BAG
 
-                                        <Box display={animate_display} className='processing' h="3px" bg="#fc2779"></Box>
+                                        <Flex justifyContent="flex-start" h="3px" w="40%">
+                                            <Flex bg="#fc2779" className={animate_display}> </Flex>
+                                        </Flex>
+
                                     </Flex>
                                 </Flex>
 
