@@ -2,7 +2,7 @@ import no_results from "./no_results.png"
 import React from 'react'
 import { Card } from '../Card/Card';
 import { useEffect, useState } from 'react'
-import { useQuery } from '../../useQuery';
+import { useQuery } from '../../unils/useQuery';
 import { CardCarousel } from "../CardCarousel/CardCarousel";
 import { Spinner } from "@chakra-ui/react";
 import {
