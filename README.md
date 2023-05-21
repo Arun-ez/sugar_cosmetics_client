@@ -4,7 +4,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ## Go <a href="https://sugar-cosmetics-clone-seven.vercel.app"> Live </a>
 
-## Check for the Backend Server <a href="https://github.com/Arun-ez/sugar_cosmetics_backend"> here </a>
+## Check for the Backend <a href="https://github.com/Arun-ez/sugar_cosmetics_backend"> here </a>
 
 ## Tech Stack
 
