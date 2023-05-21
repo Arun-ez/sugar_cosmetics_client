@@ -27,6 +27,18 @@ const Product = () => {
     let [sort_param, set_sort_param] = useState("");
     const dispatch = useDispatch();
 
+    const banners = {
+        lips: "https://sugar-mobile-application.s3.amazonaws.com/collection-web-banner/Lips.jpg",
+        eyes: "https://d32baadbbpueqt.cloudfront.net/Collection/5a16ce4f-1b39-48bf-9e5f-42d7dc8e2d66.jpg",
+        skincare: "https://d32baadbbpueqt.cloudfront.net/Collection/4335c634-172e-42de-96de-4d01f585d685.jpg",
+        face: "https://sugar-mobile-application.s3.amazonaws.com/collection-web-banner/Face.jpg",
+        seller: "https://d32baadbbpueqt.cloudfront.net/Collection/72d09a6a-2f85-4337-a4d5-b5807ad2c9c6.jpg",
+        new: "https://d32baadbbpueqt.cloudfront.net/Collection/6fca01a2-8f3f-465b-a29b-7933fe0d4ccc.jpg",
+        accessories: "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F9723d8e3-9e99-459f-acfe-4ef93089e9ef.jpg&w=1920&q=75",
+        kit: "https://d32baadbbpueqt.cloudfront.net/Collection/dc9fc0b7-9b57-4b8f-ae5c-42a0be0af8fb.jpg"
+
+    }
+
     const data = useSelector((store) => {
         return store.ProductReducer.data;
     })
@@ -68,6 +80,12 @@ const Product = () => {
 
     return (
         <Box mb="50px">
+            <Flex bgImage={banners[param.product]} h={["auto", "auto", "auto", "270px"]}>
+                <Flex w="100%" h="100%" backdropFilter="blur(20px)" justifyContent="center">
+                    <img src={banners[param.product]} alt="banner" />
+                </Flex>
+
+            </Flex>
             <Flex pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
                 <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
                 <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />

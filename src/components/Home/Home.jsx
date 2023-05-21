@@ -8,6 +8,7 @@ const Home = () => {
 
     const banner1 = [
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F0be8dd72-3086-45d4-919d-3e435ca3d818.jpg&w=1920&q=75",
+        "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F80677b12-913a-48b8-a8f4-2419c76564cd.gif&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2Fcd9aec57-0010-49f2-a903-47b581127743.gif&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F5c828b59-7b5e-4803-ba68-971bb1a4862a.jpg&w=1920&q=75",
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F2d329dae-a83e-4572-bb29-6d84fd8442d3.jpg&w=1920&q=75",

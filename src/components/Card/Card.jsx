@@ -191,7 +191,8 @@ const Card = ({ product, status }) => {
                     color="white"
                     fontWeight="500"
                     gap="2px"
-                    fontSize={["8px", "10px", "14px", "14px"]}
+                    whiteSpace="nowrap"
+                    fontSize={["8px", "10px", "13px", "13px"]}
                     direction="column" w={["60%", "60%", "70%", "80%"]}
                     py="3%"
                     justifyContent="space-around"

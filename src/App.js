@@ -27,7 +27,6 @@ function App() {
     <div className="App">
       <Navbar ad_display={ad_display} set_ad_display={set_ad_display} />
       <RouteProvider ad_display={ad_display} />
-
       <Footer />
       <BottomBar />
     </div>

@@ -23,27 +23,29 @@ const AccountNavigator = ({ children }) => {
                 <Flex
                     direction="column"
                     color="white"
-                    w={["92%", "92%", "92%", "80%"]}
+                    w={["92%", "92%", "92%", "85%"]}
                     p="10px"
-                    h="300px" borderRadius="15px"
+                    h="220px" borderRadius="15px"
                     justifyContent="flex-start"
                     alignItems="center"
-                    bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png">
+                    bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png"
+                    backgroundSize="100%"
+                >
                     <Image w="100px" h="100px" src="https://media.sugarcosmetics.com/upload/accountMask.png" alt="user_logo" />
                     <Image w="30px" position="absolute" mt="85px" src="/batch.svg" alt="batch" />
-                    <Heading as="h1" mt="20px" fontSize="16px"> {user.name} </Heading>
-                    <Text mt="5px" fontSize="12px"> {user.email} </Text>
+                    <Heading as="h1" mt="20px" fontSize="18px"> {user.name} </Heading>
+                    <Text mt="5px" fontSize="14px"> {user.email} </Text>
                     <Text mt="5px" fontSize="12px"> {user.number} </Text>
                 </Flex>
 
-                <Flex w="21%"
-                    minW="300px"
+                <Flex w="22%"
+                    minW="320px"
                     h="500px"
                     position="absolute"
                     borderRadius="15px"
                     boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px"
                     zIndex="1"
-                    mt="270"
+                    mt="200"
                     bg="white"
                     direction="column"
                     overflow="hidden"
@@ -70,7 +72,6 @@ const AccountNavigator = ({ children }) => {
                                 <FiShare2 style={{ color: "white", fontSize: "20px" }} />
                             </Flex>
                         </Flex>
-
                     </Box>
 
                     <Box whiteSpace="nowrap">
@@ -80,11 +81,11 @@ const AccountNavigator = ({ children }) => {
                                     <BiReceipt style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Orders </Heading>
+                                <Heading as="h1" fontSize="17px" fontWeight="500"> Orders </Heading>
                             </Flex>
 
                             <Flex>
-                                <MdKeyboardArrowRight style={{ fontSize: "20px" }} />
+                                <MdKeyboardArrowRight style={{ fontSize: "25px" }} />
                             </Flex>
                         </NavLink>
 
@@ -94,11 +95,11 @@ const AccountNavigator = ({ children }) => {
                                     <HiOutlineLocationMarker style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Addresses </Heading>
+                                <Heading as="h1" fontSize="17px" fontWeight="500"> Addresses </Heading>
                             </Flex>
 
                             <Flex>
-                                <MdKeyboardArrowRight style={{ fontSize: "20px" }} />
+                                <MdKeyboardArrowRight style={{ fontSize: "25px" }} />
                             </Flex>
                         </NavLink>
 
@@ -108,25 +109,25 @@ const AccountNavigator = ({ children }) => {
                                     <CiHeart style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Wishlist </Heading>
+                                <Heading as="h1" fontSize="17px" fontWeight="500"> Wishlist </Heading>
                             </Flex>
 
                             <Flex>
-                                <MdKeyboardArrowRight style={{ fontSize: "20px" }} />
+                                <MdKeyboardArrowRight style={{ fontSize: "25px" }} />
                             </Flex>
                         </NavLink>
 
-                        <NavLink className="side_nav_link" to="/account/whatsapp">
+                        <NavLink className="side_nav_link" to="https://api.whatsapp.com/send/?phone=919136922061&text=Hi&type=phone_number&app_absent=0" target='_blank'>
                             <Flex alignItems="center" gap="10px">
                                 <Box display="flex" justifyContent="center" alignItems="center" w="40px" h="40px" borderRadius="50%" border="1px solid #e3e3e3">
                                     <BsWhatsapp style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="normal"> WhatsApp Store </Heading>
+                                <Heading as="h1" fontSize="17px" fontWeight="500"> WhatsApp Store </Heading>
                             </Flex>
 
                             <Flex>
-                                <MdKeyboardArrowRight style={{ fontSize: "20px" }} />
+                                <MdKeyboardArrowRight style={{ fontSize: "25px" }} />
                             </Flex>
                         </NavLink>
 
@@ -136,16 +137,24 @@ const AccountNavigator = ({ children }) => {
                                     <BiGift style={{ fontSize: "22px" }} />
                                 </Box>
 
-                                <Heading as="h1" fontSize="18px" fontWeight="normal"> Refer & Earn </Heading>
+                                <Heading as="h1" fontSize="17px" fontWeight="500"> Refer & Earn </Heading>
                             </Flex>
 
                             <Flex>
-                                <MdKeyboardArrowRight style={{ fontSize: "20px" }} />
+                                <MdKeyboardArrowRight style={{ fontSize: "25px" }} />
                             </Flex>
                         </NavLink>
                     </Box>
 
                 </Flex>
+            </Flex>
+
+            <Flex display={["flex", "flex", "flex", "none"]} className='menubar' w="90%" alignItems="center" gap="3%" m="20px auto" overflow="auto" whiteSpace="nowrap" boxSizing='border-box'>
+                <NavLink to="/account/orders"> Orders </NavLink>
+                <NavLink to="/account/addresses"> Addresses </NavLink>
+                <NavLink to="/account/wishlist"> Wishlist </NavLink>
+                <NavLink to="https://api.whatsapp.com/send/?phone=919136922061&text=Hi&type=phone_number&app_absent=0" target='_blank'> WhatsApp Store </NavLink>
+                <NavLink to="/account/refer"> Refer & Earn </NavLink>
             </Flex>
 
             <Flex w="100%"> {children} </Flex>
