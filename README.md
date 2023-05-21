@@ -15,7 +15,8 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 - React
 - Redux
 - ChakraUI
-- React Bootstrap 
+- React Toastify
+- React Carousel
 
 **Server:**
 - Node Js
@@ -50,7 +51,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_7.bbb9dc54098d8158fef3.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_8.b0611ed1cf2e317cbc8d.png)
+![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_8.8cc700f138a50a946347.png)
 
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_9.73c5440a21a2e6bd1751.png)
 
