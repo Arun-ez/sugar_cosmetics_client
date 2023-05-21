@@ -38,15 +38,17 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_1.c46c83265dd45ba63d0a.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_2.11a3a5bebfe13241af5e.png)
+![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_2.35596cd8060813d2ee17.png)
 
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_4.77cbb0467ded803021ee.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_7.b77ee94841a1f5243aaa.png)
-
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_6.b70967a86cc4cd75444f.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_5.50bf4e875c0421c9b78b.png)
+![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_5.56baaec441bcc4746714.png)
+
+![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_3.bc696ceb9c22f6f1c8e7.png)
+
+![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_7.bbb9dc54098d8158fef3.png)
 
 ![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_8.b0611ed1cf2e317cbc8d.png)
 
