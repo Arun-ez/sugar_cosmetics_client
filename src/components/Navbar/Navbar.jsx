@@ -61,7 +61,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
     }
 
     const handle_key = ({ key }) => {
-        if (key == 'Enter') {
+        if (key === 'Enter') {
             handle_search();
         }
 

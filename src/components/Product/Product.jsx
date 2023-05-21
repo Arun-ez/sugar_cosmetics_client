@@ -20,6 +20,7 @@ import { MdArrowForwardIos } from "react-icons/md"
 import { Card } from '../Card/Card';
 import { get, sort, filter } from '../../redux/products/actions';
 import { Spinner } from '@chakra-ui/react';
+import { ToastContainer } from 'react-toastify';
 
 const Product = () => {
     let navigate = useNavigate();
@@ -230,8 +231,6 @@ const Product = () => {
                 </Flex>
 
             </Flex>
-
-
         </Box>
     )
 }

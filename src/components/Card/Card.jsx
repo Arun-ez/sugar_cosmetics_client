@@ -1,15 +1,15 @@
-import "./Card.css"
-import { useState } from 'react'
-import { Flex, Heading, Image, Button, Box, Text, useToast } from "@chakra-ui/react"
-import { FiHeart } from "react-icons/fi"
-import { HiHeart } from "react-icons/hi"
-import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { sort_and_filter_handler, get_wishlist } from "../../redux/products/actions"
+import "./Card.css";
+import { useState } from 'react';
+import { Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { ToastContainer, toast } from "react-toastify";
+import { FiHeart } from "react-icons/fi";
+import { HiHeart } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { sort_and_filter_handler, get_wishlist } from "../../redux/products/actions";
 
 const Card = ({ product, status }) => {
 
-    const toast = useToast();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [animate_display, set_animate_display] = useState("");
@@ -19,33 +19,9 @@ const Card = ({ product, status }) => {
     })
 
     const notify = (message) => {
+        toast(message);
         setTimeout(() => {
-            toast({
-                position: "bottom-left",
-                duration: 1000,
-                isClosable: true,
-                render: () => {
-                    return (
-                        <Flex w="250px"
-                            h="70px"
-                            alignItems="center"
-                            borderRadius="4px"
-                            fontSize="17px"
-                            fontWeight="medium"
-                            direction="column"
-                            justifyContent="center"
-                            color='white'
-                            bg='#121212'
-                        >
-                            {message}
-                        </Flex>
-
-                    )
-                }
-            })
-
             set_animate_display("");
-
         }, 500)
     }
 
@@ -203,13 +179,13 @@ const Card = ({ product, status }) => {
                 >
                     <Flex h="3px"> </Flex>
                     ADD TO BAG
-                    <Flex justifyContent="flex-start" h="3px" w="50%">
+                    <Flex justifyContent="flex-start" h="4px" w={["60%", "50%", "50%", "50%"]}>
                         <Flex bg="#fc2779" className={animate_display}> </Flex>
                     </Flex>
+
                 </Flex>
 
             </Flex>
-
         </Flex>
     )
 }

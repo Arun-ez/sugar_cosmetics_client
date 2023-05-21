@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { token_login } from './redux/auth/actions';
 import { BottomBar } from './components/BottomBar/BottomBar';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -29,6 +30,15 @@ function App() {
       <RouteProvider ad_display={ad_display} />
       <Footer />
       <BottomBar />
+      <ToastContainer
+        position="bottom-left"
+        theme='dark'
+        autoClose={2000}
+        pauseOnFocusLoss={false}
+        style={{ width: "250px" }}
+        pauseOnHover={false}
+        progressStyle={{ backgroundColor: "#917EF2" }}
+      />
     </div>
   );
 }

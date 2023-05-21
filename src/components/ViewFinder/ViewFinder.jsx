@@ -7,7 +7,6 @@ import {
     Image,
     Box,
     Button,
-    useToast,
     Input,
     Accordion,
     AccordionItem,
@@ -28,10 +27,10 @@ import { GrStar } from "react-icons/gr"
 import { CardCarousel } from '../CardCarousel/CardCarousel'
 import { useDispatch, useSelector } from 'react-redux'
 import { sort_and_filter_handler } from '../../redux/products/actions'
+import { toast } from 'react-toastify'
 
 const ViewFinder = () => {
 
-    const toast = useToast();
     let navigate = useNavigate();
     let dispatch = useDispatch();
     let { id, category } = useParams();
@@ -88,33 +87,9 @@ const ViewFinder = () => {
     }
 
     const notify = (message) => {
+        toast(message);
         setTimeout(() => {
-            toast({
-                position: "bottom-left",
-                duration: 1000,
-                isClosable: true,
-                render: () => {
-                    return (
-                        <Flex w="250px"
-                            h="70px"
-                            alignItems="center"
-                            borderRadius="4px"
-                            fontSize="17px"
-                            fontWeight="medium"
-                            direction="column"
-                            justifyContent="center"
-                            color='white'
-                            bg='#121212'
-                        >
-                            {message}
-                        </Flex>
-
-                    )
-                }
-            })
-
             set_animate_display("");
-
         }, 500)
     }
 
@@ -232,12 +207,14 @@ const ViewFinder = () => {
                         </Flex>
 
                         <Flex
-                            w={["96%", "92%", "90%", "80%"]}
+                            w={["100%", "100%", "90%", "85%"]}
                             direction={["column", "column", "column", "row"]}
                             gap="20px"
                             alignItems={["center", "center", "center", "start"]}
                             p="20px" m="20px auto" minH="70vh"
-                            borderRadius="12px" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
+                            borderRadius="12px"
+                            boxShadow={["none", "none", "0 .5rem 1rem rgba(0,0,0,.15)", "0 .5rem 1rem rgba(0,0,0,.15)"]}
+                        >
 
                             <Flex w="80%" direction={["column-reverse", "column-reverse", "row", "row"]}>
 
@@ -344,7 +321,7 @@ const ViewFinder = () => {
 
                                         ADD TO BAG
 
-                                        <Flex justifyContent="flex-start" h="3px" w="40%">
+                                        <Flex justifyContent="flex-start" h="4px" w={["60%", "50%", "30%", "30%"]}>
                                             <Flex bg="#fc2779" className={animate_display}> </Flex>
                                         </Flex>
 

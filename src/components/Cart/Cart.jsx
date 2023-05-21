@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Flex, Text, Heading, Image, Button, useToast, Spinner, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, useDisclosure } from '@chakra-ui/react';
+import { toast } from 'react-toastify';
+import { Flex, Text, Heading, Image, Button, Spinner, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, useDisclosure } from '@chakra-ui/react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { CardCarousel } from '../CardCarousel/CardCarousel';
 import { AddressPicker } from '../AddressPicker/AddressPicker';
 
 const Cart = () => {
-    const toast = useToast();
     const navigate = useNavigate();
     const [loading, set_loading] = useState(true);
     const [blur, set_blur] = useState(false);
@@ -34,31 +34,7 @@ const Cart = () => {
     })
 
     const notify = (message) => {
-        setTimeout(() => {
-            toast({
-                position: "bottom-left",
-                duration: 1000,
-                isClosable: true,
-                render: () => {
-                    return (
-                        <Flex w="250px"
-                            h="70px"
-                            alignItems="center"
-                            borderRadius="4px"
-                            fontSize="17px"
-                            fontWeight="medium"
-                            direction="column"
-                            justifyContent="center"
-                            color='white'
-                            bg='#121212'
-                        >
-                            {message}
-                        </Flex>
-
-                    )
-                }
-            })
-        }, 300)
+        toast(message);
     }
 
     const load_addresses = async () => {
@@ -110,7 +86,7 @@ const Cart = () => {
             amount: total,
             products: cartproduct,
             created: getDate(0),
-            delivery: getDate(7),
+            delivery: getDate(Math.floor(Math.random() * (8 - 1) + 1)),
             status: false
         };
 
@@ -297,10 +273,10 @@ const Cart = () => {
                     <Flex
                         direction={["column", "column", "column", "row"]}
                         bgColor="#ffffff"
-                        width="96%"
-                        m="20px auto 20px auto"
+                        width={["100%", "100%", "96%", "96%"]}
+                        m={["1px auto 0px auto", "1px auto 0px auto", "20px auto 20px auto", "20px auto 20px auto"]}
 
-                        borderRadius="25px"
+                        borderRadius={["0px", "0px", "25px", "25px"]}
                         p={["20px 15px", "30px", "30px", "30px"]}
                         gap="20px"
                     >
@@ -324,7 +300,7 @@ const Cart = () => {
                                                 <Flex justifyContent="center" alignItems="center" w="200px" pl="20px" pr="20px">
 
                                                     <Flex w="100px" justifyContent="center">
-                                                        <RiDeleteBinLine fontSize="17px" color="#212529" onClick={() => { remove_item(elem) }} />
+                                                        <RiDeleteBinLine cursor="pointer" fontSize="17px" color="#212529" onClick={() => { remove_item(elem) }} />
                                                     </Flex>
 
                                                     <Flex w="100px" justifyContent="space-around" border="1px solid #212529" p="5px" borderRadius="10px">
@@ -485,7 +461,6 @@ const Cart = () => {
             }
 
             <AddressPicker reload={load_addresses} isOpen={isOpen} onClose={onClose} prefill={prefill} />
-
         </Flex>
     )
 }
