@@ -1,10 +1,10 @@
 import { useRef } from 'react'
-import { useToast, Modal, ModalOverlay, ModalContent, ModalHeader, Input, ModalFooter, ModalBody, ModalCloseButton, SimpleGrid, Flex } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, Input, ModalFooter, ModalBody, ModalCloseButton, SimpleGrid, Flex } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const AddressPicker = ({ reload, isOpen, onClose, prefill, id }) => {
 
-    const toast = useToast();
     let token = useSelector((store) => {
         return store.AuthReducer.token;
     })
@@ -19,32 +19,7 @@ const AddressPicker = ({ reload, isOpen, onClose, prefill, id }) => {
     const city = useRef(null);
 
     const notify = (message) => {
-        setTimeout(() => {
-            toast({
-                position: "bottom-left",
-                duration: 1000,
-                isClosable: true,
-                render: () => {
-                    return (
-                        <Flex w="250px"
-                            h="70px"
-                            alignItems="center"
-                            borderRadius="4px"
-                            fontSize="17px"
-                            fontWeight="medium"
-                            direction="column"
-                            justifyContent="center"
-                            color='white'
-                            bg='#121212'
-                        >
-                            {message}
-                        </Flex>
-
-                    )
-                }
-            })
-
-        }, 500)
+        toast(message);
     }
 
     const onPatch = async (data) => {
@@ -80,6 +55,7 @@ const AddressPicker = ({ reload, isOpen, onClose, prefill, id }) => {
 
             reload();
             onClose();
+            notify("Address added Successfully");
         } catch (err) {
             console.log(err);
         }

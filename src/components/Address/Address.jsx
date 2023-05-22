@@ -1,14 +1,14 @@
 import { AddressPicker } from '../AddressPicker/AddressPicker';
 import { useState, useEffect } from 'react';
-import { Flex, Box, SimpleGrid, useDisclosure, Text, Spinner, useToast, Heading } from '@chakra-ui/react';
+import { Flex, Box, SimpleGrid, useDisclosure, Text, Spinner, Heading } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
+import { toast } from 'react-toastify';
 
 
 const Address = () => {
 
-    const toast = useToast();
     const [patch_id, set_patch_id] = useState(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [prefill, set_prefill] = useState({
@@ -29,32 +29,7 @@ const Address = () => {
     })
 
     const notify = (message) => {
-        setTimeout(() => {
-            toast({
-                position: "bottom-left",
-                duration: 1000,
-                isClosable: true,
-                render: () => {
-                    return (
-                        <Flex w="250px"
-                            h="70px"
-                            alignItems="center"
-                            borderRadius="4px"
-                            fontSize="17px"
-                            fontWeight="medium"
-                            direction="column"
-                            justifyContent="center"
-                            color='white'
-                            bg='#121212'
-                        >
-                            {message}
-                        </Flex>
-
-                    )
-                }
-            })
-
-        }, 500)
+        toast(message);
     }
 
     const load = async () => {
