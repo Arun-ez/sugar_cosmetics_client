@@ -18,7 +18,6 @@ const handle_filter_options = (data) => {
     })
 
     return filters;
-
 }
 
 const get_wishlist_status = async (data, token) => {
@@ -135,4 +134,4 @@ const filter = (dispatch, value) => {
     dispatch(sort_and_filter_handler);
 }
 
-export { get, sort, filter, sort_and_filter_handler, get_wishlist, get_wishlist_status }
+export { get, sort, filter, sort_and_filter_handler, get_wishlist, get_wishlist_status, handle_filter_options }

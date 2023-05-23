@@ -13,3 +13,11 @@
 .active {
     color: #fc2779;
 }
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: black;
+}

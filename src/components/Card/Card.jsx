@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sort_and_filter_handler, get_wishlist } from "../../redux/products/actions";
 
-const Card = ({ product, status }) => {
+const Card = ({ product, status, reload }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -43,6 +43,10 @@ const Card = ({ product, status }) => {
 
             if (response.status === 200) {
                 notify("Item Added to Wishlist");
+
+                if (typeof reload === 'function') {
+                    reload()
+                }
             } else {
                 notify("Failed to add");
             }
@@ -72,6 +76,9 @@ const Card = ({ product, status }) => {
 
             if (response.status === 200) {
                 notify("Item Removed from Wishlist");
+                if (typeof reload === 'function') {
+                    reload()
+                }
             } else {
                 notify("Failed to remove");
             }

@@ -21,28 +21,88 @@ import {
     Image
 } from '@chakra-ui/react';
 import { useDispatch } from "react-redux";
+import { handle_filter_options } from "../../redux/products/actions";
+import { get_wishlist_status } from "../../redux/products/actions";
+import { useSelector } from "react-redux";
 
 const Search = () => {
     let [data, setData] = useState([]);
+    let [status_list, set_status_list] = useState([]);
     let [sort_param, set_sort_param] = useState("");
+    const [filter_options, set_filter_options] = useState([]);
+    const token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
     const dispatch = useDispatch();
     let query = useQuery();
 
     const load = async () => {
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search/${query}`);
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search?q=${query}`);
             let base = await response.json();
+            let filters = handle_filter_options(base.data);
+            set_filter_options(filters);
             setData(base.data);
         } catch (error) {
             console.log(error);
         }
     }
 
+    const filter_onchange_handler = (id) => {
+        let mapped = filter_options.map((elm, idx) => {
+            if (idx === id) {
+
+                return {
+                    ...elm,
+                    checked: !elm.checked
+                }
+            }
+
+            return elm;
+        })
+
+        set_filter_options(mapped);
+    }
+
+    const sort_and_filter_handler = async () => {
+        const url = new URL(`${process.env.REACT_APP_SERVER_URL}/products/search`);
+        const params = new URLSearchParams();
+        params.append('q', query);
+        params.append('sort', sort_param);
+
+        filter_options.forEach(({ name, checked }) => {
+            if (checked) {
+                params.append('filter', name);
+            }
+        })
+
+        url.search = params;
+
+        try {
+            let response = await fetch(url.href);
+            let base = await response.json();
+            setData(base.data);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    useEffect(() => {
+        get_wishlist_status({ data }, token).then((response) => {
+            set_status_list(response)
+        })
+    }, [data])
+
+    useEffect(() => {
+        sort_and_filter_handler();
+    }, [sort_param, filter_options])
+
     useEffect(() => {
         document.title = "Sugar Cosmetics - Search"
         load();
         window.scrollTo(0, 0);
-    }, [query, sort_param]);
+    }, [query]);
 
     return (
         <Box>
@@ -71,8 +131,8 @@ const Search = () => {
                                         <RadioGroup onChange={set_sort_param} value={sort_param}>
                                             <Flex borderTop="1px solid whitesmoke" gap="5px" direction="column" alignItems="left" w="100%" pt="8px" fontWeight="md">
                                                 <Radio colorScheme="pink" value=""> Relevance </Radio>
-                                                <Radio colorScheme="pink" value="&_sort=Price&_order=desc"> Price: High To Low </Radio>
-                                                <Radio colorScheme="pink" value='&_sort=Price&_order=asc'> Price: Low To High </Radio>
+                                                <Radio colorScheme="pink" value="dsc"> Price: High To Low </Radio>
+                                                <Radio colorScheme="pink" value='asc'> Price: Low To High </Radio>
                                             </Flex>
                                         </RadioGroup>
                                     </AccordionPanel>
@@ -96,7 +156,22 @@ const Search = () => {
                                         </h2>
 
                                         <AccordionPanel>
+                                            <Flex direction="column" gap="1px">
+                                                {filter_options.map(({ name, checked }, id) => {
+                                                    return (
+                                                        <label className='checkbox' key={id}>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={name}
+                                                                checked={checked}
+                                                                onChange={() => { filter_onchange_handler(id) }}
+                                                            />
 
+                                                            {name}
+                                                        </label>
+                                                    )
+                                                })}
+                                            </Flex>
                                         </AccordionPanel>
                                     </AccordionItem>
 
@@ -154,7 +229,7 @@ const Search = () => {
                                 <>
                                     <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
                                         {data.map((element, id) => {
-                                            return <Card product={element} key={id} />
+                                            return <Card product={element} reload={sort_and_filter_handler} status={status_list[id]} key={id} />
                                         })}
                                     </SimpleGrid>
                                 </>
