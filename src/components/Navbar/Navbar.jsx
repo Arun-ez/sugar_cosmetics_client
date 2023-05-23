@@ -10,7 +10,7 @@ import { FiHeart } from "react-icons/fi"
 import { FiSearch } from "react-icons/fi"
 import { TbDiscount2 } from "react-icons/tb"
 import { RiShoppingBagLine } from "react-icons/ri"
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Logo } from "./Logo";
 import { GlobalContext } from "../../contexts/GlobalContextProvider";
 import { RxCross1 } from "react-icons/rx"
@@ -183,7 +183,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                 fontSize="14px"
                 whiteSpace="nowrap">
                 {nav_routes.map(({ name, path }, id) => {
-                    return <NavLink className="nav_item hover-underline-animation" to={path} key={id}> {name} </NavLink>
+                    return <a className="nav_item hover-underline-animation" href={path} key={id}> {name} </a>
                 })}
             </Flex>
         </Flex>
