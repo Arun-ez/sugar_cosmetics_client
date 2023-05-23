@@ -71,6 +71,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
         { name: "LIPS", path: "/collections/lips" },
         { name: "EYES", path: "/collections/eyes" },
         { name: "FACE", path: "/collections/face" },
+        { name: "NAILS", path: "/collections/nails" },
         { name: "SKINCARE", path: "/collections/skincare" },
         { name: "ACCESSORIES", path: "/collections/accessories" },
         { name: "GIFTS & KITS", path: "/collections/kit" },
