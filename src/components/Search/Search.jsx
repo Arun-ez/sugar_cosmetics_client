@@ -29,6 +29,7 @@ const Search = () => {
     let [data, setData] = useState([]);
     let [status_list, set_status_list] = useState([]);
     let [sort_param, set_sort_param] = useState("");
+    let [loading, set_loading] = useState(true);
     const [filter_options, set_filter_options] = useState([]);
     const token = useSelector((store) => {
         return store.AuthReducer.token;
@@ -102,6 +103,9 @@ const Search = () => {
         document.title = "Sugar Cosmetics - Search"
         load();
         window.scrollTo(0, 0);
+        setTimeout(() => {
+            set_loading(false);
+        }, 3000)
     }, [query]);
 
     return (
@@ -225,28 +229,11 @@ const Search = () => {
                         </Flex>
 
                         <Flex w="100%" justifyContent="center" mt="20px">
-                            {data.length ?
-                                <>
-                                    <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
-                                        {data.map((element, id) => {
-                                            return <Card product={element} reload={sort_and_filter_handler} status={status_list[id]} key={id} />
-                                        })}
-                                    </SimpleGrid>
-                                </>
-
-                                :
-
-                                <>
-                                    <Spinner
-                                        mt="150px"
-                                        thickness='4px'
-                                        speed='0.65s'
-                                        emptyColor='gray.200'
-                                        color='pink.500'
-                                        size='xl'
-                                    />
-                                </>
-                            }
+                            <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
+                                {data.map((element, id) => {
+                                    return <Card product={element} reload={sort_and_filter_handler} status={status_list[id]} key={id} />
+                                })}
+                            </SimpleGrid>
                         </Flex>
 
                     </Flex>
@@ -256,12 +243,30 @@ const Search = () => {
                 :
 
                 <>
-                    <Image boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset" borderRadius="15px" m="auto" mt="200px" src={no_results} />
-                    <br />
 
-                    <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
+                    {loading ?
+                        <>
+                            <Flex minH="60vh" justifyContent="center" alignItems="center">
+                                <Spinner
+                                    thickness='4px'
+                                    speed='0.65s'
+                                    emptyColor='gray.200'
+                                    color='pink.500'
+                                    size='xl'
+                                />
+                            </Flex>
+                        </>
+                        :
+                        <>
+                            <Image boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset" borderRadius="15px" m="auto" mt="100px" src={no_results} />
+                            <br />
 
-                    <CardCarousel headingColor="black" type="eyes"> JUST-IN </CardCarousel>
+                            <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
+
+                            <CardCarousel headingColor="black" type="eyes"> JUST-IN </CardCarousel>
+                        </>
+                    }
+
                 </>
 
 
