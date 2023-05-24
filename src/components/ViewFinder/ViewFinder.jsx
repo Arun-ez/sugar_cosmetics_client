@@ -166,7 +166,7 @@ const ViewFinder = () => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
                 method: "POST",
-                body: JSON.stringify(product),
+                body: JSON.stringify({ ...product, qty: 0 }),
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`

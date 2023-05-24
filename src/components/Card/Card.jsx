@@ -1,7 +1,7 @@
 import "./Card.css";
 import { useState } from 'react';
 import { Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { FiHeart } from "react-icons/fi";
 import { HiHeart } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
@@ -104,7 +104,7 @@ const Card = ({ product, status, reload }) => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
                 method: "POST",
-                body: JSON.stringify(product),
+                body: JSON.stringify({ ...product, qty: 0 }),
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`
