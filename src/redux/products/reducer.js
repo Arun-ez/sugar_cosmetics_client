@@ -18,6 +18,7 @@ const ProductReducer = (state = initial, action) => {
         case GET_PRODUCTS_REQUEST: {
             return {
                 ...state,
+                data: [],
                 category: action.payload,
                 isLoading: true,
                 isError: false
