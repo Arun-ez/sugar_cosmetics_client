@@ -1,4 +1,4 @@
-
+import { BarLoader } from 'react-spinners'
 import { useEffect, useState } from 'react'
 import {
     Flex,
@@ -38,7 +38,8 @@ const ViewFinder = () => {
     let [product, set_product] = useState({});
     let [active_index, set_active_index] = useState(0);
     let [window_width, set_window_width] = useState(0);
-    const [animate_display, set_animate_display] = useState("");
+
+    let [animate_button, set_animate_button] = useState(false);
 
     let token = useSelector((store) => {
         return store.AuthReducer.token;
@@ -89,7 +90,7 @@ const ViewFinder = () => {
     const notify = (message) => {
         toast(message);
         setTimeout(() => {
-            set_animate_display("");
+            set_animate_button(false);
         }, 500)
     }
 
@@ -161,7 +162,7 @@ const ViewFinder = () => {
             return;
         }
 
-        set_animate_display("processing");
+        set_animate_button(true);
 
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
@@ -178,7 +179,6 @@ const ViewFinder = () => {
             } else {
                 notify("Failed to add");
             }
-
 
         } catch (error) {
             notify("Failed to add");
@@ -309,21 +309,20 @@ const ViewFinder = () => {
                                         direction="column"
                                         color="white"
                                         fontWeight="500"
-                                        w="50%"
-                                        py="10px"
-                                        justifyContent="space-center"
+                                        w="230px"
+                                        h="50px"
+                                        justifyContent="center"
                                         alignItems="center"
                                         bg="black"
                                         borderRadius="5px"
                                         onClick={add_to_cart}
                                         cursor="pointer"
+                                        fontSize={18}
                                     >
 
                                         ADD TO BAG
 
-                                        <Flex justifyContent="flex-start" h="4px" w={["60%", "50%", "30%", "30%"]}>
-                                            <Flex bg="#fc2779" className={animate_display}> </Flex>
-                                        </Flex>
+                                        <BarLoader color="#fc2779" loading={animate_button} />
 
                                     </Flex>
                                 </Flex>

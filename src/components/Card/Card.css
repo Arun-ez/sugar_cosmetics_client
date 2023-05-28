@@ -1,15 +1,10 @@
-.processing {
-    animation-name: process;
-    animation-duration: 0.7s;
-    animation-iteration-count: 1;
+.loading {
+    width: 90px !important;
 }
 
-@keyframes process {
-    0% {
-        width: 0%;
-    }
 
-    100% {
-        width: 100%;
+@media (0px <=width <=480px) {
+    .loading {
+        width: 70% !important;
     }
 }

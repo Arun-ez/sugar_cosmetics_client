@@ -1,5 +1,6 @@
 import "./Card.css";
 import { useState } from 'react';
+import { BarLoader } from 'react-spinners'
 import { Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import { FiHeart } from "react-icons/fi";
@@ -12,7 +13,8 @@ const Card = ({ product, status, reload }) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [animate_display, set_animate_display] = useState("");
+
+    let [animate_button, set_animate_button] = useState(false);
 
     let token = useSelector((store) => {
         return store.AuthReducer.token;
@@ -21,7 +23,7 @@ const Card = ({ product, status, reload }) => {
     const notify = (message) => {
         toast(message);
         setTimeout(() => {
-            set_animate_display("");
+            set_animate_button(false);
         }, 500)
     }
 
@@ -99,7 +101,7 @@ const Card = ({ product, status, reload }) => {
             return;
         }
 
-        set_animate_display("processing");
+        set_animate_button(true);
 
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
@@ -122,9 +124,6 @@ const Card = ({ product, status, reload }) => {
             notify("Failed to add");
         }
 
-        setTimeout(() => {
-            set_animate_display("none");
-        }, 700)
     }
 
     const goto_details = () => {
@@ -175,20 +174,20 @@ const Card = ({ product, status, reload }) => {
                     fontWeight="500"
                     gap="2px"
                     whiteSpace="nowrap"
-                    fontSize={["8px", "10px", "13px", "13px"]}
-                    direction="column" w={["60%", "60%", "70%", "80%"]}
-                    py="3%"
-                    justifyContent="space-around"
+                    fontSize={["10px", "13px", "13px", "13px"]}
+                    direction="column"
+                    w={["80%", "80%", "70%", "80%"]}
+                    h={["35px", "45px", "45px", "45px"]}
+                    justifyContent="center"
                     alignItems="center"
                     bg="black" borderRadius="5px"
                     cursor="pointer"
                     onClick={add_to_cart}
                 >
-                    <Flex h="3px"> </Flex>
+
                     ADD TO BAG
-                    <Flex justifyContent="flex-start" h="4px" w={["60%", "50%", "50%", "50%"]}>
-                        <Flex bg="#fc2779" className={animate_display}> </Flex>
-                    </Flex>
+
+                    <BarLoader color="#fc2779" loading={animate_button} className="loading" />
 
                 </Flex>
 
