@@ -143,8 +143,6 @@ const Card = ({ product, status, reload }) => {
             boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
         >
 
-
-
             <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["150px", "220px", "220px", "220px"]} borderRadius="15px" />
             <br />
             <Text fontWeight="medium" fontSize={["8px", "10px", "13px", "13px"]} cursor="pointer" onClick={goto_details} > {product.title.substring(0, 20) + "..."} </Text>
