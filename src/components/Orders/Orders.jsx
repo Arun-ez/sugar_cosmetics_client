@@ -63,7 +63,7 @@ const Orders = () => {
                                     </Flex>
 
                                     <Flex w="100%" direction="column" gap="10px">
-                                        {products.map(({ Title, images, category, _id }, id) => {
+                                        {products.map(({ title, images, category, _id, price }, id) => {
                                             return (
                                                 <Flex
                                                     key={id}
@@ -74,7 +74,11 @@ const Orders = () => {
                                                     onClick={() => { navigate(`/collections/${category}/${_id}`) }}
                                                 >
                                                     <Image src={images[0]} w={10} h={50} borderRadius="7px" />
-                                                    <Text fontSize={["12px", "12px", "15px", "15px"]}> {Title} </Text>
+                                                    <Text fontSize={["12px", "12px", "15px", "15px"]}>
+                                                        {title}
+                                                        <br />
+                                                        <b style={{ fontWeight: "500" }}> ₹{price} </b>
+                                                    </Text>
                                                 </Flex>
                                             )
                                         })}

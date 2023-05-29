@@ -293,7 +293,7 @@ const Cart = () => {
                                                 >
                                                     <Image w="40px" src={elem.images[0]} alt="product" borderRadius="7px" />
                                                     <Flex direction="column">
-                                                        <Text fontSize="13px" height="25px" overflow="hidden">{elem.Title}</Text>
+                                                        <Text fontSize="13px" height="25px" overflow="hidden">{elem.title}</Text>
                                                         <Text style={{ fontWeight: 'bold', opacity: "90%" }} > ₹{elem.price} </Text>
                                                     </Flex>
                                                 </Flex>
