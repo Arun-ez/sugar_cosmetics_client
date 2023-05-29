@@ -78,7 +78,7 @@ const Navbar = ({ ad_display, set_ad_display }) => {
         { name: "BESTSELLERS", path: "/collections/seller" },
         { name: "NEW LAUNCHES", path: "/collections/new" },
         { name: "OFFERS", path: "/offers" },
-        { name: "BLOG", path: "/blog" },
+        { name: "BLOG", path: "https://in.sugarcosmetics.com/blog" },
         { name: "STORES", path: "/stores" },
     ]
 
