@@ -68,7 +68,7 @@ const ViewFinder = () => {
 
             let data = await response.json();
 
-            document.title = data.data.Title;
+            document.title = data.data.title;
 
             set_product(data.data);
         } catch (error) {
@@ -167,7 +167,7 @@ const ViewFinder = () => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
                 method: "POST",
-                body: JSON.stringify({ ...product, qty: 0 }),
+                body: JSON.stringify(product),
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`
@@ -203,7 +203,7 @@ const ViewFinder = () => {
                         <Flex w="100%" pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px" gap="10px">
                             <Text opacity="70%" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
                             <MdArrowForwardIos style={{ opacity: "60%", fontSize: "15px" }} />
-                            <Heading as="h1" fontSize={["14px", "15px", "16px", "16px"]}> {product.Title} </Heading>
+                            <Heading as="h1" fontSize={["14px", "15px", "16px", "16px"]}> {product.title} </Heading>
                         </Flex>
 
                         <Flex
@@ -252,7 +252,7 @@ const ViewFinder = () => {
 
                             {/* Details wrapper */}
                             <Flex direction="column" gap="10px" pt="15px" w="100%" color="#212121">
-                                <Heading as="h1" fontWeight="medium" fontSize="20px"> {product.Title} </Heading>
+                                <Heading as="h1" fontWeight="medium" fontSize="20px"> {product.title} </Heading>
                                 <Text
                                     display="flex"
                                     fontWeight="medium"
@@ -273,7 +273,7 @@ const ViewFinder = () => {
                                 >
                                     <Flex alignItems="center" gap="10px">
                                         <Heading as="h1" fontWeight="bold" fontSize="20px"> {"₹" + product.price + ".00"} </Heading>
-                                        <Heading as="h1" fontWeight="bold" opacity="90%" fontSize="13px" color="#fc2779"> {"(50% Off)"} </Heading>
+                                        <Heading as="h1" fontWeight="bold" opacity="90%" fontSize="13px" color="#fc2779"> {product.discount ? `( ${product.discount}% off )` : ``} </Heading>
                                     </Flex>
 
                                     <Flex alignItems="center" gap="10px">
@@ -352,7 +352,7 @@ const ViewFinder = () => {
                                             </h2>
 
                                             <AccordionPanel fontSize="13px">
-                                                <Text> {product.desc} </Text>
+                                                <Text> {product.description} </Text>
                                                 <br />
                                                 <p>
                                                     <span style={{ fontSize: "14px", fontWeight: "bold" }}> Benifits: </span>
@@ -360,9 +360,9 @@ const ViewFinder = () => {
                                                 </p>
 
                                                 <ul style={{ marginLeft: "15px", marginTop: "10px" }}>
-                                                    <li> {product.benifts[0]} </li>
-                                                    <li> {product.benifts[1]} </li>
-                                                    <li> {product.benifts[2]} </li>
+                                                    <li> {product.benifits[0]} </li>
+                                                    <li> {product.benifits[1]} </li>
+                                                    <li> {product.benifits[2]} </li>
                                                 </ul>
 
                                                 <p style={{ marginTop: "20px" }}>
@@ -397,7 +397,7 @@ const ViewFinder = () => {
                                                             {get_starts()}
                                                         </Flex>
 
-                                                        <Text mt="5px" fontWeight="medium" fontSize="12px"> {(product.pt3 ? product.pt3[1] : "1") + " REVIEWS"} </Text>
+                                                        <Text mt="5px" fontWeight="medium" fontSize="12px"> {product.reviews.length} REVIEWS </Text>
                                                     </Flex>
 
                                                     <Flex w="100%" gap="4px" direction="column" justifyContent="center" alignItems="center"

@@ -106,7 +106,7 @@ const Card = ({ product, status, reload }) => {
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
                 method: "POST",
-                body: JSON.stringify({ ...product, qty: 0 }),
+                body: JSON.stringify(product),
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`
@@ -147,11 +147,11 @@ const Card = ({ product, status, reload }) => {
 
             <Image cursor="pointer" onClick={goto_details} src={product.images[0]} alt="thumbnail" h={["150px", "220px", "220px", "220px"]} borderRadius="15px" />
             <br />
-            <Text fontWeight="medium" fontSize={["8px", "10px", "13px", "13px"]} cursor="pointer" onClick={goto_details} > {product.Title.substring(0, 20) + "..."} </Text>
+            <Text fontWeight="medium" fontSize={["8px", "10px", "13px", "13px"]} cursor="pointer" onClick={goto_details} > {product.title.substring(0, 20) + "..."} </Text>
 
             <Flex cursor="pointer" mt="10px" onClick={goto_details} w="100%" justifyContent="center" alignItems="center" gap="10px">
                 <Heading as="h1" fontSize={["12px", "15px", "17px", "17px"]}> ₹{product.price} </Heading>
-                <Heading as="h1" fontSize={["8px", "10px", "12px", "12px"]} color="#fc2779"> {product.brandcolor} </Heading>
+                <Heading as="h1" fontSize={["8px", "10px", "12px", "12px"]} color="#fc2779"> {product.discount ? `( ${product.discount}% off )` : ``} </Heading>
             </Flex>
 
 
