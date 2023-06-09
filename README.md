@@ -37,25 +37,16 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ## Screenshots
 
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_home.png?t=2023-06-09T21%3A36%3A44.508Z)
-
-<!-- ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_2.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_10.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_4.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_6.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_5.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_3.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_7.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_8.png)
-
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_9.png) -->
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_1.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_2.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_3.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_4.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_5.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_6.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_7.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_8.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_9.png)
+![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_10.png)
 
 
 ## Environment Variables
