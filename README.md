@@ -39,7 +39,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_1.png)
 
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_2.png)
+<!-- ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_2.png)
 
 ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_10.png)
 
@@ -55,7 +55,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_8.png)
 
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_9.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_9.png) -->
 
 
 ## Environment Variables
