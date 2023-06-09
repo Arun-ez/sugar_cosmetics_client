@@ -37,7 +37,8 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ## Screenshots
 
-![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_1.png?t=2023-06-09T21%3A23%3A58.433Z)
+<img src="https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_1.png?t=2023-06-09T21%3A23%3A58.433Z" />
+<!-- ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_1.png?t=2023-06-09T21%3A23%3A58.433Z) -->
 
 <!-- ![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_2.png)
 
