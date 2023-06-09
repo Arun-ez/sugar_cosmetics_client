@@ -60,7 +60,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env.local file
+To run this project, The following environment variables are required in .env file
 
 `REACT_APP_SERVER_URL` - backend server url
 `REACT_APP_KEY_ID` - razorpay key_id
