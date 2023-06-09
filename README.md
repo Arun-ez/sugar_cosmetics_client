@@ -37,23 +37,25 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ## Screenshots
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_1.c46c83265dd45ba63d0a.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_1.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_2.35596cd8060813d2ee17.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_2.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_4.77cbb0467ded803021ee.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_10.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_6.b70967a86cc4cd75444f.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_4.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_5.56baaec441bcc4746714.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_6.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_3.bc696ceb9c22f6f1c8e7.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_5.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_7.bbb9dc54098d8158fef3.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_3.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_8.8cc700f138a50a946347.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_7.png)
 
-![App Screenshot](https://arunshaw.vercel.app/static/media/sugar_9.73c5440a21a2e6bd1751.png)
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_8.png)
+
+![App Screenshot](https://qafgonqpxbvofaxwuamk.supabase.co/storage/v1/object/public/images/sugar_cosmetics_thumbs/sugar_9.png)
 
 
 ## Environment Variables
