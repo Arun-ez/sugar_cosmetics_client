@@ -1,15 +1,18 @@
 import "./Card.css";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { BarLoader } from 'react-spinners'
-import { Flex, Heading, Image, Text } from "@chakra-ui/react";
+import { Flex, Heading, Image, Text, useConst } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import { FiHeart } from "react-icons/fi";
 import { HiHeart } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { sort_and_filter_handler, get_wishlist } from "../../redux/products/actions";
+import { GlobalContext } from "../../contexts/GlobalContextProvider";
 
 const Card = ({ product, status, reload }) => {
+
+    const { load_home_static_products } = useContext(GlobalContext);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -55,6 +58,9 @@ const Card = ({ product, status, reload }) => {
 
             dispatch(sort_and_filter_handler);
             dispatch(get_wishlist);
+
+
+            load_home_static_products();
 
         } catch (error) {
             notify("Failed to add");

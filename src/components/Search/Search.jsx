@@ -1,5 +1,5 @@
 import no_results from "./no_results.png"
-import React from 'react'
+import React, { useContext } from 'react'
 import { Card } from '../Card/Card';
 import { useEffect, useState } from 'react'
 import { useQuery } from '../../unils/useQuery';
@@ -24,8 +24,12 @@ import { useDispatch } from "react-redux";
 import { handle_filter_options } from "../../redux/products/actions";
 import { get_wishlist_status } from "../../redux/products/actions";
 import { useSelector } from "react-redux";
+import { GlobalContext } from "../../contexts/GlobalContextProvider";
 
 const Search = () => {
+
+    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
+
     let [data, setData] = useState([]);
     let [status_list, set_status_list] = useState([]);
     let [sort_param, set_sort_param] = useState("");
@@ -261,9 +265,15 @@ const Search = () => {
                             <Image boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset" borderRadius="15px" m="auto" mt="100px" src={no_results} />
                             <br />
 
-                            <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
+                            <CardCarousel
+                                data={face}
+                                headingColor="black"
+                            />
 
-                            <CardCarousel headingColor="black" type="eyes"> JUST-IN </CardCarousel>
+                            <CardCarousel
+                                data={kit}
+                                headingColor="black"
+                            />
                         </>
                     }
 

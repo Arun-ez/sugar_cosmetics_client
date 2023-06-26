@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -7,8 +7,12 @@ import { MdArrowForwardIos } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { CardCarousel } from '../CardCarousel/CardCarousel';
 import { AddressPicker } from '../AddressPicker/AddressPicker';
+import { GlobalContext } from '../../contexts/GlobalContextProvider';
 
 const Cart = () => {
+
+    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
+
     const navigate = useNavigate();
     const [loading, set_loading] = useState(true);
     const [blur, set_blur] = useState(false);
@@ -456,7 +460,10 @@ const Cart = () => {
 
 
 
-                    <CardCarousel headingColor="black" type="seller"> BESTSELLERS </CardCarousel>
+                    <CardCarousel
+                        data={face}
+                        headingColor="black"
+                    />
                 </>
             }
 

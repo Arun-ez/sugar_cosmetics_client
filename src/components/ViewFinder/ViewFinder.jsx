@@ -1,5 +1,5 @@
 import { BarLoader } from 'react-spinners'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
     Flex,
     Text,
@@ -28,8 +28,11 @@ import { CardCarousel } from '../CardCarousel/CardCarousel'
 import { useDispatch, useSelector } from 'react-redux'
 import { sort_and_filter_handler } from '../../redux/products/actions'
 import { toast } from 'react-toastify'
+import { GlobalContext } from '../../contexts/GlobalContextProvider'
 
 const ViewFinder = () => {
+
+    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
 
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -481,9 +484,15 @@ const ViewFinder = () => {
 
             </Flex>
 
-            <CardCarousel headingColor="black" type="face"> BUY NOW PAY LATER </CardCarousel>
+            <CardCarousel
+                data={face}
+                headingColor="black"
+            />
 
-            <CardCarousel headingColor="black" type="eyes"> GIFTING </CardCarousel>
+            <CardCarousel
+                data={kit}
+                headingColor="black"
+            />
         </>
     )
 }

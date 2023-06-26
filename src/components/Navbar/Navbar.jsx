@@ -57,7 +57,6 @@ const Navbar = ({ ad_display, set_ad_display }) => {
 
         if (!query) { return }
         navigate(`/search?q=${query}`);
-        search_ref.current.value = "";
     }
 
     const handle_key = ({ key }) => {

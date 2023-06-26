@@ -2,9 +2,13 @@ import { Box, Flex, Heading, Image } from "@chakra-ui/react"
 import { BannerCarousel } from '../BannerCarousel/BannerCarousel'
 import { CardCarousel } from "../CardCarousel/CardCarousel"
 import { DealsCarousel } from "../DealsCarousel/DealsCarousel"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react";
+
+import { GlobalContext } from "../../contexts/GlobalContextProvider";
 
 const Home = () => {
+
+    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
 
     const banner1 = [
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F0be8dd72-3086-45d4-919d-3e435ca3d818.jpg&w=1920&q=75",
@@ -66,9 +70,8 @@ const Home = () => {
                 bgImage="https://media.sugarcosmetics.com/upload/homePageBackGroundTexture.jpg"
                 headingColor="white"
                 type="seller"
-            >
-                BESTSELLERS
-            </CardCarousel>
+                data={seller}
+            />
 
 
             <Flex pl={["10%", "10%", "25%", "25%"]} boxShadow="rgba(17, 17, 26, 0.1) 0px 1px 0px;" pr="30px" justifyContent="space-between" alignItems="center" bgImage="https://media.sugarcosmetics.com/upload/Reward_Banner_Desktop.png" backgroundSize="cover" w="95%" h="170px" m="auto">
@@ -84,7 +87,10 @@ const Home = () => {
 
             <DealsCarousel data={deals} headingColor="black"> HOT DEALS </DealsCarousel>
 
-            <CardCarousel headingColor="black" type="eyes"> JUST-IN </CardCarousel>
+            <CardCarousel
+                data={eyes}
+                headingColor="black"
+            />
 
             <Flex w="100%" direction="column" alignItems="center" h={["300px", "400px", "500px", "600px"]}>
 
@@ -110,9 +116,15 @@ const Home = () => {
 
             <DealsCarousel data={top_deals} headingColor="black"> TOP PICKS OF THE WEEK </DealsCarousel>
 
-            <CardCarousel headingColor="black" type="face"> BUY NOW PAY LATER </CardCarousel>
+            <CardCarousel
+                data={face}
+                headingColor="black"
+            />
 
-            <CardCarousel headingColor="black" type="kit"> GIFTING </CardCarousel>
+            <CardCarousel
+                data={kit}
+                headingColor="black"
+            />
 
 
             <Flex w="100%" direction="column" alignItems="center" gap="20px" mb="50px">
@@ -124,7 +136,11 @@ const Home = () => {
                 <Image width="96%" borderRadius="15px" src='https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F8638d096-d168-404e-9b83-56967625b5e6.jpg&w=1920&q=75' />
             </Flex>
 
-            <CardCarousel type="accessories" headingColor="white" bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png"> SUPER SAVERS </CardCarousel>
+            <CardCarousel
+                data={accessories}
+                headingColor="white"
+                bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png"
+            />
 
             <BannerCarousel images={banner2} w="100%" m="20px auto" br="20px" />
 
@@ -140,7 +156,10 @@ const Home = () => {
                 </Flex>
             </Flex>
 
-            <CardCarousel headingColor="black" type="skincare"> SKINCARE BASICS </CardCarousel>
+            <CardCarousel
+                data={skincare}
+                headingColor="black"
+            />
 
         </Box>
     )

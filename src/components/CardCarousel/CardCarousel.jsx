@@ -8,9 +8,8 @@ import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import "./CardCarousel.css";
 
-const CardCarousel = ({ type, headingColor, bgImage, children }) => {
+const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
 
-    let [data, set_data] = useState(null);
     let [status, set_status] = useState([]);
     let token = useSelector((store) => {
         return store.AuthReducer.token;
@@ -44,15 +43,10 @@ const CardCarousel = ({ type, headingColor, bgImage, children }) => {
 
     const load = async () => {
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${type}`);
-            let base = await response.json();
-
-            if (token) {
-                let status_response = await get_wishlist_status(base, token);
+            if (token && data) {
+                let status_response = await get_wishlist_status({ data }, token);
                 set_status(status_response);
             }
-
-            set_data(base.data);
         } catch (err) {
             console.log(err);
         }
@@ -61,7 +55,7 @@ const CardCarousel = ({ type, headingColor, bgImage, children }) => {
 
     useEffect(() => {
         load();
-    }, [type, wishlist]);
+    }, [data, wishlist]);
 
 
 
@@ -71,7 +65,7 @@ const CardCarousel = ({ type, headingColor, bgImage, children }) => {
                 <>
                     <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" mb="20px" whiteSpace="nowrap">
                         <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
-                        <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color={headingColor}> {children} </Heading>
+                        <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color={headingColor}> {title} </Heading>
                         <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
                     </Flex>
                     <Carousel
