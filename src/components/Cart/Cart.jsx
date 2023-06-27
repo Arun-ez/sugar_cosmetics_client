@@ -83,22 +83,22 @@ const Cart = () => {
         }
     }
 
-    const create_order = async (id) => {
+    const create_order = async () => {
 
         let payload = {
-            orderId: id,
             amount: total,
             products: cartproduct,
-            created: getDate(0),
-            delivery: getDate(Math.floor(Math.random() * (8 - 1) + 1)),
-            status: false
+            ordered_on: getDate(0),
+            delivered_on: getDate(Math.floor(Math.random() * (8 - 1) + 1)),
+            status: 0,
+            address: address[address_index]
         };
 
 
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/order`, {
                 method: "POST",
-                body: JSON.stringify({ ...payload, address: address[address_index] }),
+                body: JSON.stringify(payload),
                 headers: {
                     "Content-Type": "application/json",
                     "authorization": `Bearer ${token}`
@@ -130,7 +130,7 @@ const Cart = () => {
             let data = await response.json();
 
             if (data.status === true) {
-                create_order(id)
+                create_order()
             }
 
 

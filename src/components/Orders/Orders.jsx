@@ -50,14 +50,14 @@ const Orders = () => {
                     <Heading fontWeight="bold"> All Orders </Heading>
 
                     <Flex direction="column" alignItems="center" mt="50px" w={["100%", "100%", "98%", "98%"]} gap="10px">
-                        {orders.map(({ orderId, amount, delivery, products }, id) => {
+                        {orders.map(({ order_id, amount, delivered_on, products }, id) => {
                             return (
                                 <Flex key={id} border="1px solid #f2f2f2" w="100%" borderRadius="10px" direction="column" p="20px" gap="15px">
 
                                     <Flex justifyContent="space-between">
                                         <Heading fontSize={["12px", "12px", "15px", "15px"]}>
-                                            Order id : <span style={{ fontWeight: "lighter" }}> {orderId} </span>
-                                            <Text mt="5px" color="#38A169" fontWeight="medium"> Expected Delivery : {delivery} </Text>
+                                            Order id : <span style={{ fontWeight: "lighter" }}> {order_id} </span>
+                                            <Text mt="5px" color="#38A169" fontWeight="medium"> Expected Delivery : {delivered_on} </Text>
                                         </Heading>
                                         <Heading fontSize={["25px", "25px", "35px", "35px"]}> ₹{amount} </Heading>
                                     </Flex>
