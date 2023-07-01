@@ -18,23 +18,11 @@ const GlobalContextProvider = ({ children }) => {
 
     const load_home_static_products = async () => {
 
-        let arr = [
-            { title: 'BESTSELLERS', type: 'seller', data: null },
-            { title: 'JUST-IN', type: 'eyes', data: null },
-            { title: 'BUY NOW PAY LATER', type: 'face', data: null },
-            { title: 'GIFTING', type: 'kit', data: null },
-            { title: 'SUPER SAVERS', type: 'accessories', data: null },
-            { title: 'SKINCARE BASICS', type: 'skincare', data: null },
-        ]
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/static`);
 
+        const { data } = await response.json();
 
-        for (let i = 0; i < arr.length; i++) {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${arr[i].type}`);
-            let { data } = await response.json();
-            arr[i] = { ...arr[i], data }
-        }
-
-        set_static_data(arr);
+        set_static_data(data);
 
     }
 
