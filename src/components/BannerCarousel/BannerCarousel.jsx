@@ -1,14 +1,14 @@
-import { Box } from '@chakra-ui/react'
-import React from 'react'
-import { Carousel } from 'react-bootstrap'
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
-import "./bootstrap.min.css"
+import './BannerCarousel.css';
+import { Box } from '@chakra-ui/react';
+import React from 'react';
+import { Carousel } from 'react-bootstrap';
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const BannerCarousel = ({ w, m, images }) => {
   return (
-    <Box w={w} m={m}>
+    <Box w={w} m={m} mb={10}>
       <Carousel
-        indicators={false}
+        indicators={true}
         variant='dark'
         nextIcon={<IoIosArrowForward style={{ background: "black", fontSize: "30px", padding: "7px", borderRadius: "50%" }} />}
         prevIcon={<IoIosArrowBack style={{ background: "black", fontSize: "30px", padding: "7px", borderRadius: "50%" }} />}

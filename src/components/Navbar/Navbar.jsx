@@ -100,13 +100,13 @@ const Navbar = ({ ad_display, set_ad_display }) => {
                 pr={["30px", "30px", "60px", "60px"]}
             >
 
-                <Flex display={["flex", "flex", "flex", "none"]} gap="20px">
+                <Flex display={["flex", "flex", "flex", "none"]} gap="20px" alignItems={'center'}>
                     <HiMenuAlt2 color='white' fontSize="20px" onClick={handle_drawer} />
                     <Sidebar onClose={onClose} isOpen={isOpen} />
-                    <Logo onClick={() => { navigate("/") }} h={["25px", "25px", "40px", "40px"]} display={["block", "block", "none", "none"]} />
+                    <Logo onClick={() => { navigate("/") }} h={"35px"} display={["block", "block", "none", "none"]} />
                 </Flex>
 
-                <Logo onClick={() => { navigate("/") }} h={["25px", "25px", "40px", "40px"]} display={["none", "none", "block", "block"]} />
+                <Logo onClick={() => { navigate("/") }} h={"50px"} display={["none", "none", "block", "block"]} />
 
                 <Flex w="40%" border="1px solid white" borderRadius="8px" overflow="hidden" display={["none", "none", "none", "flex"]}>
                     <Input
