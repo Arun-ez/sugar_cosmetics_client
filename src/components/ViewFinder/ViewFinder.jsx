@@ -306,28 +306,53 @@ const ViewFinder = () => {
                                         border="1px solid black"
                                         hover="none"
                                         onClick={status === true ? remove_wishlist : add_wishlist}
-                                        borderRadius="10px"> {status === true ? <HiHeart fontSize="25px" /> : <FiHeart fontSize="25px" />}  </Button>
+                                        borderRadius="10px"> {status === true ? <HiHeart fontSize="25px" /> : <FiHeart fontSize="25px" />}
+                                    </Button>
 
-                                    <Flex
-                                        direction="column"
-                                        color="white"
-                                        fontWeight="500"
-                                        w="230px"
-                                        h="50px"
-                                        justifyContent="center"
-                                        alignItems="center"
-                                        bg="black"
-                                        borderRadius="5px"
-                                        onClick={add_to_cart}
-                                        cursor="pointer"
-                                        fontSize={18}
-                                    >
+                                    {product.inventory ? (
+                                        <Flex
+                                            direction="column"
+                                            color="white"
+                                            fontWeight="500"
+                                            w="230px"
+                                            h="50px"
+                                            justifyContent="center"
+                                            alignItems="center"
+                                            bg="black"
+                                            borderRadius="5px"
+                                            onClick={add_to_cart}
+                                            cursor="pointer"
+                                            fontSize={18}
+                                        >
 
-                                        ADD TO BAG
+                                            ADD TO BAG
 
-                                        <BarLoader color="#fc2779" loading={animate_button} />
+                                            <BarLoader color="#fc2779" loading={animate_button} />
 
-                                    </Flex>
+                                        </Flex>
+                                    ) : (
+                                        <Flex
+                                            direction="column"
+                                            fontWeight="bold"
+                                            w="230px"
+                                            h="50px"
+                                            justifyContent="center"
+                                            alignItems="center"
+                                            border="1px solid black"
+                                            borderRadius="5px"
+                                            onClick={() => { notify("You will be notified on availability") }}
+                                            cursor="pointer"
+                                            fontSize={18}
+                                        >
+
+                                            Notify Me
+
+                                            <BarLoader color="#fc2779" loading={animate_button} />
+
+                                        </Flex>
+                                    )}
+
+
                                 </Flex>
 
                                 <Flex w="100%" gap="10px" mt="15px">

@@ -8,7 +8,7 @@ import { GlobalContext } from "../../contexts/GlobalContextProvider";
 
 const Home = () => {
 
-    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
+    const { static_data: [seller, eyes, face, kit, accessories, skincare], load_home_static_products } = useContext(GlobalContext);
 
     const banner1 = [
         "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F0be8dd72-3086-45d4-919d-3e435ca3d818.jpg&w=1920&q=75",
@@ -54,7 +54,8 @@ const Home = () => {
 
     useEffect(() => {
         window.scroll(0, 0);
-        document.title = "Buy Beauty Products at SUGAR Cosmetics Online Store"
+        document.title = "Buy Beauty Products at SUGAR Cosmetics Online Store";
+        load_home_static_products();
     }, [])
 
     return (

@@ -69,6 +69,10 @@ const Product = () => {
     }
 
     useEffect(() => {
+
+    }, [])
+
+    useEffect(() => {
         document.title = param.product[0].toUpperCase() + param.product.slice(1);
         get(dispatch, param.product);
         set_sort_param("");

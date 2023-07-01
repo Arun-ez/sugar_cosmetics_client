@@ -59,9 +59,6 @@ const Card = ({ product, status, reload }) => {
             dispatch(sort_and_filter_handler);
             dispatch(get_wishlist);
 
-
-            load_home_static_products();
-
         } catch (error) {
             notify("Failed to add");
         }
@@ -173,28 +170,46 @@ const Card = ({ product, status, reload }) => {
                     borderRadius="10px"> {status === true ? <HiHeart fontSize="21px" /> : <FiHeart fontSize="21px" />}
                 </Flex>
 
-                <Flex
-                    color="white"
-                    fontWeight="500"
-                    gap="2px"
-                    whiteSpace="nowrap"
-                    fontSize={["10px", "13px", "13px", "13px"]}
-                    direction="column"
-                    w={["80%", "80%", "70%", "80%"]}
-                    h={["35px", "45px", "45px", "45px"]}
-                    justifyContent="center"
-                    alignItems="center"
-                    bg="black" borderRadius="5px"
-                    cursor="pointer"
-                    onClick={add_to_cart}
-                >
+                {product.inventory ? (
+                    <Flex
+                        color="white"
+                        fontWeight="500"
+                        gap="2px"
+                        whiteSpace="nowrap"
+                        fontSize={["10px", "13px", "13px", "13px"]}
+                        direction="column"
+                        w={["80%", "80%", "70%", "80%"]}
+                        h={["35px", "45px", "45px", "45px"]}
+                        justifyContent="center"
+                        alignItems="center"
+                        bg="black" borderRadius="5px"
+                        cursor="pointer"
+                        onClick={add_to_cart}
+                    >
 
-                    ADD TO BAG
+                        ADD TO BAG
 
-                    <BarLoader color="#fc2779" loading={animate_button} className="loading" />
+                        <BarLoader color="#fc2779" loading={animate_button} className="loading" />
 
-                </Flex>
-
+                    </Flex>
+                ) : (
+                    <Flex
+                        fontWeight="bold"
+                        gap="2px"
+                        whiteSpace="nowrap"
+                        fontSize={["10px", "13px", "15px", "15px"]}
+                        direction="column"
+                        w={["80%", "80%", "70%", "80%"]}
+                        h={["35px", "45px", "45px", "45px"]}
+                        justifyContent="center"
+                        alignItems="center"
+                        border="2px solid black" borderRadius="5px"
+                        cursor="pointer"
+                        onClick={() => { notify('You will be notified on availability') }}
+                    >
+                        Notify Me
+                    </Flex>
+                )}
             </Flex>
         </Flex>
     )
