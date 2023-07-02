@@ -55,7 +55,6 @@ const Home = () => {
     useEffect(() => {
         window.scroll(0, 0);
         document.title = "Buy Beauty Products at SUGAR Cosmetics Online Store";
-        load_home_static_products();
     }, [])
 
     return (

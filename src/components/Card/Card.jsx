@@ -52,12 +52,14 @@ const Card = ({ product, status, reload }) => {
                 if (typeof reload === 'function') {
                     reload()
                 }
+
+                dispatch(sort_and_filter_handler);
+                dispatch(get_wishlist);
             } else {
                 notify("Failed to add");
             }
 
-            dispatch(sort_and_filter_handler);
-            dispatch(get_wishlist);
+
 
         } catch (error) {
             notify("Failed to add");

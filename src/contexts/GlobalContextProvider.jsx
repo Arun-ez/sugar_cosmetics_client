@@ -27,7 +27,7 @@ const GlobalContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        load_home_static_products()
+        load_home_static_products();
     }, [])
 
     return (

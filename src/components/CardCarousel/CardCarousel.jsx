@@ -55,7 +55,7 @@ const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
 
     useEffect(() => {
         load();
-    }, [data, wishlist]);
+    }, [wishlist]);
 
 
 
