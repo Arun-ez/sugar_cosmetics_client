@@ -1,7 +1,8 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Flex, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react"
+import { Flex, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react";
+import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { get_wishlist } from '../../redux/products/actions';
@@ -49,7 +50,8 @@ const WishList = () => {
                 <>
                     {loading ?
                         <>
-                            <Flex minH="60vh" justifyContent="center" alignItems="center">
+                            <ProductSkeleton />
+                            {/* <Flex minH="60vh" justifyContent="center" alignItems="center">
                                 <Spinner
                                     thickness='4px'
                                     speed='0.65s'
@@ -57,7 +59,7 @@ const WishList = () => {
                                     color='pink.500'
                                     size='xl'
                                 />
-                            </Flex>
+                            </Flex> */}
                         </>
                         :
                         <>
