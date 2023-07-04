@@ -76,7 +76,7 @@ const Product = () => {
 
     useEffect(() => {
         load(true);
-    }, [param, filter, set_sort, token])
+    }, [param, filter, sort, token])
 
     useEffect(() => {
         document.title = param.product[0].toUpperCase() + param.product.slice(1);
