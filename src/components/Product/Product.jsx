@@ -18,7 +18,8 @@ import {
     Checkbox,
     Skeleton
 } from '@chakra-ui/react';
-import { MdArrowForwardIos } from "react-icons/md"
+import { MdArrowForwardIos } from "react-icons/md";
+import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { useSelector } from 'react-redux';
 
@@ -228,17 +229,7 @@ const Product = () => {
                         :
 
                         <>
-                            <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
-                            </SimpleGrid>
+                            <ProductSkeleton />
                         </>
                     }
 
