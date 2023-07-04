@@ -19,5 +19,5 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-    accent-color: black;
+    accent-color: black !important;
 }

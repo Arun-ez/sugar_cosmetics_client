@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import {
     Box,
     Flex,
@@ -14,18 +13,29 @@ import {
     AccordionIcon,
     AccordionPanel,
     Radio,
-    RadioGroup
+    RadioGroup,
+    CheckboxGroup,
+    Checkbox,
+    Skeleton
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md"
 import { Card } from '../Card/Card';
-import { get, sort, filter } from '../../redux/products/actions';
-import { Spinner } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 
 const Product = () => {
     let navigate = useNavigate();
     let param = useParams();
-    let [sort_param, set_sort_param] = useState("");
-    const dispatch = useDispatch();
+
+    const token = useSelector((store) => {
+        return store.AuthReducer.token;
+    })
+
+    const [products, set_products] = useState([]);
+    const [filter_options, set_filter_options] = useState([]);
+    const [filter, set_filter] = useState([]);
+    const [sort, set_sort] = useState('default');
+    const [wishlist, set_wishlist] = useState([]);
+    const [banner, set_banner] = useState(null);
 
     const banners = {
         lips: "https://sugar-mobile-application.s3.amazonaws.com/collection-web-banner/Lips.jpg",
@@ -37,60 +47,54 @@ const Product = () => {
         new: "https://d32baadbbpueqt.cloudfront.net/Collection/6fca01a2-8f3f-465b-a29b-7933fe0d4ccc.jpg",
         accessories: "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F9723d8e3-9e99-459f-acfe-4ef93089e9ef.jpg&w=1920&q=75",
         kit: "https://d32baadbbpueqt.cloudfront.net/Collection/dc9fc0b7-9b57-4b8f-ae5c-42a0be0af8fb.jpg"
-
     }
 
-    const data = useSelector((store) => {
-        return store.ProductReducer.data;
-    })
+    const load = async (shoudShow) => {
 
-    const filter_options = useSelector((store) => {
-        return store.ProductReducer.filterBy;
-    })
+        if (shoudShow) {
+            set_products([]);
+        }
 
-    const statuslist = useSelector((store) => {
-        return store.ProductReducer.statuslist;
-    })
-
-    const filter_onchange_handler = (id) => {
-        let mapped = filter_options.map((elm, idx) => {
-            if (idx === id) {
-
-                return {
-                    ...elm,
-                    checked: !elm.checked
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products?category=${param.product}&filter=${filter.join('%')}&sort=${sort}`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token || ''}`
                 }
-            }
+            })
 
-            return elm;
-        })
+            let { data, banner, filters, wishlist } = await response.json();
 
-        filter(dispatch, mapped);
+            set_products(data);
+            set_filter_options(filters);
+            set_wishlist(wishlist);
+            set_banner(banner);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
-
-    }, [])
+        load(true);
+    }, [param, filter, set_sort, token])
 
     useEffect(() => {
         document.title = param.product[0].toUpperCase() + param.product.slice(1);
-        get(dispatch, param.product);
-        set_sort_param("");
         window.scrollTo(0, 0);
+        set_banner(null);
     }, [param]);
-
-    useEffect(() => {
-        sort(dispatch, sort_param);
-    }, [sort_param])
 
     return (
         <Box mb="50px">
-            <Flex bgImage={banners[param.product]} h={["auto", "auto", "auto", "270px"]}>
-                <Flex w="100%" h="100%" backdropFilter="blur(20px)" justifyContent="center">
-                    <img src={banners[param.product]} alt="banner" />
-                </Flex>
 
-            </Flex>
+            {banner && (
+                <Flex bgImage={banner} h={["auto", "auto", "auto", "270px"]}>
+                    <Flex w="100%" h="100%" backdropFilter="blur(20px)" justifyContent="center">
+                        <img src={banner} alt="banner" />
+                    </Flex>
+                </Flex>
+            )}
+
             <Flex pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
                 <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
                 <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />
@@ -112,11 +116,11 @@ const Product = () => {
                             </h2>
 
                             <AccordionPanel>
-                                <RadioGroup onChange={set_sort_param} value={sort_param}>
+                                <RadioGroup onChange={set_sort} value={sort}>
                                     <Flex borderTop="1px solid whitesmoke" gap="5px" direction="column" alignItems="left" w="100%" pt="8px" fontWeight="md">
-                                        <Radio colorScheme="pink" value=""> Relevance </Radio>
-                                        <Radio colorScheme="pink" value="price_asc"> Price: Low To High </Radio>
-                                        <Radio colorScheme="pink" value="price_dsc"> Price: High To Low </Radio>
+                                        <Radio colorScheme="pink" value="default"> Relevance </Radio>
+                                        <Radio colorScheme="pink" value="asc"> Price: Low To High </Radio>
+                                        <Radio colorScheme="pink" value="dsc"> Price: High To Low </Radio>
                                     </Flex>
                                 </RadioGroup>
                             </AccordionPanel>
@@ -140,22 +144,18 @@ const Product = () => {
                                 </h2>
 
                                 <AccordionPanel>
-                                    <Flex direction="column" gap="1px">
-                                        {filter_options.map(({ name, checked }, id) => {
-                                            return (
-                                                <label className='checkbox' key={id}>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={name}
-                                                        checked={checked}
-                                                        onChange={() => { filter_onchange_handler(id) }}
-                                                    />
+                                    <CheckboxGroup value={filter} onChange={(value) => { set_filter(value) }} >
+                                        <Flex direction={'column'} gap={1}>
 
-                                                    {name}
-                                                </label>
-                                            )
-                                        })}
-                                    </Flex>
+                                            {filter_options.map((value, idx) => {
+                                                return (
+                                                    <Checkbox value={value} key={idx} > {value} </Checkbox>
+                                                )
+                                            })}
+
+
+                                        </Flex>
+                                    </CheckboxGroup>
                                 </AccordionPanel>
                             </AccordionItem>
 
@@ -209,11 +209,18 @@ const Product = () => {
                 </Flex>
 
                 <Flex w="100%" justifyContent="center" mt="20px">
-                    {data.length ?
+                    {products.length ?
                         <>
                             <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
-                                {data.map((element, id) => {
-                                    return <Card product={element} status={statuslist[id]} key={id} />
+                                {products.map((element, idx) => {
+                                    return (
+                                        <Card
+                                            product={element}
+                                            status={wishlist[idx]}
+                                            key={idx}
+                                            reload={load}
+                                        />
+                                    )
                                 })}
                             </SimpleGrid>
                         </>
@@ -221,14 +228,17 @@ const Product = () => {
                         :
 
                         <>
-                            <Spinner
-                                mt="150px"
-                                thickness='4px'
-                                speed='0.65s'
-                                emptyColor='gray.200'
-                                color='pink.500'
-                                size='xl'
-                            />
+                            <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                                <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} fadeDuration={1} />
+                            </SimpleGrid>
                         </>
                     }
 

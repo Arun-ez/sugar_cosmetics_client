@@ -12,8 +12,6 @@ import { GlobalContext } from "../../contexts/GlobalContextProvider";
 
 const Card = ({ product, status, reload }) => {
 
-    const { load_home_static_products } = useContext(GlobalContext);
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -48,18 +46,10 @@ const Card = ({ product, status, reload }) => {
 
             if (response.status === 200) {
                 notify("Item Added to Wishlist");
-
-                if (typeof reload === 'function') {
-                    reload()
-                }
-
-                dispatch(sort_and_filter_handler);
-                dispatch(get_wishlist);
+                reload(false);
             } else {
                 notify("Failed to add");
             }
-
-
 
         } catch (error) {
             notify("Failed to add");
@@ -83,15 +73,10 @@ const Card = ({ product, status, reload }) => {
 
             if (response.status === 200) {
                 notify("Item Removed from Wishlist");
-                if (typeof reload === 'function') {
-                    reload()
-                }
+                reload(false);
             } else {
                 notify("Failed to remove");
             }
-
-            dispatch(sort_and_filter_handler);
-            dispatch(get_wishlist);
 
         } catch (error) {
             notify("Failed to remove");
