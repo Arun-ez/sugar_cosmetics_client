@@ -1,10 +1,6 @@
-import no_results from "./no_results.png"
-import React, { useContext } from 'react'
-import { Card } from '../Card/Card';
-import { useEffect, useState } from 'react'
-import { useQuery } from '../../unils/useQuery';
-import { CardCarousel } from "../CardCarousel/CardCarousel";
-import { Spinner } from "@chakra-ui/react";
+
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -18,107 +14,82 @@ import {
     AccordionPanel,
     Radio,
     RadioGroup,
-    Image
+    CheckboxGroup,
+    Checkbox,
+    Image,
 } from '@chakra-ui/react';
-import { useDispatch } from "react-redux";
-import { handle_filter_options } from "../../redux/products/actions";
-import { get_wishlist_status } from "../../redux/products/actions";
-import { useSelector } from "react-redux";
-import { GlobalContext } from "../../contexts/GlobalContextProvider";
+import { useQuery } from '../../unils/useQuery';
+import { MdArrowForwardIos } from "react-icons/md";
+import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
+import { Card } from '../Card/Card';
+import { CardCarousel } from '../CardCarousel/CardCarousel';
+import { useSelector } from 'react-redux';
+import { GlobalContext } from '../../contexts/GlobalContextProvider';
 
 const Search = () => {
+    let navigate = useNavigate();
+    const query = useQuery();
 
-    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
+    const { static_data } = useContext(GlobalContext);
 
-    let [data, setData] = useState([]);
-    let [status_list, set_status_list] = useState([]);
-    let [sort_param, set_sort_param] = useState("");
-    let [loading, set_loading] = useState(true);
-    const [filter_options, set_filter_options] = useState([]);
     const token = useSelector((store) => {
         return store.AuthReducer.token;
     })
-    const dispatch = useDispatch();
-    let query = useQuery();
 
-    const load = async () => {
-        try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search?q=${query}`);
-            let base = await response.json();
-            let filters = handle_filter_options(base.data);
-            set_filter_options(filters);
-            setData(base.data);
-        } catch (error) {
-            console.log(error);
+    const [products, set_products] = useState(null);
+    const [filter_options, set_filter_options] = useState([]);
+    const [filter, set_filter] = useState([]);
+    const [sort, set_sort] = useState('default');
+    const [wishlist, set_wishlist] = useState([]);
+    const [loading, set_loading] = useState(false);
+
+    const load = async (shoudShow) => {
+
+        if (shoudShow) {
+            set_products(null);
         }
-    }
 
-    const filter_onchange_handler = (id) => {
-        let mapped = filter_options.map((elm, idx) => {
-            if (idx === id) {
+        set_loading(true);
 
-                return {
-                    ...elm,
-                    checked: !elm.checked
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search?q=${query}&filter=${filter.join('%')}&sort=${sort}`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token || ''}`
                 }
-            }
+            })
 
-            return elm;
-        })
+            let { data, filters, wishlist } = await response.json();
 
-        set_filter_options(mapped);
-    }
+            set_loading(false);
 
-    const sort_and_filter_handler = async () => {
-        const url = new URL(`${process.env.REACT_APP_SERVER_URL}/products/search`);
-        const params = new URLSearchParams();
-        params.append('q', query);
-        params.append('sort', sort_param);
-
-        filter_options.forEach(({ name, checked }) => {
-            if (checked) {
-                params.append('filter', name);
-            }
-        })
-
-        url.search = params;
-
-        try {
-            let response = await fetch(url.href);
-            let base = await response.json();
-            setData(base.data);
+            set_products(data);
+            set_filter_options(filters);
+            set_wishlist(wishlist);
         } catch (error) {
             console.log(error);
         }
-
     }
 
     useEffect(() => {
-        get_wishlist_status({ data }, token).then((response) => {
-            set_status_list(response)
-        })
-    }, [data])
+        load(true);
+    }, [query, filter, sort, token])
 
     useEffect(() => {
-        sort_and_filter_handler();
-    }, [sort_param, filter_options])
-
-    useEffect(() => {
-        document.title = "Sugar Cosmetics - Search"
-        load();
+        document.title = 'Sugar Cosmetics - Search';
         window.scrollTo(0, 0);
-        setTimeout(() => {
-            set_loading(false);
-        }, 3000)
     }, [query]);
 
     return (
-        <Box>
-            {data.length ?
+        <Box mb="50px">
+
+            {((products?.length) || (loading)) ? (
+
                 <>
-                    <Flex pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="5px">
-                        <Text opacity="70%"> search results for </Text>
-                        <Text opacity="70%" textDecoration="underline"> {query} </Text>
+                    <Flex pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
+                        <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
+                        <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />
+                        <Heading as="h1" fontSize="15px"> { } </Heading>
                     </Flex>
 
                     <Flex>
@@ -136,11 +107,11 @@ const Search = () => {
                                     </h2>
 
                                     <AccordionPanel>
-                                        <RadioGroup onChange={set_sort_param} value={sort_param}>
+                                        <RadioGroup onChange={set_sort} value={sort}>
                                             <Flex borderTop="1px solid whitesmoke" gap="5px" direction="column" alignItems="left" w="100%" pt="8px" fontWeight="md">
-                                                <Radio colorScheme="pink" value=""> Relevance </Radio>
+                                                <Radio colorScheme="pink" value="default"> Relevance </Radio>
+                                                <Radio colorScheme="pink" value="asc"> Price: Low To High </Radio>
                                                 <Radio colorScheme="pink" value="dsc"> Price: High To Low </Radio>
-                                                <Radio colorScheme="pink" value='asc'> Price: Low To High </Radio>
                                             </Flex>
                                         </RadioGroup>
                                     </AccordionPanel>
@@ -164,22 +135,18 @@ const Search = () => {
                                         </h2>
 
                                         <AccordionPanel>
-                                            <Flex direction="column" gap="1px">
-                                                {filter_options.map(({ name, checked }, id) => {
-                                                    return (
-                                                        <label className='checkbox' key={id}>
-                                                            <input
-                                                                type="checkbox"
-                                                                value={name}
-                                                                checked={checked}
-                                                                onChange={() => { filter_onchange_handler(id) }}
-                                                            />
+                                            <CheckboxGroup value={filter} onChange={(value) => { set_filter(value) }} >
+                                                <Flex direction={'column'} gap={1}>
 
-                                                            {name}
-                                                        </label>
-                                                    )
-                                                })}
-                                            </Flex>
+                                                    {filter_options.map((value, idx) => {
+                                                        return (
+                                                            <Checkbox value={value} key={idx} > {value} </Checkbox>
+                                                        )
+                                                    })}
+
+
+                                                </Flex>
+                                            </CheckboxGroup>
                                         </AccordionPanel>
                                     </AccordionItem>
 
@@ -233,56 +200,55 @@ const Search = () => {
                         </Flex>
 
                         <Flex w="100%" justifyContent="center" mt="20px">
-                            <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
-                                {data.map((element, id) => {
-                                    return <Card product={element} reload={sort_and_filter_handler} status={status_list[id]} key={id} />
-                                })}
-                            </SimpleGrid>
+                            {products?.length ?
+                                <>
+                                    <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
+                                        {products.map((element, idx) => {
+                                            return (
+                                                <Card
+                                                    product={element}
+                                                    status={wishlist[idx]}
+                                                    key={idx}
+                                                    reload={load}
+                                                />
+                                            )
+                                        })}
+                                    </SimpleGrid>
+                                </>
+
+                                :
+
+                                <>
+                                    <ProductSkeleton />
+                                </>
+                            }
+
                         </Flex>
 
                     </Flex>
-
                 </>
+            ) : (
+                <Box>
+                    <Image
+                        src={'/no_results.png'}
+                        boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset"
+                        borderRadius="15px" m="auto" mt="100px"
+                    />
+                    <br />
 
-                :
+                    <CardCarousel
+                        data={static_data[2]}
+                        headingColor="black"
+                    />
 
-                <>
-
-                    {loading ?
-                        <>
-                            <Flex minH="60vh" justifyContent="center" alignItems="center">
-                                <Spinner
-                                    thickness='4px'
-                                    speed='0.65s'
-                                    emptyColor='gray.200'
-                                    color='pink.500'
-                                    size='xl'
-                                />
-                            </Flex>
-                        </>
-                        :
-                        <>
-                            <Image boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset" borderRadius="15px" m="auto" mt="100px" src={no_results} />
-                            <br />
-
-                            <CardCarousel
-                                data={face}
-                                headingColor="black"
-                            />
-
-                            <CardCarousel
-                                data={kit}
-                                headingColor="black"
-                            />
-                        </>
-                    }
-
-                </>
-
-
-            }
+                    <CardCarousel
+                        data={static_data[3]}
+                        headingColor="black"
+                    />
+                </Box>
+            )}
         </Box>
     )
 }
 
-export { Search }
+export { Search };

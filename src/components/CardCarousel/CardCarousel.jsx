@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import "./CardCarousel.css";
+import { useEffect, useState } from 'react';
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { Card } from "../Card/Card";
 import { Spinner } from '@chakra-ui/react';
-import { get_wishlist_status } from '../../redux/products/actions';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
-import "react-multi-carousel/lib/styles.css";
-import "./CardCarousel.css";
+
+
 
 const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
 
@@ -34,30 +34,43 @@ const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
         }
     }
 
-
-    let wishlist = useSelector((store) => {
-        return store.ProductReducer.wishlist
-    })
-
-
-
     const load = async () => {
+
+        if (!data || !token) { return }
+
         try {
-            if (token && data) {
-                let status_response = await get_wishlist_status({ data }, token);
-                set_status(status_response);
-            }
-        } catch (err) {
-            console.log(err);
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            });
+
+            let wishlist = await response.json();
+
+            let status_list = data.map((elm) => {
+                let track = wishlist.data.find((item) => {
+                    return elm._id === item._id;
+                })
+
+                if (track) {
+                    return true;
+                } else {
+                    return false;
+                }
+            })
+
+            set_status(status_list);
+
+        } catch (error) {
+            console.log(error)
         }
     }
 
 
     useEffect(() => {
         load();
-    }, [wishlist]);
-
-
+    }, []);
 
     return (
         <Flex className='card_wrapper' h={["450px", "600px", "600px", "600px"]} pb="50px" bgImage={bgImage} direction="column" justifyContent="center" alignItems="center">
@@ -77,7 +90,7 @@ const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
                         {data.map((elm, id) => {
                             return (
                                 <Flex p="5%" key={id}>
-                                    <Card product={elm} status={status[id]} key={id} />
+                                    <Card product={elm} reload={load} status={status[id]} key={id} />
                                 </Flex>
                             )
 

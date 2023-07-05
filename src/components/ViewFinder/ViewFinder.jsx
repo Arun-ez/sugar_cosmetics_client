@@ -25,8 +25,7 @@ import { TbTruckReturn } from "react-icons/tb"
 import { HiOutlineBadgeCheck } from "react-icons/hi"
 import { GrStar } from "react-icons/gr"
 import { CardCarousel } from '../CardCarousel/CardCarousel'
-import { useDispatch, useSelector } from 'react-redux'
-import { sort_and_filter_handler } from '../../redux/products/actions'
+import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { GlobalContext } from '../../contexts/GlobalContextProvider'
 
@@ -35,10 +34,9 @@ const ViewFinder = () => {
     const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
 
     let navigate = useNavigate();
-    let dispatch = useDispatch();
-    let { id, category } = useParams();
+    let { id } = useParams();
     let [status, set_status] = useState(false);
-    let [product, set_product] = useState({});
+    let [product, set_product] = useState(null);
     let [active_index, set_active_index] = useState(0);
     let [window_width, set_window_width] = useState(0);
 
@@ -55,25 +53,17 @@ const ViewFinder = () => {
 
     const load = async () => {
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${category}/${id}`);
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${id}`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token || ''}`
+                }
+            });
 
-            if (token) {
-                let status_response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist/exist/${id}`, {
-                    method: "GET",
-                    headers: {
-                        "authorization": `Bearer ${token}`
-                    }
-                });
-
-                let curr_status = await status_response.json();
-                set_status(curr_status.status);
-            }
-
-            let data = await response.json();
-
-            document.title = data.data.title;
-
-            set_product(data.data);
+            let { data, wishlist } = await response.json();
+            set_status(wishlist);
+            document.title = data.title;
+            set_product(data);
         } catch (error) {
             console.log(error);
         }
@@ -114,14 +104,11 @@ const ViewFinder = () => {
             })
 
             if (response.status === 200) {
+                load();
                 notify("Item Added to Wishlist");
             } else {
                 notify("Failed to add");
             }
-
-            dispatch(sort_and_filter_handler);
-            load();
-
 
         } catch (error) {
             notify("Failed to add");
@@ -144,13 +131,11 @@ const ViewFinder = () => {
             })
 
             if (response.status === 200) {
+                load();
                 notify("Item Removed from Wishlist");
             } else {
                 notify("Failed to remove");
             }
-
-            dispatch(sort_and_filter_handler);
-            load();
 
         } catch (error) {
             notify("Failed to remove");
@@ -200,7 +185,7 @@ const ViewFinder = () => {
         <>
             <Flex direction="column" w="100%" alignItems="center" minH="70vh">
 
-                {product.images ?
+                {product ?
                     <>
 
                         <Flex w="100%" pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px" gap="10px">

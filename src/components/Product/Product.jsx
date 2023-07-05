@@ -15,8 +15,7 @@ import {
     Radio,
     RadioGroup,
     CheckboxGroup,
-    Checkbox,
-    Skeleton
+    Checkbox
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md";
 import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
@@ -37,18 +36,6 @@ const Product = () => {
     const [sort, set_sort] = useState('default');
     const [wishlist, set_wishlist] = useState([]);
     const [banner, set_banner] = useState(null);
-
-    const banners = {
-        lips: "https://sugar-mobile-application.s3.amazonaws.com/collection-web-banner/Lips.jpg",
-        eyes: "https://d32baadbbpueqt.cloudfront.net/Collection/5a16ce4f-1b39-48bf-9e5f-42d7dc8e2d66.jpg",
-        face: "https://sugar-mobile-application.s3.amazonaws.com/collection-web-banner/Face.jpg",
-        nails: "https://d32baadbbpueqt.cloudfront.net/Collection/b69b03ce-2d02-4223-a318-33b5abb2be53.gif",
-        skincare: "https://d32baadbbpueqt.cloudfront.net/Collection/4335c634-172e-42de-96de-4d01f585d685.jpg",
-        seller: "https://d32baadbbpueqt.cloudfront.net/Collection/72d09a6a-2f85-4337-a4d5-b5807ad2c9c6.jpg",
-        new: "https://d32baadbbpueqt.cloudfront.net/Collection/6fca01a2-8f3f-465b-a29b-7933fe0d4ccc.jpg",
-        accessories: "https://in.sugarcosmetics.com/_next/image?url=https%3A%2F%2Fd32baadbbpueqt.cloudfront.net%2FHomepage%2F9723d8e3-9e99-459f-acfe-4ef93089e9ef.jpg&w=1920&q=75",
-        kit: "https://d32baadbbpueqt.cloudfront.net/Collection/dc9fc0b7-9b57-4b8f-ae5c-42a0be0af8fb.jpg"
-    }
 
     const load = async (shoudShow) => {
 

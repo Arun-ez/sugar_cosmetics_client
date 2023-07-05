@@ -11,7 +11,7 @@ import { GlobalContext } from '../../contexts/GlobalContextProvider';
 
 const Cart = () => {
 
-    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
+    const { static_data } = useContext(GlobalContext);
 
     const navigate = useNavigate();
     const [loading, set_loading] = useState(true);
@@ -458,10 +458,8 @@ const Cart = () => {
 
                     }
 
-
-
                     <CardCarousel
-                        data={face}
+                        data={static_data[2]}
                         headingColor="black"
                     />
                 </>

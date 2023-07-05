@@ -4,77 +4,74 @@ import { useNavigate } from 'react-router-dom';
 import { Flex, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react";
 import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
 import { Card } from '../Card/Card';
-import { useDispatch, useSelector } from 'react-redux';
-import { get_wishlist } from '../../redux/products/actions';
-import empty from "./empty.png"
+import { useSelector } from 'react-redux';
 
 const WishList = () => {
 
     let navigate = useNavigate();
-    let dispatch = useDispatch();
     const [loading, set_loading] = useState(true);
 
-    let data = useSelector((store) => {
-        return store.ProductReducer.wishlist
+    const [wishlist, set_wishlist] = useState(null);
+
+    let token = useSelector((store) => {
+        return store.AuthReducer.token;
     })
 
-    useEffect(() => {
-        document.title = "Sugar Cosmetics - Wishlist"
-        window.scroll(0, 0);
-        dispatch(get_wishlist);
+    const load = async () => {
+        try {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${token}`
+                }
+            });
 
-        if (data.length > 0) {
-            set_loading(false)
-        } else {
-            setTimeout(() => {
-                set_loading(false);
-            }, 3000);
+            let { data } = await response.json();
+            set_wishlist(data)
+        } catch (err) {
+            console.log(err);
         }
+    }
+
+    useEffect(() => {
+        load();
+        window.scroll(0, 0);
+        document.title = "Sugar Cosmetics - Wishlist"
     }, [])
 
 
     return (
         <Box w="100%" justifyContent="center" mt="20px" pb="50px">
 
-            {data.length ?
-                <>
+            {wishlist ? (
+                wishlist.length ? (
                     <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px" m="auto">
-                        {data.map((element, id) => {
-                            return <Card product={element} status={true} key={id} />
+                        {wishlist.map((element, id) => {
+                            return <Card product={element} reload={load} status={true} key={id} />
                         })}
                     </SimpleGrid>
-                </>
+                ) : (
+                    <Flex
+                        mt="50px" pb="55px"
+                        justifyContent="center"
+                        alignItems="flex-end"
+                        w="96%" h="450px"
+                        borderRadius="15px"
+                        bgImage={'/empty.png'}
+                        bgPosition="center"
+                        boxShadow="0 .5rem 1rem rgba(0,0,0,.15)"
+                    >
+                        <Button
+                            variant="ghost" p="22px" bg="black"
+                            colorScheme="black" color="white"
+                            onClick={() => { navigate("/") }}
+                        > FILL IT UP </Button>
+                    </Flex>
+                )
 
-                :
-
-                <>
-                    {loading ?
-                        <>
-                            <ProductSkeleton />
-                            {/* <Flex minH="60vh" justifyContent="center" alignItems="center">
-                                <Spinner
-                                    thickness='4px'
-                                    speed='0.65s'
-                                    emptyColor='gray.200'
-                                    color='pink.500'
-                                    size='xl'
-                                />
-                            </Flex> */}
-                        </>
-                        :
-                        <>
-                            <Flex mt="50px" justifyContent="center" pb="55px" alignItems="flex-end" width="96%" borderRadius="15px" h="450px" bgImage={empty} bgPosition="center" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
-                                <Button
-                                    variant="ghost" p="22px" bg="black"
-                                    colorScheme="black" color="white"
-                                    onClick={() => { navigate("/") }}
-                                > FILL IT UP </Button>
-                            </Flex>
-                        </>
-
-                    }
-
-                </>
+            ) : (
+                <ProductSkeleton />
+            )
             }
 
         </Box>

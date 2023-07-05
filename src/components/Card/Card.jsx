@@ -1,5 +1,5 @@
 import "./Card.css";
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { BarLoader } from 'react-spinners'
 import { Flex, Heading, Image, Text, useConst } from "@chakra-ui/react";
 import { toast } from "react-toastify";
@@ -7,13 +7,11 @@ import { FiHeart } from "react-icons/fi";
 import { HiHeart } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { sort_and_filter_handler, get_wishlist } from "../../redux/products/actions";
-import { GlobalContext } from "../../contexts/GlobalContextProvider";
+
 
 const Card = ({ product, status, reload }) => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     let [animate_button, set_animate_button] = useState(false);
 
