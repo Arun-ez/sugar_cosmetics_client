@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Flex, Heading, Image, Text, Button, Spinner } from "@chakra-ui/react";
+import { OrderCard } from "../OrderCard/OrderCard";
 
 const Orders = () => {
 
@@ -50,42 +51,9 @@ const Orders = () => {
                     <Heading fontWeight="bold"> All Orders </Heading>
 
                     <Flex direction="column" alignItems="center" mt="50px" w={["100%", "100%", "98%", "98%"]} gap="10px">
-                        {orders.map(({ order_id, amount, delivered_on, products }, id) => {
+                        {orders.map((order, idx) => {
                             return (
-                                <Flex key={id} border="1px solid #f2f2f2" w="100%" borderRadius="10px" direction="column" p="20px" gap="15px">
-
-                                    <Flex justifyContent="space-between">
-                                        <Heading fontSize={["12px", "12px", "15px", "15px"]}>
-                                            Order id : <span style={{ fontWeight: "lighter" }}> {order_id} </span>
-                                            <Text mt="5px" color="#38A169" fontWeight="medium"> Expected Delivery : {delivered_on} </Text>
-                                        </Heading>
-                                        <Heading fontSize={["25px", "25px", "35px", "35px"]}> ₹{amount} </Heading>
-                                    </Flex>
-
-                                    <Flex w="100%" direction="column" gap="10px">
-                                        {products.map(({ title, images, category, _id, price }, id) => {
-                                            return (
-                                                <Flex
-                                                    key={id}
-                                                    bgColor="#f2f2f2"
-                                                    borderRadius="10px"
-                                                    p="10px" gap="10px"
-                                                    cursor="pointer"
-                                                    onClick={() => { navigate(`/collections/${category}/${_id}`) }}
-                                                >
-                                                    <Image src={images[0]} w={10} h={50} borderRadius="7px" />
-                                                    <Text fontSize={["12px", "12px", "15px", "15px"]}>
-                                                        {title}
-                                                        <br />
-                                                        <b style={{ fontWeight: "500" }}> ₹{price} </b>
-                                                    </Text>
-                                                </Flex>
-                                            )
-                                        })}
-                                    </Flex>
-
-
-                                </Flex>
+                                <OrderCard order={order} key={idx} />
                             )
                         })}
                     </Flex>
