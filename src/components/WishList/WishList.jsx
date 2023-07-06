@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Flex, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react";
+import { Flex, SimpleGrid, Button, Box } from "@chakra-ui/react";
 import { ProductSkeleton } from '../Skeletons/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { useSelector } from 'react-redux';
@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 const WishList = () => {
 
     let navigate = useNavigate();
-    const [loading, set_loading] = useState(true);
 
     const [wishlist, set_wishlist] = useState(null);
 
@@ -42,7 +41,6 @@ const WishList = () => {
 
     return (
         <Box w="100%" mt="20px" pb="50px">
-
             {wishlist ? (
                 wishlist.length ? (
                     <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px" m="auto">
@@ -73,7 +71,6 @@ const WishList = () => {
                 <Flex justifyContent={'center'} w={'100%'} >
                     <ProductSkeleton />
                 </Flex>
-
             )}
 
         </Box>

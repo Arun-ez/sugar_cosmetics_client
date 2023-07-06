@@ -2,12 +2,13 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Flex, Text, Heading, Image, Button, Spinner, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, useDisclosure } from '@chakra-ui/react';
+import { Flex, Text, Heading, Image, Button, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, useDisclosure } from '@chakra-ui/react';
 import { MdArrowForwardIos } from 'react-icons/md';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { CardCarousel } from '../CardCarousel/CardCarousel';
 import { AddressPicker } from '../AddressPicker/AddressPicker';
 import { GlobalContext } from '../../contexts/GlobalContextProvider';
+import { CartSkeleton } from '../CartSkeleton/CartSkeleton';
 
 const Cart = () => {
 
@@ -195,6 +196,9 @@ const Cart = () => {
     }
 
     const load = async () => {
+
+        set_loading(true);
+
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
                 method: "GET",
@@ -209,6 +213,8 @@ const Cart = () => {
         } catch (err) {
             console.log(err);
         }
+
+        set_loading(false);
     }
 
     const quantity_handler = async (product, payload) => {
@@ -248,7 +254,6 @@ const Cart = () => {
     useEffect(() => {
         window.scroll(0, 0);
         document.title = "Sugar Cosmetics - Bag";
-
         if (cartproduct.length > 0) {
             set_loading(false);
         } else {
@@ -272,7 +277,7 @@ const Cart = () => {
             </Flex>
 
 
-            {cartproduct.length ?
+            {cartproduct.length ? (
                 <>
                     <Flex
                         direction={["column", "column", "column", "row"]}
@@ -337,7 +342,7 @@ const Cart = () => {
                                 <Flex pt={1} justify="space-between" w="100%" borderTop="1px dashed #bdbdbd" mt={2} fontWeight="bold" fontSize="17px"> <Text> Total </Text> <Text> ₹{total} </Text> </Flex>
                             </Flex>
 
-                            {address.length ?
+                            {address.length && (
 
                                 <>
                                     <Flex justifyContent="space-between" alignItems="center">
@@ -395,75 +400,48 @@ const Cart = () => {
                                         </Flex>
                                     </Flex>
                                 </>
+                            )}
 
-                                :
-
-                                <>
-                                </>
-
-                            }
-
-                            <button
-                                style={{
-                                    width: "200px",
-                                    alignSelf: "flex-end",
-                                    backgroundColor: "black",
-                                    color: "white",
-                                    fontSize: "14px",
-                                    padding: "12px",
-                                    borderRadius: "6px",
-                                    marginTop: "30px",
-                                    opacity: total > 0 ? "100%" : "50%",
-                                    pointerEvents: total > 0 ? "auto" : "none"
-                                }}
+                            <Button
+                                alignSelf={'flex-end'}
+                                mt={4} py={6}
+                                w={200} bg={'black'}
+                                color={'white'}
+                                _hover={'none'}
+                                fontWeight={'normal'}
                                 onClick={address.length > 0 ? payment_handler : onOpen}
                             >
                                 ₹{total} PLACE ORDER
-                            </button>
+                            </Button>
                         </Flex>
                     </Flex>
-                </>
-
-                :
+                </>) : (
 
                 <>
-                    {loading ?
-                        <>
-                            <Flex minH="60vh" justifyContent="center" alignItems="center">
-                                <Spinner
-                                    thickness='4px'
-                                    speed='0.65s'
-                                    emptyColor='gray.200'
-                                    color='pink.500'
-                                    size='xl'
-                                />
-                            </Flex>
+                    {loading ? (
+                        <Flex minH="60vh" justifyContent="center" alignItems="center">
+                            <CartSkeleton />
+                        </Flex>
+                    ) : (
+                        <Flex m="50px auto 50px auto" gap="10px" direction="column" justifyContent="center" pb="55px" alignItems="center" width="90%" borderRadius="15px" h="450px" bgPosition="center" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
+                            <Image src='https://in.sugarcosmetics.com/Cart_nofound.svg' />
+                            <Text textAlign="center" fontWeight="bold" opacity="70%" lineHeight="20px"> Hey! It's lonely here. <br />Your bag seems to have no company.<br /> Why not add some products?</Text>
 
-                        </>
-
-                        :
-
-                        <>
-                            <Flex m="50px auto 50px auto" gap="10px" direction="column" justifyContent="center" pb="55px" alignItems="center" width="90%" borderRadius="15px" h="450px" bgPosition="center" boxShadow="0 .5rem 1rem rgba(0,0,0,.15)">
-                                <Image src='https://in.sugarcosmetics.com/Cart_nofound.svg' />
-                                <Text textAlign="center" fontWeight="bold" opacity="70%" lineHeight="20px"> Hey! It's lonely here. <br />Your bag seems to have no company.<br /> Why not add some products?</Text>
-
-                                <Button
-                                    variant="ghost" p="22px" bg="black"
-                                    colorScheme="black" color="white"
-                                    onClick={() => { navigate("/") }}
-                                > SHOP NOW </Button>
-                            </Flex>
-                        </>
-
-                    }
+                            <Button
+                                variant="ghost" p="22px" bg="black"
+                                colorScheme="black" color="white"
+                                onClick={() => { navigate("/") }}
+                            > SHOP NOW </Button>
+                        </Flex>
+                    )}
 
                     <CardCarousel
                         data={static_data[2]}
                         headingColor="black"
                     />
+
                 </>
-            }
+            )}
 
             <AddressPicker reload={load_addresses} isOpen={isOpen} onClose={onClose} prefill={prefill} />
         </Flex>

@@ -15,7 +15,8 @@ import {
     Radio,
     RadioGroup,
     CheckboxGroup,
-    Checkbox
+    Checkbox,
+    Skeleton
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md";
 import { ProductSkeleton } from '../Skeletons/ProductSkeleton';
@@ -31,7 +32,7 @@ const Product = () => {
     })
 
     const [products, set_products] = useState([]);
-    const [filter_options, set_filter_options] = useState([]);
+    const [filter_options, set_filter_options] = useState(null);
     const [filter, set_filter] = useState([]);
     const [sort, set_sort] = useState('default');
     const [wishlist, set_wishlist] = useState([]);
@@ -70,6 +71,8 @@ const Product = () => {
         document.title = param.product[0].toUpperCase() + param.product.slice(1);
         window.scrollTo(0, 0);
         set_banner(null);
+        set_filter([]);
+        set_filter_options(null);
     }, [param]);
 
     return (
@@ -135,12 +138,22 @@ const Product = () => {
                                     <CheckboxGroup value={filter} onChange={(value) => { set_filter(value) }} >
                                         <Flex direction={'column'} gap={1}>
 
-                                            {filter_options.map((value, idx) => {
-                                                return (
-                                                    <Checkbox value={value} key={idx} > {value} </Checkbox>
-                                                )
-                                            })}
-
+                                            {filter_options ? (
+                                                filter_options.map((value, idx) => {
+                                                    return (
+                                                        <Checkbox value={value} key={idx} > {value} </Checkbox>
+                                                    )
+                                                })
+                                            ) : (
+                                                <>
+                                                    <Skeleton h={4} w={100} fadeDuration={1} />
+                                                    <Skeleton h={4} w={100} fadeDuration={1} />
+                                                    <Skeleton h={4} w={100} fadeDuration={1} />
+                                                    <Skeleton h={4} w={100} fadeDuration={1} />
+                                                    <Skeleton h={4} w={100} fadeDuration={1} />
+                                                    <Skeleton h={4} w={100} fadeDuration={1} />
+                                                </>
+                                            )}
 
                                         </Flex>
                                     </CheckboxGroup>
