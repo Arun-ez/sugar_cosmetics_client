@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Flex, SimpleGrid, Button, Box, Spinner } from "@chakra-ui/react";
-import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
+import { ProductSkeleton } from '../Skeletons/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { useSelector } from 'react-redux';
 

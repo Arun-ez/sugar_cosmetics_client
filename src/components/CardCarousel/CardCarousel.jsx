@@ -1,12 +1,10 @@
 import "./CardCarousel.css";
 import { useEffect, useState } from 'react';
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import { Card } from "../Card/Card";
 import { Spinner } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import Carousel from 'react-multi-carousel';
-
-
 
 const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
 
@@ -36,7 +34,9 @@ const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
 
     const load = async () => {
 
-        if (!data || !token) { return }
+        if (!data?.length || !token) {
+            return;
+        }
 
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/wishlist`, {
@@ -100,13 +100,34 @@ const CardCarousel = ({ headingColor, bgImage, data: { title, data } }) => {
                 :
 
                 <>
-                    <Spinner
-                        thickness='4px'
-                        speed='0.65s'
-                        emptyColor='gray.200'
-                        color='pink.500'
-                        size='xl'
-                    />
+                    <Flex w="100%" h="50px" justifyContent="center" alignItems="center" gap="15px" mt="20px" mb="20px" whiteSpace="nowrap">
+                        <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                        <Heading as="h2" fontSize={["15px", "20px", "20px", "20px"]} color={headingColor}> {title} </Heading>
+                        <Box h="2px" w={["30px", "50px", "50px", "50px"]} bg="#fc2779"></Box>
+                    </Flex>
+                    <Carousel
+                        arrows={false}
+                        responsive={breakpoints}
+                        containerClass="carousel_container"
+                        removeArrowOnDeviceType={["tablet", "mobile"]}
+                        infinite={true}
+                    >
+                        <Flex p="5%">
+                            <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} w={400} fadeDuration={1} />
+                        </Flex>
+
+                        <Flex p="5%">
+                            <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} w={400} fadeDuration={1} />
+                        </Flex>
+
+                        <Flex p="5%">
+                            <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} w={400} fadeDuration={1} />
+                        </Flex>
+
+                        <Flex p="5%">
+                            <Skeleton borderRadius="15px" h={[270, 420, 420, 420]} w={400} fadeDuration={1} />
+                        </Flex>
+                    </Carousel>
                 </>
             }
 

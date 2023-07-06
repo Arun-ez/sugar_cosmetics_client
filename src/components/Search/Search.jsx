@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react';
 import { useQuery } from '../../unils/useQuery';
 import { MdArrowForwardIos } from "react-icons/md";
-import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
+import { ProductSkeleton } from '../Skeletons/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { CardCarousel } from '../CardCarousel/CardCarousel';
 import { useSelector } from 'react-redux';

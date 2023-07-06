@@ -18,7 +18,7 @@ import {
     Checkbox
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md";
-import { ProductSkeleton } from '../ProductSeleton/ProductSkeleton';
+import { ProductSkeleton } from '../Skeletons/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { useSelector } from 'react-redux';
 

@@ -14,7 +14,7 @@ import {
     AccordionButton,
     AccordionPanel,
     Spinner
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md"
 import { useNavigate, useParams } from 'react-router-dom'
 import { AiFillStar } from "react-icons/ai"
@@ -25,6 +25,7 @@ import { TbTruckReturn } from "react-icons/tb"
 import { HiOutlineBadgeCheck } from "react-icons/hi"
 import { GrStar } from "react-icons/gr"
 import { CardCarousel } from '../CardCarousel/CardCarousel'
+import { ViewfinderSkeleton } from '../Skeletons/ViewfinderSkeleton';
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { GlobalContext } from '../../contexts/GlobalContextProvider'
@@ -46,12 +47,22 @@ const ViewFinder = () => {
         return store.AuthReducer.token;
     })
 
-    window.addEventListener("resize", () => {
-        set_window_width(window.innerWidth);
-    })
+    useEffect(() => {
 
+        const action = () => {
+            set_window_width(window.innerWidth);
+        }
+
+        window.addEventListener("resize", action)
+
+        return () => window.removeEventListener('resize', action);
+
+    }, [])
 
     const load = async () => {
+
+        set_product(null);
+
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${id}`, {
                 method: "GET",
@@ -185,7 +196,7 @@ const ViewFinder = () => {
         <>
             <Flex direction="column" w="100%" alignItems="center" minH="70vh">
 
-                {product ?
+                {product ? (
                     <>
 
                         <Flex w="100%" pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px" gap="10px">
@@ -476,21 +487,9 @@ const ViewFinder = () => {
                             </Flex>
                         </Flex>
                     </>
-
-                    :
-
-                    <>
-                        <Spinner
-                            mt="150px"
-                            thickness='4px'
-                            speed='0.65s'
-                            emptyColor='gray.200'
-                            color='pink.500'
-                            size='xl'
-                        />
-                    </>
-
-                }
+                ) : (
+                    <ViewfinderSkeleton />
+                )}
 
             </Flex>
 
