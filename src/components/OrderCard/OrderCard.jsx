@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Image, HStack, Button, Box } from "@chakra-ui/react";
+import { Flex, Heading, Text, Image, HStack, Button, Box, SimpleGrid } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { OrderStepper } from "../OrderStepper/OrderStepper";
 
@@ -30,7 +30,7 @@ const OrderCard = ({ order: { order_id, ordered_on, amount, delivered_on, produc
             <Box h={show ? 'auto' : 0} overflowY={'hidden'}>
                 <OrderStepper active={status} />
 
-                <Flex w="100%" direction="column" gap="10px" >
+                <SimpleGrid w="100%" columns={[1, 1, 2, 2]} gap="10px" >
                     {products.map(({ title, images, category, _id, price }, idx) => {
                         return (
                             <Flex
@@ -50,7 +50,7 @@ const OrderCard = ({ order: { order_id, ordered_on, amount, delivered_on, produc
                             </Flex>
                         )
                     })}
-                </Flex>
+                </SimpleGrid>
 
             </Box>
 

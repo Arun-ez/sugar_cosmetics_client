@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Flex, Heading, Image, Text, Button, Spinner } from "@chakra-ui/react";
+import { Flex, Heading, Image, Text, Button, Spinner, Skeleton } from "@chakra-ui/react";
 import { OrderCard } from "../OrderCard/OrderCard";
 
 const Orders = () => {
 
     const navigate = useNavigate();
     const [orders, set_orders] = useState([]);
-    const [loading, set_loading] = useState(true);
+    const [loading, set_loading] = useState(false);
 
     const token = useSelector((store) => {
         return store.AuthReducer.token;
     })
 
     const load = async () => {
+
+        set_loading(true);
+
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/order`, {
                 headers: {
@@ -26,6 +29,8 @@ const Orders = () => {
         } catch (error) {
             console.log(error)
         }
+
+        set_loading(false);
     }
 
     useEffect(() => {
@@ -65,14 +70,11 @@ const Orders = () => {
 
                     {loading ?
                         <>
-                            <Flex minH="60vh" justifyContent="center" alignItems="center">
-                                <Spinner
-                                    thickness='4px'
-                                    speed='0.65s'
-                                    emptyColor='gray.200'
-                                    color='pink.500'
-                                    size='xl'
-                                />
+                            <Flex direction="column" alignItems="center" mt="50px" w={["100%", "100%", "98%", "98%"]} gap="10px">
+                                <Skeleton h={40} w={'100%'} borderRadius="10px" fadeDuration={1} />
+                                <Skeleton h={40} w={'100%'} borderRadius="10px" fadeDuration={1} />
+                                <Skeleton h={40} w={'100%'} borderRadius="10px" fadeDuration={1} />
+                                <Skeleton h={40} w={'100%'} borderRadius="10px" fadeDuration={1} />
                             </Flex>
                         </>
                         :
