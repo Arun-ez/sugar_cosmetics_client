@@ -39,7 +39,7 @@ https://sugar-cosmetics-clone-seven.vercel.app
 - Add and Change Addresses
 - Order Items
 - Payment
-- Data persistant
+- Data persistent accross sessions
 
 ## Screenshots
 
