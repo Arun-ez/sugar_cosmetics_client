@@ -19,7 +19,7 @@ const AccountNavigator = ({ children }) => {
 
     return (
         <Flex minH="900px" direction={["column", "column", "column", "row"]}>
-            <Flex direction="column" alignItems="center" mt="20px" w={["100%", "100%", "100%", "35%"]} minW="375px">
+            <Flex direction="column" alignItems="center" mt="20px" w={["100%", "100%", "100%", "35%"]} minW={["370px", "370px", "375px", "375px"]}>
                 <Flex
                     direction="column"
                     color="white"
@@ -31,7 +31,7 @@ const AccountNavigator = ({ children }) => {
                     bgImage="https://media.sugarcosmetics.com/upload/VTOBackgroungTexture.png"
                     backgroundSize="100%"
                 >
-                    <Image w="100px" h="100px" src="https://media.sugarcosmetics.com/upload/accountMask.png" alt="user_logo" />
+                    <Image w={24} h="100px" src="https://media.sugarcosmetics.com/upload/accountMask.png" alt="user_logo" />
                     <Image w="30px" position="absolute" mt="85px" src="/batch.svg" alt="batch" />
                     <Heading as="h1" mt="20px" fontSize="18px"> {user.name} </Heading>
                     <Text mt="5px" fontSize="14px"> {user.email} </Text>
