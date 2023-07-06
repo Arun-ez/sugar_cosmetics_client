@@ -43,7 +43,7 @@ const WishList = () => {
     return (
         <Box w="100%" mt="20px" pb="50px">
 
-            {!wishlist ? (
+            {wishlist ? (
                 wishlist.length ? (
                     <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px" m="auto">
                         {wishlist.map((element, id) => {
