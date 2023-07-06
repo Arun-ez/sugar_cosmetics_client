@@ -13,7 +13,6 @@ import {
     AccordionIcon,
     AccordionButton,
     AccordionPanel,
-    Spinner
 } from '@chakra-ui/react';
 import { MdArrowForwardIos } from "react-icons/md"
 import { useNavigate, useParams } from 'react-router-dom'
@@ -32,7 +31,7 @@ import { GlobalContext } from '../../contexts/GlobalContextProvider'
 
 const ViewFinder = () => {
 
-    const { static_data: [seller, eyes, face, kit, accessories, skincare] } = useContext(GlobalContext);
+    const { static_data } = useContext(GlobalContext);
 
     let navigate = useNavigate();
     let { id } = useParams();
@@ -59,9 +58,11 @@ const ViewFinder = () => {
 
     }, [])
 
-    const load = async () => {
+    const load = async (shouldClear) => {
 
-        set_product(null);
+        if (shouldClear) {
+            set_product(null);
+        }
 
         try {
             let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/${id}`, {
@@ -188,7 +189,7 @@ const ViewFinder = () => {
     useEffect(() => {
         window.scroll(0, 0);
         set_window_width(window.innerWidth);
-        load();
+        load(true);
         return () => { window.scroll(0, 0) }
     }, [id])
 
@@ -494,12 +495,12 @@ const ViewFinder = () => {
             </Flex>
 
             <CardCarousel
-                data={face}
+                data={static_data[2]}
                 headingColor="black"
             />
 
             <CardCarousel
-                data={kit}
+                data={static_data[3]}
                 headingColor="black"
             />
         </>
