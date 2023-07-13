@@ -1,6 +1,5 @@
 
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -19,7 +18,6 @@ import {
     Image,
 } from '@chakra-ui/react';
 import { useQuery } from '../../unils/useQuery';
-import { MdArrowForwardIos } from "react-icons/md";
 import { ProductSkeleton } from '../Skeletons/ProductSkeleton';
 import { Card } from '../Card/Card';
 import { CardCarousel } from '../CardCarousel/CardCarousel';
@@ -27,7 +25,6 @@ import { useSelector } from 'react-redux';
 import { GlobalContext } from '../../contexts/GlobalContextProvider';
 
 const Search = () => {
-    let navigate = useNavigate();
     const query = useQuery();
 
     const { static_data } = useContext(GlobalContext);
@@ -86,10 +83,9 @@ const Search = () => {
             {((products?.length) || (loading)) ? (
 
                 <>
-                    <Flex pl="20px" h="50px" alignItems="center" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;" gap="10px">
-                        <Text opacity="70%" fontSize="15px" cursor="pointer" onClick={() => { navigate("/") }}> Home </Text>
-                        <MdArrowForwardIos style={{ opacity: "60%", fontSize: "13px" }} />
-                        <Heading as="h1" fontSize="15px"> { } </Heading>
+                    <Flex pl="20px" h="50px" alignItems="center" gap="5px">
+                        <Text opacity="70%" fontSize="15px" cursor="pointer"> Search Results for </Text>
+                        <Text opacity="70%" fontSize="15px" cursor="pointer" textDecoration={'underline'} > {query} </Text>
                     </Flex>
 
                     <Flex>
