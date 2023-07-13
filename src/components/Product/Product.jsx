@@ -109,9 +109,9 @@ const Product = () => {
                             <AccordionPanel>
                                 <RadioGroup onChange={set_sort} value={sort}>
                                     <Flex borderTop="1px solid whitesmoke" gap="5px" direction="column" alignItems="left" w="100%" pt="8px" fontWeight="md">
-                                        <Radio colorScheme="pink" value="default"> Relevance </Radio>
-                                        <Radio colorScheme="pink" value="asc"> Price: Low To High </Radio>
-                                        <Radio colorScheme="pink" value="dsc"> Price: High To Low </Radio>
+                                        <Radio value="default"> Relevance </Radio>
+                                        <Radio value="asc"> Price: Low To High </Radio>
+                                        <Radio value="dsc"> Price: High To Low </Radio>
                                     </Flex>
                                 </RadioGroup>
                             </AccordionPanel>
@@ -121,7 +121,7 @@ const Product = () => {
                     <Flex direction="column" borderRadius="7px" alignItems="center" mt="20px" width="80%" minW="200px" boxShadow="rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px">
                         <Flex justifyContent="space-between" w="100%" alignItems="center" p="25px" h="50px">
                             <Heading as="h1" fontSize="17px"> Filter </Heading>
-                            <Text color="#fc2779"> Reset </Text>
+                            <Text color="#fc2779" cursor={'pointer'} onClick={() => { set_filter([]) }} > Reset </Text>
                         </Flex>
                         <Accordion allowMultiple={true} w="100%" display="flex" flexDirection="column" alignItems="center">
                             <AccordionItem w="95%" mt="10px">

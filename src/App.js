@@ -8,7 +8,7 @@ import { token_login } from './redux/auth/actions';
 import { BottomBar } from './components/BottomBar/BottomBar';
 import { ToastContainer } from 'react-toastify';
 
-function App() {
+const App = () => {
 
   let dispatch = useDispatch();
 
@@ -43,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export { App };
