@@ -210,7 +210,7 @@ const Product = () => {
                 </Flex>
 
                 <Flex w="100%" justifyContent="center" mt="20px">
-                    {products.length ?
+                    {products?.length ?
                         <>
                             <SimpleGrid w="90%" columns={[2, 2, 2, 3]} gap="20px">
                                 {products.map((element, idx) => {
