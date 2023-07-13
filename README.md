@@ -4,7 +4,7 @@ Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics prod
 
 ## Live
 
-https://sugar-cosmetics-clone-seven.vercel.app
+https://sugarcosmeticsbuy.vercel.app
 
 ## Related Repositories
 
@@ -43,25 +43,25 @@ https://sugar-cosmetics-clone-seven.vercel.app
 
 ## Screenshots
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_1.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_1.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_2.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_2.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_3.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_3.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_4.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_4.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_5.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_5.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_6.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_6.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_7.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_7.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_8.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_8.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_9.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_9.png)
 
-![App Screenshot](https://sugar-cosmetics-clone-seven.vercel.app/thumbs/sugar_10.png)
+![App Screenshot](https://sugarcosmeticsbuy.vercel.app/thumbs/sugar_10.png)
 
 
 ## Environment Variables
