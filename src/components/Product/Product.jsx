@@ -45,7 +45,7 @@ const Product = () => {
         }
 
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products?category=${param.product}&filter=${filter.join('%')}&sort=${sort}`, {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products?category=${param.product}&filter=${filter.join('.')}&sort=${sort}`, {
                 method: "GET",
                 headers: {
                     "authorization": `Bearer ${token || ''}`
