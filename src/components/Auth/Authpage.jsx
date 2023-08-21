@@ -3,12 +3,13 @@ import { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../../contexts/GlobalContextProvider';
 import { Login } from './Login';
 import { Otp } from './Otp';
+import { Password } from './Password';
 import { Register } from './Register';
 
-const Loginpage = () => {
+const Authpage = () => {
     let [process_index, set_process_index] = useState(0);
     let { set_isLoginPage } = useContext(GlobalContext);
-    let [progress_data, set_progress_data] = useState({ name: "", email: "", number: "" })
+    let [progress_data, set_progress_data] = useState({ name: "", email: "", number: "", hashkey: "" })
 
     const process_paths = [
         <Login
@@ -17,6 +18,10 @@ const Loginpage = () => {
             set_progress_data={set_progress_data}
         />,
         <Otp
+            set_process_index={set_process_index}
+            progress_data={progress_data}
+        />,
+        <Password
             set_process_index={set_process_index}
             progress_data={progress_data}
         />,
@@ -51,4 +56,4 @@ const Loginpage = () => {
     )
 }
 
-export { Loginpage }
+export { Authpage }

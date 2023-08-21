@@ -42,7 +42,7 @@ const Register = ({ set_process_index, progress_data }) => {
 
     const register = () => {
         let name = first_ref.current.value + " " + second_ref.current.value;
-        let email = email_ref.current.value;
+        let email = progress_data.email;
         let password = password_ref.current.value;
         dispatch({ type: SIGNUP_REQUEST, payload: { name, email, password } });
         dispatch(signup_request);
@@ -78,17 +78,6 @@ const Register = ({ set_process_index, progress_data }) => {
                 height='60px'
                 border='1px solid grey'
                 ref={second_ref}
-            />
-
-            <br />
-
-            <Input
-                type='email'
-                placeholder='Enter email id'
-                width={['80%', '80%', '50%', '50%']}
-                height='60px'
-                border='1px solid grey'
-                ref={email_ref}
             />
 
             <br />

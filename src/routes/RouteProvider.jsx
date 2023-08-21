@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Home } from '../components/Home/Home';
 import { Product } from '../components/Product/Product';
 import { Search } from '../components/Search/Search';
-import { Loginpage } from '../components/Loginpage/Loginpage';
+import { Authpage } from '../components/Auth/Authpage';
 import { ViewFinder } from '../components/ViewFinder/ViewFinder';
 import { GlobalContext } from '../contexts/GlobalContextProvider';
 import { AuthValidationLayer } from './AuthValidationLayer';
@@ -31,7 +31,7 @@ const RouteProvider = ({ ad_display }) => {
                 <Route path='/' element={<Home />} />
                 <Route path='/collections/:product' element={<Product />} />
                 <Route path='/search' element={<Search />} />
-                <Route path='/account' element={<AuthValidationLayer comp="login"> <Loginpage /> </AuthValidationLayer>} />
+                <Route path='/account' element={<AuthValidationLayer comp="login"> <Authpage /> </AuthValidationLayer>} />
                 <Route path='/collections/:category/:id' element={<ViewFinder />} />
                 <Route path='/account/orders' element={<AuthValidationLayer> <AccountNavigator> <Orders /> </AccountNavigator> </AuthValidationLayer>} />
                 <Route path='/account/addresses' element={<AuthValidationLayer> <AccountNavigator> <Address /> </AccountNavigator> </AuthValidationLayer>} />

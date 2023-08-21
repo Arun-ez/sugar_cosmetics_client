@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNUP_SUCCESS, SIGNUP_FAILED } from "./action_types";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -49,13 +50,10 @@ const token_login = async (dispatch, get_state) => {
         let json = await response.json();
 
         if (json.error) {
-            let [key, message] = json.error.split(":");
-            alert(message);
             return;
         }
 
         if (json.failed) {
-            alert(json.failed);
             return;
         }
 
@@ -77,7 +75,7 @@ const signup_request = async (dispatch, get_state) => {
                 "Content-Type": "application/json"
             }
         })
-        alert("Signup successful please login");
+        toast.success("Signup successful please login");
         dispatch({ type: SIGNUP_SUCCESS });
     } catch (error) {
         const [key, message] = error.message.split(":");

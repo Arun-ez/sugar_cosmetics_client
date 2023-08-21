@@ -18,8 +18,9 @@ const ChakraUiProvider = ({ children }) => {
     })
 
     const styles = defineMultiStyleConfig({ baseStyle })
+    const config = { initialColorMode: 'light', useSystemColorMode: false }
 
-    const theme = extendTheme({ components: { Checkbox: styles, Radio: styles } })
+    const theme = extendTheme({ config, components: { Checkbox: styles, Radio: styles } })
 
     return (
         <ChakraProvider theme={theme} > {children} </ChakraProvider>

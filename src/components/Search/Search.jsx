@@ -49,7 +49,7 @@ const Search = () => {
         set_loading(true);
 
         try {
-            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search?q=${query}&filter=${filter.join('%')}&sort=${sort}`, {
+            let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/products/search?q=${query}&filter=${filter.join('.')}&sort=${sort}`, {
                 method: "GET",
                 headers: {
                     "authorization": `Bearer ${token || ''}`
