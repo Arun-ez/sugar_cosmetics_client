@@ -1,4 +1,4 @@
-# Sugar Cosmetics - clone
+# Sugar Cosmetics
 
 Sugar Cosmetics is an Ecommerce website which provides variety of cosmetics products
 
