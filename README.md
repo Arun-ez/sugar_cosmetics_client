@@ -90,11 +90,6 @@ Clone the project
 - [Github](https://github.com/Arun-ez)
 - [Linkedin](https://www.linkedin.com/in/arun-shaw-60ba64240)
 
-### Aahwan verma
-- [Github](https://github.com/Vaahwan)
-- [Linkedin](https://www.linkedin.com/in/aahwan-verma-aa3903241/)
-
-
 ## Support
 
 For support, email arunshaw433@gmail.com
